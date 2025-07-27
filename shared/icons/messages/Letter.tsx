@@ -1,0 +1,31 @@
+//import constant
+import { COLORS, SIZES } from "@/shared/constant/icons";
+
+interface ILetterProps {
+  size?: keyof typeof SIZES;
+  color?: keyof typeof COLORS;
+}
+
+export default function Letter({ color = "DARK", size = "MD" }: ILetterProps) {
+  return (
+    <svg
+      width={SIZES[size]}
+      height={SIZES[size]}
+      viewBox="0 0 21 21"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1.75 10.5C1.75 7.20017 1.75 5.55025 2.77513 4.52513C3.80025 3.5 5.45017 3.5 8.75 3.5H12.25C15.5498 3.5 17.1997 3.5 18.2249 4.52513C19.25 5.55025 19.25 7.20017 19.25 10.5C19.25 13.7998 19.25 15.4497 18.2249 16.4749C17.1997 17.5 15.5498 17.5 12.25 17.5H8.75C5.45017 17.5 3.80025 17.5 2.77513 16.4749C1.75 15.4497 1.75 13.7998 1.75 10.5Z"
+        stroke={COLORS[color]}
+        strokeWidth="1.5"
+      />
+      <path
+        d="M5.25 7L7.13903 8.5742C8.74609 9.91341 9.54962 10.583 10.5 10.583C11.4504 10.583 12.2539 9.91341 13.861 8.57419L15.75 7"
+        stroke={COLORS[color]}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
