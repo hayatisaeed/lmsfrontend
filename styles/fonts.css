@@ -1,0 +1,100 @@
+/* font Kalameh */
+@font-face {
+  font-family: "Kalameh";
+  src: url("/public/fonts/Fa-Kalameh/Kalameh-Thin.ttf");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/public/fonts/Fa-Kalameh/Kalameh-ExtraLight.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/public/fonts/Fa-Kalameh/Kalameh-Light.ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/public/fonts/Fa-Kalameh/Kalameh-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/public/fonts/Fa-Kalameh/Kalameh-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/public/fonts/Fa-Kalameh/Kalameh-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/public/fonts/Fa-Kalameh/Kalameh-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/public//fonts/Fa-Kalameh/Kalameh-ExtraBold.ttf");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Shabnam";
+  src: url("/public/fonts/Fa-Kalameh/Kalameh-Black.ttf");
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* font Shabnam */
+
+@font-face {
+  font-family: "Shabnam";
+  src: url("/public/fonts/Fa-Shabnam/Shabnam-Thin-FD.ttf");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Shabnam";
+  src: url("/public/fonts/Fa-Shabnam/Shabnam-Light-FD.ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Shabnam";
+  src: url("/public/fonts/Fa-Shabnam/Shabnam-FD.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Shabnam";
+  src: url("/public/fonts/Fa-Shabnam/Shabnam-Medium-FD.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Shabnam";
+  src: url("/public/fonts/Fa-Shabnam/Shabnam-Bold-FD.ttf");
+  font-weight: 700;
+  font-style: normal;
+}

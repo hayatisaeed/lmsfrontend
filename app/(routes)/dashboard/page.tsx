@@ -10,7 +10,11 @@ export default function Page() {
 
   return (
     <div>
-      <h3 className="bg-">sdssdfdsf</h3>
+      <h3 className="text-4xl num-onaly">تست</h3>
+      <h3 className="text-4xl font-kalameh">تست</h3>
+      <h3 className="num-only text-4xl">123</h3>
+      <h3 className="font-kalameh text-4xl">123</h3>
+
       <OTPInput
         error={e}
         onComplete={(c) => {

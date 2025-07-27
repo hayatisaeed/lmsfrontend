@@ -1,1 +1,12 @@
+/* improt tailwindcss */
 @import "tailwindcss";
+@layer theme, components;
+
+/* improt fonts */
+@import "./fonts.css";
+
+/* improt theme */
+@import "./theme.css" layer(theme);
+
+/* import components */
+@import "./components.css" layer(components);
