@@ -67,6 +67,14 @@ export const SIZES = {
     fontSize: "14px",
     radius: "8px",
   },
+  XXL: {
+    minWidth: "200px",
+    minHeight: "46px",
+    paddingX: "18px",
+    paddingY: "9px",
+    fontSize: "16px",
+    radius: "8px",
+  },
   FULL: {
     minWidth: "100%",
     minHeight: "42px",

@@ -25,7 +25,7 @@ interface IRootLayoutProps {
 
 export default function RootLayout({ children }: IRootLayoutProps) {
   return (
-    <html lang="fa" dir="rtl" className="font-kalameh">
+    <html lang="fa" dir="rtl" className="font-kalameh font-medium">
       <body>{children}</body>
     </html>
   );

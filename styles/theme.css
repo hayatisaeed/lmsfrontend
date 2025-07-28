@@ -1,4 +1,9 @@
 @theme {
+  /* fonts */
   --font-kalameh: "Kalameh";
   --font-shabnam: "Shabnam";
+
+  /* colors */
+  --color-text-primary: #222222;
+  --color-white-primary: #ffffff;
 }
