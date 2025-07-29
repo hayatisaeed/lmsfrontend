@@ -9,7 +9,7 @@ interface IMainLayoutProps {
 
 export default function Mainlayout({ children }: IMainLayoutProps) {
   return (
-    <div className=" flex gap-5 overflow-hidden p-0 lg:p-5">
+    <div className="flex h-full gap-5 overflow-hidden p-0 lg:p-5">
       <aside className="lg:inline-block hidden">
         <NavDesktop />
       </aside>
@@ -17,7 +17,7 @@ export default function Mainlayout({ children }: IMainLayoutProps) {
         <header>
           <Header />
         </header>
-        <div className="h-full overflow-y-auto">
+        <div className="h-full overflow-y-scroll">
           <main>{children}</main>
           <footer>
             <Footer />
