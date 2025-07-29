@@ -1,5 +1,7 @@
 "use client";
+import PasswordInput from "@/features/dashboard/components/PasswordInput";
 import OTPInput from "@/shared/components/OTPInput";
+
 import { Smartphone } from "@/shared/icons";
 import Logout3 from "@/shared/icons/arrowsAction/Logout3";
 import { toPersianDigits } from "@/shared/lib/digitConverter.ts";
@@ -11,6 +13,11 @@ export default function Page() {
 
   return (
     <div>
+      <PasswordInput
+        placeholder="رمز عبور فعلی خود را وارد کنید."
+        label="رمز عبور فعلی"
+        error
+      />
       <h3 className="text-4xl num-onaly">تست</h3>
       <h3 className="text-4xl font-kalameh">تست</h3>
       <h3 className="num-only font-shabnam font-normal text-4xl ">
@@ -42,8 +49,9 @@ export default function Page() {
       <Logout3 size="XL" color="GREEN" />
       <Button
         className="text-amber-50"
-        size="SM"
+        size="XXL"
         color="ERROR"
+        loading
         icon={<Smartphone color="LIGHT" size="SM" />}
         onClick={() => {
           setE(!e);

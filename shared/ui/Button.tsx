@@ -9,11 +9,15 @@ import { ButtonHTMLAttributes, ReactNode, useState } from "react";
 //import types
 import { COLORS, SIZES } from "@/shared/constant/button";
 
+//import spinner
+import { Spinner } from "@/shared/ui";
+
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   color?: keyof typeof COLORS;
   size?: keyof typeof SIZES;
   icon?: ReactNode;
+  loading?: boolean;
 }
 
 export default function Button({
@@ -23,6 +27,7 @@ export default function Button({
   color = "PRIMARY",
   size = "MD",
   icon,
+  loading,
   ...props
 }: IButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
@@ -34,16 +39,16 @@ export default function Button({
 
   return (
     <button
-      {...props}
       type={type}
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={clsx(
-        "cursor-pointer transition-colors duration-200 ease-linear flex justify-center items-center gap-1",
+        "transition-colors duration-200 ease-linear flex justify-center items-center gap-1",
+        loading?"cursor-progress":"cursor-pointer",
         className
       )}
       style={{
-        backgroundColor: isHovered ? hover : background,
+        backgroundColor: isHovered && !loading ? hover : background,
         color: text,
         padding: clsx(paddingY, paddingX),
         minWidth,
@@ -51,10 +56,18 @@ export default function Button({
         fontSize,
         borderRadius: radius,
       }}
+      disabled={loading}
+      {...props}
     >
       <>
-        {icon}
-        <span>{children}</span>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            {icon}
+            <span>{children}</span>
+          </>
+        )}
       </>
     </button>
   );
