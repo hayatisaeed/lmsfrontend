@@ -1,5 +1,3 @@
-//RootLayout
-
 ///import css
 import "@/styles/globals.css";
 
@@ -20,13 +18,13 @@ export const metadata: Metadata = {
 };
 
 interface IRootLayoutProps {
-  children: Readonly<ReactNode>;
+  children: ReactNode;
 }
 
 export default function RootLayout({ children }: IRootLayoutProps) {
   return (
-    <html lang="fa" dir="rtl" className="font-kalameh font-medium">
-      <body>{children}</body>
+    <html lang="fa" dir="rtl" className="h-full font-kalameh font-medium">
+      <body className="h-screen bg-[#f8f9fa]">{children}</body>
     </html>
   );
 }

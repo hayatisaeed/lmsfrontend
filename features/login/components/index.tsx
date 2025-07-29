@@ -1,4 +1,4 @@
-export { default as Brand } from "@/features/login/components/Brand";
+export { default as Brand } from "@/shared/components/Brand";
 export { default as GoogleLoginButton } from "@/features/login/components/GoogleLoginButton";
 export { default as PhoneInput } from "@/features/login/components/PhoneInput";
 export { default as LoginForm } from "@/features/login/components/LoginForm";
