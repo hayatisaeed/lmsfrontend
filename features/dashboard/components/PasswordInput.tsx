@@ -43,6 +43,10 @@ export default function PasswordInput({
         <Key />
         <input
           type={show ? "text" : "password"}
+          onCopy={(e) => e.preventDefault()}
+          onCut={(e) => e.preventDefault()}
+          onPaste={(e) => e.preventDefault()}
+          onContextMenu={(e) => e.preventDefault()}
           className="grow border-0 outline-0 "
           placeholder={placeholder}
           value={password}
