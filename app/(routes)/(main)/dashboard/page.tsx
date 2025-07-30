@@ -1,6 +1,6 @@
 "use client";
-import InputEdit from "@/features/dashboard/components/InputEdit";
-import PasswordInput from "@/features/dashboard/components/PasswordInput";
+import InputEdit from "@/features/profile/components/InputEdit";
+import PasswordInput from "@/features/profile/components/PasswordInput";
 import OTPInput from "@/shared/components/OTPInput";
 
 import { Smartphone, UserRounded } from "@/shared/icons";

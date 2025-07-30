@@ -18,7 +18,6 @@ export default function WindowInputOTP({ onClose }: IWindowInputOTPProps) {
 
   async function handleClickEnter() {
     console.log(code);
-
     onClose?.();
   }
 

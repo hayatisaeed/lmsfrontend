@@ -3,7 +3,7 @@
 import { useModal } from "@/shared/components/Modal";
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 import { Button } from "@/shared/ui";
-import { ChangeEvent, ReactNode, useState } from "react";
+import { ChangeEvent, ReactNode, useEffect, useRef, useState } from "react";
 
 interface IWindowInputEditProps {
   defaultValue: string;
@@ -22,6 +22,12 @@ export default function WindowInputEdit({
 }: IWindowInputEditProps) {
   const [value, setValue] = useState<string>(defaultValue);
   const { open } = useModal();
+  const refInput = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    refInput.current?.focus();
+  }, []);
+
   const isSmUp = useMediaQuery("(min-width: 640px)");
 
   function changeValue(e: ChangeEvent<HTMLInputElement>) {
@@ -48,6 +54,7 @@ export default function WindowInputEdit({
           type="text"
           className="outline-0 border-0"
           value={value}
+          ref={refInput}
           onChange={changeValue}
         />
         {icon}

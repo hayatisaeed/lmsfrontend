@@ -1,7 +1,7 @@
 "use client";
 
 //import hooks react
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 //import types
 import { ChangeEvent, KeyboardEvent, ClipboardEvent } from "react";
@@ -29,6 +29,10 @@ export default function OTPInput({
 }: OTPInputProps) {
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
   const [otpValues, setOtpValues] = useState<string[]>(Array(length).fill(""));
+
+  useEffect(() => {
+    inputRefs.current.at(0)?.focus();
+  }, []);
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>, index: number) {
     const value = e.target.value;

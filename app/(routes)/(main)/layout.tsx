@@ -20,8 +20,8 @@ export default function Mainlayout({ children }: IMainLayoutProps) {
           <header>
             <Header />
           </header>
-          <div className="h-full overflow-y-scroll">
-            <main>{children}</main>
+          <div className="h-full overflow-y-auto flex flex-col">
+            <main className="grow">{children}</main>
             <footer>
               <Footer />
             </footer>
