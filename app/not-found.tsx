@@ -1,6 +1,10 @@
+//import logo
 import { Brand } from "@/shared/components";
-import clsx from "clsx";
+
+//import types
 import { Metadata } from "next";
+
+//import link
 import Link from "next/link";
 
 export const metadata: Metadata = {

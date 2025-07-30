@@ -1,9 +1,9 @@
 export const SIZES = {
   SM: {
-    width: "300px",
+    width: "280px",
     height: "58px",
     boxSIze: "35px",
-    gap: "12px",
+    gap: "10px",
     fontSize: "16px",
   },
   LG: {

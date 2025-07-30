@@ -91,7 +91,7 @@ function Window({ children, id }: IWindowProps) {
     <div className="fixed inset-0 bg-text-primary/60">
       <div
         ref={refWindow}
-        className={`transform transition-transform duration-150 ease-in-out absolute bg-white-primary rounded-2xl p-5 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-auto ${scaleClass}`}
+        className={`transform transition-transform duration-150 ease-in-out absolute bg-white-primary rounded-2xl p-6 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-auto ${scaleClass}`}
       >
         {cloneElement(children, { onClose: close })}
       </div>
@@ -118,6 +118,14 @@ function Open({ children, id }: IOpenProps) {
       open(id);
     },
   });
+}
+
+export function useModal() {
+  const context = useContext(ContextModal);
+  if (!context)
+    throw new Error("useModal  must be used within a <Modal> component");
+
+  return context;
 }
 
 Modal.Window = Window;

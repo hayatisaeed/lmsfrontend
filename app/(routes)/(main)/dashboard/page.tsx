@@ -1,8 +1,9 @@
 "use client";
+import InputEdit from "@/features/dashboard/components/InputEdit";
 import PasswordInput from "@/features/dashboard/components/PasswordInput";
 import OTPInput from "@/shared/components/OTPInput";
 
-import { Smartphone } from "@/shared/icons";
+import { Smartphone, UserRounded } from "@/shared/icons";
 import Logout3 from "@/shared/icons/arrowsAction/Logout3";
 import { toPersianDigits } from "@/shared/lib/digitConverter.ts";
 import { Button } from "@/shared/ui";
@@ -13,10 +14,15 @@ export default function Page() {
 
   return (
     <div>
+      <InputEdit
+        defaultValue="امیرحسین شکری"
+        label="نام و نام خانوادگی خود را وارد کنید."
+        icon={<UserRounded />}
+      />
       <PasswordInput
         placeholder="رمز عبور فعلی خود را وارد کنید."
         label="رمز عبور فعلی"
-        error
+        
       />
       <h3 className="text-4xl num-onaly">تست</h3>
       <h3 className="text-4xl font-kalameh">تست</h3>
