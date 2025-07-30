@@ -1,6 +1,5 @@
 "use client";
 import PasswordInput from "@/features/dashboard/components/PasswordInput";
-import Modal from "@/shared/components/Modal";
 import OTPInput from "@/shared/components/OTPInput";
 
 import { Smartphone } from "@/shared/icons";

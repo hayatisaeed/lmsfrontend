@@ -1,6 +1,7 @@
 //import navbar , header
 import { Footer, Header, NavDesktop } from "@/components/";
 
+//types
 import { ReactNode } from "react";
 
 interface IMainLayoutProps {

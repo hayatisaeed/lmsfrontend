@@ -1,5 +1,7 @@
+//import components
 import { Brand, LoginForm } from "@/features/login/components";
 
+//import next-image
 import Image from "next/image";
 
 export default function Login() {

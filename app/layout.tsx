@@ -5,9 +5,10 @@ import "@/styles/globals.css";
 import { Metadata } from "next";
 import { ReactNode } from "react";
 
+//metadata
 export const metadata: Metadata = {
   title: {
-    template: "باشگاه المپیاد طلایی ها | %s",
+    template: "%s | باشگاه المپیاد طلایی ها",
     default: "باشگاه المپیاد طلایی ها",
   },
 
