@@ -45,10 +45,11 @@ export default function InputEdit({
           defaultValue={defaultValue}
           label={label}
           icon={icon}
+          id={idModal as Exclude<id, "name">}
         />
       </Modal.Window>
 
-      <Modal.Window id="verify-code">
+      <Modal.Window id={`verify-code-${idModal as Exclude<id, "name">}`}>
         <WindowInputOTP />
       </Modal.Window>
     </div>

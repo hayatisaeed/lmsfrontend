@@ -4,4 +4,5 @@ export type ModalID =
   | "edit-input-name"
   | "edit-input-email"
   | "edit-input-phone"
-  | "verify-code";
+  | "verify-code-email"
+  | "verify-code-phone";

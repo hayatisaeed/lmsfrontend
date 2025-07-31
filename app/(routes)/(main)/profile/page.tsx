@@ -1,4 +1,7 @@
-import { Account } from "@/features/profile/components";
+//import items
+import { Account, ChangePassword } from "@/features/profile/components";
+
+//import ui
 import { Container } from "@/shared/ui";
 
 //immport types
@@ -10,9 +13,13 @@ export const metadata: Metadata = {
 
 export default function Profile() {
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       <Container title="اطلاعات حساب">
-        <Account/>
+        <Account />
+      </Container>
+
+      <Container title="تغییر رمز عبور">
+        <ChangePassword />
       </Container>
     </div>
   );

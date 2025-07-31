@@ -1,6 +1,9 @@
 "use client";
 
+//import item
 import { AccountItem } from "@/features/profile/components";
+
+//import icons
 import { Letter, Smartphone, UserRounded } from "@/shared/icons";
 
 export default function Account() {

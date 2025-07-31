@@ -1,4 +1,5 @@
 ///import css
+import Modal from "@/shared/components/Modal";
 import "@/styles/globals.css";
 
 //import types
@@ -25,7 +26,11 @@ interface IRootLayoutProps {
 export default function RootLayout({ children }: IRootLayoutProps) {
   return (
     <html lang="fa" dir="rtl" className="h-full font-kalameh font-medium">
-      <body className="h-screen bg-[#f8f9fa] overflow-hidden">{children}</body>
+      <Modal>
+        <body className="h-screen bg-[#f8f9fa] overflow-hidden">
+          {children}
+        </body>
+      </Modal>
     </html>
   );
 }

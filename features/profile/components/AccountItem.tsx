@@ -1,5 +1,10 @@
+//import input
 import { InputEdit } from "@/features/profile/components";
+
+//import types
 import { ReactNode } from "react";
+
+//import id modal
 import { id } from "@/features/profile/types/idModal";
 
 interface IAccountItemProps {

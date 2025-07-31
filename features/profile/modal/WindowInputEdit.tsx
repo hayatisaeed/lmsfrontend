@@ -4,6 +4,7 @@ import { useModal } from "@/shared/components/Modal";
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 import { Button } from "@/shared/ui";
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from "react";
+import { id } from "@/features/profile/types/idModal";
 
 interface IWindowInputEditProps {
   defaultValue: string;
@@ -11,6 +12,7 @@ interface IWindowInputEditProps {
   label: string;
   sendCode?: boolean;
   onClose?: () => void;
+  id: Exclude<id, "name">;
 }
 
 export default function WindowInputEdit({
@@ -19,6 +21,7 @@ export default function WindowInputEdit({
   icon,
   sendCode = true,
   onClose,
+  id,
 }: IWindowInputEditProps) {
   const [value, setValue] = useState<string>(defaultValue);
   const { open } = useModal();
@@ -37,9 +40,12 @@ export default function WindowInputEdit({
 
   async function handleClickEnter() {
     onClose?.();
-    setTimeout(() => {
-      open("verify-code");
-    }, 250);
+
+    if (id === "email" || id === "phone") {
+      setTimeout(() => {
+        open(`verify-code-${id}`);
+      }, 250);
+    }
   }
 
   function handleClickCancel() {
