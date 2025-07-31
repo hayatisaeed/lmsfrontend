@@ -4,3 +4,4 @@ export { default as Account } from "@/features/profile/components/Account";
 export { default as AccountItem } from "@/features/profile/components/AccountItem";
 export { default as ChangePassword } from "@/features/profile/components/ChangePassword";
 export { default as ChangePasswordItem } from "@/features/profile/components/ChangePasswordItem";
+export { default as Uploader } from "@/features/profile/components/Uploader";

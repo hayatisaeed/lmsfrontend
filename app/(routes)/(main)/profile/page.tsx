@@ -21,6 +21,8 @@ export default function Profile() {
       <Container title="تغییر رمز عبور">
         <ChangePassword />
       </Container>
+
+      <Container title="اعلان ها">اعلان</Container>
     </div>
   );
 }

@@ -43,6 +43,7 @@ export default function ChangePassword() {
             control={control}
             name="newPassword"
             rules={{
+              required: "رمز عبور باید حداقل ۸ کاراکتر و شامل حرف و عدد باشد.",
               pattern: {
                 value:
                   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d\S]{8,}$/,
@@ -61,6 +62,7 @@ export default function ChangePassword() {
             control={control}
             name="replayPawssword"
             rules={{
+              required: "رمز عبور وارد شده یکسان نیست.",
               validate: {
                 value: (value) =>
                   value === getValues("newPassword") ||
@@ -76,7 +78,7 @@ export default function ChangePassword() {
             )}
           />
         </div>
-        <div className="flex w-full justify-between items-center">
+        <div className="flex w-full justify-end items-center">
           <Button type="submit">ثبت تغییرات</Button>
         </div>
       </div>
