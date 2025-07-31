@@ -1,6 +1,7 @@
 "use client";
 import InputEdit from "@/features/profile/components/InputEdit";
 import PasswordInput from "@/features/profile/components/PasswordInput";
+import DropDown from "@/shared/components/DropDown";
 import OTPInput from "@/shared/components/OTPInput";
 
 import { Smartphone, UserRounded } from "@/shared/icons";
@@ -14,16 +15,20 @@ export default function Page() {
 
   return (
     <div>
-      <InputEdit
-        defaultValue="امیرحسین شکری"
-        label="نام و نام خانوادگی خود را وارد کنید."
-        icon={<UserRounded />}
-      />
-      <PasswordInput
-        placeholder="رمز عبور فعلی خود را وارد کنید."
-        label="رمز عبور فعلی"
-        
-      />
+      <DropDown>
+        <DropDown.Window id="user">
+          <DropDown.Item>حساب کاربری</DropDown.Item>
+          <DropDown.Item icon={<UserRounded size="SM" />}>
+            حساب کاربری
+          </DropDown.Item>
+          <DropDown.Item>حساب کاربری</DropDown.Item>
+        </DropDown.Window>
+
+        <DropDown.Toggler id="user">
+          <DropDown.Button id="user" />
+          {/* <button type="button">sfsdfsd</button> */}
+        </DropDown.Toggler>
+      </DropDown>
       <h3 className="text-4xl num-onaly">تست</h3>
       <h3 className="text-4xl font-kalameh">تست</h3>
       <h3 className="num-only font-shabnam font-normal text-4xl ">

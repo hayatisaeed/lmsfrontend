@@ -1,7 +1,7 @@
 "use client";
 
 //import modal
-import Modal from "@/shared/components/Modal";
+import { Modal } from "@/shared/components/";
 
 //import icons
 import { PenNewSquare } from "@/shared/icons";

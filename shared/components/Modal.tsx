@@ -6,7 +6,6 @@ import {
   createContext,
   useContext,
   useState,
-  ReactNode,
   ReactElement,
   useEffect,
   useRef,
@@ -14,6 +13,7 @@ import {
 
 // Type import
 import { ModalID } from "@/shared/types/modal";
+import { ReactNode } from "react";
 
 interface IContextModalProps {
   openId: ModalID;
@@ -79,9 +79,9 @@ function Window({ children, id }: IWindowProps) {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("click", handleClickOutside, true);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside, true);
     };
   }, []);
 
