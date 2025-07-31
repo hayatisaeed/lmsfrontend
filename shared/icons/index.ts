@@ -59,3 +59,6 @@ export { default as UserRounded } from "@/shared/icons/users/UserRounded";
 
 // Video
 export { default as Camera } from "@/shared/icons/video/Camera";
+
+//linear
+export { default as ArrowsALogout } from "@/shared/icons/linear/ArrowsALogout2";

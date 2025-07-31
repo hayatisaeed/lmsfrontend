@@ -9,7 +9,6 @@ import {
   useContext,
   cloneElement,
   ButtonHTMLAttributes,
-  DetailedReactHTMLElement,
   ReactElement,
 } from "react";
 

@@ -1,6 +1,8 @@
 ///import css
-import Modal from "@/shared/components/Modal";
 import "@/styles/globals.css";
+
+//import golobal
+import { DropDown, Modal } from "@/shared/components";
 
 //import types
 import { Metadata } from "next";
@@ -27,9 +29,11 @@ export default function RootLayout({ children }: IRootLayoutProps) {
   return (
     <html lang="fa" dir="rtl" className="h-full font-kalameh font-medium">
       <Modal>
-        <body className="h-screen bg-[#f8f9fa] overflow-hidden">
-          {children}
-        </body>
+        <DropDown>
+          <body className="h-screen bg-[#f8f9fa] overflow-hidden">
+            {children}
+          </body>
+        </DropDown>
       </Modal>
     </html>
   );
