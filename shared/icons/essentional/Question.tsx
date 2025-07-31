@@ -1,7 +1,6 @@
 //import constant
 import { COLORS, SIZES } from "@/shared/constant/icons";
 
-
 interface IQuestionProps {
   size?: keyof typeof SIZES;
   color?: keyof typeof COLORS;
@@ -24,7 +23,7 @@ export default function Question({
         cy="12"
         r="9.84375"
         stroke={COLORS[color]}
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <path
         d="M10.1543 8.92383C10.1543 7.90447 10.9806 7.07812 12 7.07812C13.0194 7.07812 13.8457 7.90447 13.8457 8.92383C13.8457 9.60053 13.4815 10.1922 12.9385 10.5135C12.4706 10.7903 12 11.2103 12 11.7539V12.9844"

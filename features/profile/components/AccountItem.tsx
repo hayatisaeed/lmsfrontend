@@ -9,7 +9,7 @@ import { id } from "@/features/profile/types/idModal";
 
 interface IAccountItemProps {
   label?: string;
-  type?: string;
+  type?: "none" | "reject" | "pendding";
   icon?: ReactNode;
   value: string;
   labelModal: string;
@@ -30,6 +30,7 @@ export default function AccountItem({
     <div className="w-full flex flex-col justify-start gap-3">
       <div className="flex w-full justify-start">
         <h3 className="text-text-primary text-sm">{label}</h3>
+        {}
       </div>
       <InputEdit
         defaultValue={value}

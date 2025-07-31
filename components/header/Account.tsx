@@ -49,7 +49,7 @@ export default function Account({ name, image }: IAccountProps) {
       </DropDown.Toggler>
 
       <h3 className="text-sm md:text-[16px]">{name}</h3>
-      <div className="relative size-8 md:size-10 rounded-full bg-box-primary ">
+      <div className="relative size-8 md:size-10 rounded-full bg-box-primary">
         <Image
           fill
           alt="user"
