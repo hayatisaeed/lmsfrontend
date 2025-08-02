@@ -17,10 +17,10 @@ export default function Account() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <AccountItem
-          label="نام و نام خانوادگی"
+          label="نام کاربری"
           value=""
           sendCode={false}
-          labelModal="نام و نام خانوادگی خود را وارد کنید."
+          labelModal="نام کاربری خود را وارد کنید."
           icon={<UserRounded size="SM" />}
           id="name"
         />

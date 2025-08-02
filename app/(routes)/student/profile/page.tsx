@@ -3,6 +3,7 @@ import {
   Account,
   ChangePassword,
   Personal,
+  Education,
 } from "@/features/student/profile/components";
 
 //import ui
@@ -22,8 +23,11 @@ export default function Profile() {
         <Account />
       </Container>
 
-      <Container title="اطلاعات شخصی">
+      <Container title="اطلاعات هویتی">
         <Personal />
+      </Container>
+      <Container title="اطلاعات تحصیلی">
+        <Education />
       </Container>
 
       <Container title="تغییر رمز عبور">

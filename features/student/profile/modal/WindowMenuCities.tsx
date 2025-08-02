@@ -51,7 +51,7 @@ export default function WindowMenuCities({
     <div className="flex flex-col gap-5 sm:w-[500px]">
       <h3 className="text-text-primary font-semibold">{label}</h3>
 
-      <div className="flex flex-col sm:flex-row gap-3 bg-box-primary p-4 rounded-2xl">
+      <div className="flex flex-col sm:flex-row gap-3">
         <Menu
           label="استان مورد نظر خود را انتخاب کنید"
           options={provinceOptions}
@@ -64,7 +64,7 @@ export default function WindowMenuCities({
           options={cityOptions}
           value={province}
           onChange={handleSelectProvince}
-          disabled={!province.id}
+          disabled={province.id === -1}
         />
       </div>
 

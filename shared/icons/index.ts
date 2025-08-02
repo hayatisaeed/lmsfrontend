@@ -56,6 +56,8 @@ export { default as Widget } from "@/shared/icons/settings/widget";
 // Users
 export { default as UserId } from "@/shared/icons/users/UserId";
 export { default as UserRounded } from "@/shared/icons/users/UserRounded";
+export { default as UserGroup } from "@/shared/icons/users/UserGroup";
+export { default as UserCheck } from "@/shared/icons/users/UserCheck";
 
 // Video
 export { default as Camera } from "@/shared/icons/video/Camera";

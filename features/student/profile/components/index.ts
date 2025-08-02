@@ -7,3 +7,5 @@ export { default as ChangePasswordItem } from "@/features/student/profile/compon
 export { default as Uploader } from "@/features/student/profile/components/Uploader";
 export { default as Personal } from "@/features/student/profile/components/Personal";
 export { default as PersonalItem } from "@/features/student/profile/components/PersonalItem";
+export { default as InputShow } from "@/features/student/profile/components/InputShow";
+export { default as Education } from "@/features/student/profile/components/Education";

@@ -37,24 +37,27 @@ export default function Menu({
         ))}
       </DropDown.Window>
       <DropDown.Toggler id="provinces">
-        <input
-          value={select?.label || label}
+        <button
           disabled={disabled}
-          className="
+          className={`
         p-4 
         rounded-xl 
         bg-white-primary 
         border 
         border-text-primary/50 
-        outline-none  
-        text-text-primary
-        w-full
-        cursor-pointer
+        outline-none     
+        w-full 
         transition
-        "
-          type="text"
-          readOnly
-        />
+        text-sm
+        ${
+          disabled
+            ? "cursor-auto text-text-primary/60"
+            : " cursor-pointer text-text-primary"
+        } `}
+          type="button"
+        >
+          {select?.label || label}
+        </button>
       </DropDown.Toggler>
     </>
   );

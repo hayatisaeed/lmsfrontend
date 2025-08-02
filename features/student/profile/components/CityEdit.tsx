@@ -14,7 +14,7 @@ import { ReactNode } from "react";
 import WindowMenuCities from "../modal/WindowMenuCities";
 
 interface IInputEditProps {
-  defaultValue: { id: number; label: string };
+  defaultValue?: { id: number; label: string };
   icon?: ReactNode;
 }
 
@@ -22,7 +22,7 @@ export default function CityEdit({ defaultValue, icon }: IInputEditProps) {
   return (
     <div className="flex justify-between items-center gap-2 p-4 rounded-xl bg-white-primary border border-text-primary/50">
       {icon}
-      <h3 className="grow border-0 outline-0 ">{defaultValue.label}</h3>
+      <h3 className="grow border-0 outline-0 ">{defaultValue?.label}</h3>
 
       <Modal.Open id={`edit-input-city`}>
         <button type="button" className=" cursor-pointer">
@@ -31,10 +31,7 @@ export default function CityEdit({ defaultValue, icon }: IInputEditProps) {
       </Modal.Open>
 
       <Modal.Window id={`edit-input-city`}>
-        <WindowMenuCities
-          label="
-محل سکونت خود را وارد کنید"
-        />
+        <WindowMenuCities label="محل سکونت خود را وارد کنید" />
       </Modal.Window>
     </div>
   );
