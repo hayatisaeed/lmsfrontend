@@ -1,12 +1,28 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, JSX } from "react";
 import { Brand } from "@/shared/components";
 import { ButtonIcon } from "@/shared/ui";
 import { Closet } from "@/shared/icons";
 import clsx from "clsx";
+import NavLink from "./NavLink";
+import { COLORS, SIZES } from "@/shared/constant/icons";
 
-export default function Nav() {
+interface INavProps {
+  navs: {
+    label: string;
+    icon: ({
+      color,
+      size,
+    }: {
+      color: keyof typeof COLORS;
+      size: keyof typeof SIZES;
+    }) => JSX.Element;
+    link: string;
+  }[];
+}
+
+export default function Nav({ navs }: INavProps) {
   const [open, setOpen] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -62,7 +78,16 @@ export default function Nav() {
             : "opacity-0 max-h-0 px-0 mt-0"
         )}
       >
-        <div className="flex flex-col"></div>
+        <div className="flex flex-col gap-3">
+          {navs.map((nav) => (
+            <NavLink
+              key={nav.link}
+              label={nav.label}
+              path={`/student${nav.link}`}
+              icon={nav.icon}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

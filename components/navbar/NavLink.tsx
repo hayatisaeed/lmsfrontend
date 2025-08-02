@@ -1,5 +1,6 @@
 "use client";
 
+import { COLORS, SIZES } from "@/shared/constant/icons";
 //import clsx
 import clsx from "clsx";
 
@@ -8,13 +9,21 @@ import Link from "next/link";
 
 //import react hooks
 import { usePathname } from "next/navigation";
+import { JSX } from "react";
 
 interface INavLinkProps {
   path: string;
   label: string;
+  icon: ({
+    color,
+    size,
+  }: {
+    color: keyof typeof COLORS;
+    size: keyof typeof SIZES;
+  }) => JSX.Element;
 }
 
-export default function NavLink({ label, path }: INavLinkProps) {
+export default function NavLink({ label, path, icon: Icon }: INavLinkProps) {
   const pathname = usePathname();
 
   return (
@@ -30,13 +39,13 @@ export default function NavLink({ label, path }: INavLinkProps) {
       <Link
         href={path}
         className={clsx(
-          "flex items-center gap-2 p-4 rounded-xl transition-all grow",
+          "flex items-center gap-2 p-4 rounded-xl transition-all grow text-[15px] whitespace-nowrap",
           pathname === path
             ? "bg-primary text-white-primary"
             : "text-text-primary bg-white"
         )}
       >
-        {/* < color={pathname === "/dashboard" ? "LIGHT" : "DARK"} /> */}
+        <Icon color={pathname === path ? "LIGHT" : "DARK"} size="SM" />
         <span>{label}</span>
       </Link>
     </div>
