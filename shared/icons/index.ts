@@ -62,3 +62,10 @@ export { default as Camera } from "@/shared/icons/video/Camera";
 
 //linear
 export { default as ArrowsALogout } from "@/shared/icons/linear/ArrowsALogout2";
+
+//building
+export { default as City } from "@/shared/icons/building/City";
+export { default as Buildings } from "@/shared/icons/building/Buildings";
+
+//money
+export { default as Card } from "@/shared/icons/money/Card";

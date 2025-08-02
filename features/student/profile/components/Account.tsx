@@ -1,8 +1,8 @@
 "use client";
 
 //import componets profile
-import { AccountItem } from "@/features/profile/components";
-import Uploader from "@/features/profile/components/Uploader";
+import { AccountItem } from "@/features/student/profile/components";
+import Uploader from "@/features/student/profile/components/Uploader";
 
 //import icons
 import { Letter, Smartphone, UserRounded } from "@/shared/icons";

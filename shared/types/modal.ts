@@ -5,4 +5,11 @@ export type ModalID =
   | "edit-input-email"
   | "edit-input-phone"
   | "verify-code-email"
-  | "verify-code-phone";
+  | "verify-code-phone"
+  | "edit-input-national-code"
+  | "edit-input-city"
+  | "edit-input-school-name"
+  | "edit-input-school-type"
+  | "edit-input-parents-phone"
+  | "edit-input-olympiad"
+  | "edit-input-study";

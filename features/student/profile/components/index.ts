@@ -1,0 +1,9 @@
+export { default as InputEdit } from "@/features/student/profile/components/InputEdit";
+export { default as PasswordInput } from "@/features/student/profile/components/PasswordInput";
+export { default as Account } from "@/features/student/profile/components/Account";
+export { default as AccountItem } from "@/features/student/profile/components/AccountItem";
+export { default as ChangePassword } from "@/features/student/profile/components/ChangePassword";
+export { default as ChangePasswordItem } from "@/features/student/profile/components/ChangePasswordItem";
+export { default as Uploader } from "@/features/student/profile/components/Uploader";
+export { default as Personal } from "@/features/student/profile/components/Personal";
+export { default as PersonalItem } from "@/features/student/profile/components/PersonalItem";

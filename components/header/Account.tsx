@@ -20,7 +20,7 @@ export default function Account({ name, image }: IAccountProps) {
   const router = useRouter();
 
   function handleClickAccount() {
-    router.replace(`/profile`);
+    router.replace(`profile`);
   }
   function handleClickLogout() {}
 

@@ -1,5 +1,9 @@
 //import items
-import { Account, ChangePassword } from "@/features/profile/components";
+import {
+  Account,
+  ChangePassword,
+  Personal,
+} from "@/features/student/profile/components";
 
 //import ui
 import { Container } from "@/shared/ui";
@@ -16,6 +20,10 @@ export default function Profile() {
     <div className="flex flex-col gap-5">
       <Container title="اطلاعات حساب">
         <Account />
+      </Container>
+
+      <Container title="اطلاعات شخصی">
+        <Personal />
       </Container>
 
       <Container title="تغییر رمز عبور">

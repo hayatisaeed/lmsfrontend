@@ -1,15 +1,14 @@
 //import input
-import { InputEdit } from "@/features/profile/components";
+import { InputEdit } from "@/features/student/profile/components";
 
 //import types
 import { ReactNode } from "react";
 
 //import id modal
-import { id } from "@/features/profile/types/idModal";
+import { id } from "@/features/student/profile/types/idModal";
 
 interface IAccountItemProps {
   label?: string;
-  type?: "none" | "reject" | "pendding";
   icon?: ReactNode;
   value: string;
   labelModal: string;
@@ -17,9 +16,9 @@ interface IAccountItemProps {
   id: id;
 }
 
-export default function AccountItem({
+export default function PersonalItem({
   label,
-  type,
+
   labelModal,
   value,
   icon,

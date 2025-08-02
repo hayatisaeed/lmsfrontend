@@ -8,10 +8,13 @@ import { PenNewSquare } from "@/shared/icons";
 
 //import types
 import { ReactNode } from "react";
-import { id } from "@/features/profile/types/idModal";
+import { id } from "@/features/student/profile/types/idModal";
 
 //input window modal
-import { WindowInputOTP, WindowInputEdit } from "@/features/profile/modal/";
+import {
+  WindowInputOTP,
+  WindowInputEdit,
+} from "@/features/student/profile/modal/";
 
 interface IInputEditProps {
   defaultValue: string;
@@ -49,7 +52,7 @@ export default function InputEdit({
         />
       </Modal.Window>
 
-      <Modal.Window id={`verify-code-${idModal as Exclude<id, "name">}`}>
+      <Modal.Window id={`verify-code-${idModal as "email" | "phone"}`}>
         <WindowInputOTP />
       </Modal.Window>
     </div>

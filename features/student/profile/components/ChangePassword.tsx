@@ -4,7 +4,7 @@
 import { Controller, useForm } from "react-hook-form";
 
 //import item
-import { ChangePasswordItem } from "@/features/profile/components/";
+import { ChangePasswordItem } from "@/features/student/profile/components/";
 
 //import ui
 import { Button } from "@/shared/ui";

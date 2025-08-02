@@ -1,5 +1,5 @@
 //import components input
-import { PasswordInput } from "@/features/profile/components/";
+import { PasswordInput } from "@/features/student/profile/components/";
 
 //import types
 import { ChangeEvent } from "react";

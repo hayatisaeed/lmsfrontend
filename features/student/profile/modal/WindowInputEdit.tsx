@@ -4,7 +4,7 @@ import { useModal } from "@/shared/components/Modal";
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 import { Button } from "@/shared/ui";
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from "react";
-import { id } from "@/features/profile/types/idModal";
+import { id } from "@/features/student/profile/types/idModal";
 
 interface IWindowInputEditProps {
   defaultValue: string;
