@@ -3,19 +3,33 @@ import {
   Bookmark,
   Buildings,
   Notebook,
+  NotebookMinimalistic,
   Smartphone,
 } from "@/shared/icons";
-import EducationItem from "./EducationItem";
+import {
+  EducationItem,
+  PersonalItemCity,
+} from "@/features/student/profile/components";
 
 export default function Education() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5">
+      <PersonalItemCity value="" />
       <EducationItem
-        id="study"
+        id="degree"
         value=""
         labelModal="مقطع تحصیلی خود را وارد کنید"
         label="مقطع تحصیلی"
         icon={<Book size="SM" />}
+        sendCode={false}
+      />
+
+      <EducationItem
+        id="study"
+        value=""
+        labelModal="رشته تحصیلی خود را وارد کنید"
+        label="رشته تحصیلی"
+        icon={<NotebookMinimalistic size="SM" />}
         sendCode={false}
       />
 

@@ -24,13 +24,13 @@ export default function CityEdit({ defaultValue, icon }: IInputEditProps) {
       {icon}
       <h3 className="grow border-0 outline-0 ">{defaultValue?.label}</h3>
 
-      <Modal.Open id={`edit-input-city`}>
-        <button type="button" className=" cursor-pointer">
+      <Modal.Open id="edit-input-city">
+        <button type="button" className="cursor-pointer">
           <PenNewSquare size="SM" />
         </button>
       </Modal.Open>
 
-      <Modal.Window id={`edit-input-city`}>
+      <Modal.Window id="edit-input-city">
         <WindowMenuCities label="محل سکونت خود را وارد کنید" />
       </Modal.Window>
     </div>

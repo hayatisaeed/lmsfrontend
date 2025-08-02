@@ -6,10 +6,11 @@ export type ModalID =
   | "edit-input-phone"
   | "verify-code-email"
   | "verify-code-phone"
-  | "edit-input-national-code"
+  | "edit-input-degree"
   | "edit-input-city"
   | "edit-input-school-name"
   | "edit-input-school-type"
   | "edit-input-parents-phone"
   | "edit-input-olympiad"
-  | "edit-input-study";
+  | "edit-input-study"
+  | "identity-information";

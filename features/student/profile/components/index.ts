@@ -9,3 +9,6 @@ export { default as Personal } from "@/features/student/profile/components/Perso
 export { default as PersonalItem } from "@/features/student/profile/components/PersonalItem";
 export { default as InputShow } from "@/features/student/profile/components/InputShow";
 export { default as Education } from "@/features/student/profile/components/Education";
+export { default as EducationItem } from "@/features/student/profile/components/EducationItem";
+export { default as CityEdit } from "@/features/student/profile/components/CityEdit";
+export { default as PersonalItemCity } from "@/features/student/profile/components/PersonalItemCity";

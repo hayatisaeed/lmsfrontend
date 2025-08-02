@@ -138,6 +138,8 @@ function Toggler({ children, id }: ITogglerProps) {
       close();
     } else {
       const rect = e.currentTarget.getBoundingClientRect();
+      console.log(rect);
+
       changePosition(rect.right, rect.bottom);
       open(id);
     }

@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { DropDown } from "@/shared/components";
+import { useState, useRef, useEffect } from "react";
 
 interface IMenuProps {
   label: string;
@@ -18,47 +17,94 @@ export default function Menu({
   onChange,
   disabled = false,
 }: IMenuProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const [select, setSelect] = useState<
     { id: number; label: string } | undefined
   >(value);
 
-  function handleClickItem(item: { id: number; label: string }) {
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  function toggleMenu() {
+    if (!disabled) {
+      setIsOpen((prev) => !prev);
+    }
+  }
+
+  function handleSelect(item: { id: number; label: string }) {
     setSelect(item);
     onChange(item);
+    setIsOpen(false);
   }
 
   return (
-    <>
-      <DropDown.Window id="provinces">
-        {options.map((item) => (
-          <DropDown.Item onClick={() => handleClickItem(item)} key={item.id}>
-            {item.label}
-          </DropDown.Item>
-        ))}
-      </DropDown.Window>
-      <DropDown.Toggler id="provinces">
-        <button
-          disabled={disabled}
-          className={`
-        p-4 
-        rounded-xl 
-        bg-white-primary 
-        border 
-        border-text-primary/50 
-        outline-none     
-        w-full 
-        transition
-        text-sm
-        ${
-          disabled
-            ? "cursor-auto text-text-primary/60"
-            : " cursor-pointer text-text-primary"
-        } `}
-          type="button"
+    <div className="relative inline-block w-full" ref={menuRef}>
+      <button
+        type="button"
+        disabled={disabled}
+        onClick={toggleMenu}
+        className={`w-full p-4 rounded-xl border outline-none text-sm
+          ${
+            disabled
+              ? "cursor-not-allowed text-text-primary/60 bg-gray-100 border-gray-300"
+              : "cursor-pointer text-text-primary bg-white border-text-primary/50"
+          }`}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+      >
+        {select?.label || label}
+      </button>
+
+      {isOpen && (
+        <ul
+          role="listbox"
+          className="absolute z-50 mt-2 w-full max-h-60 overflow-auto rounded-xl border border-text-primary/30 bg-white shadow-lg"
+          tabIndex={-1}
         >
-          {select?.label || label}
-        </button>
-      </DropDown.Toggler>
-    </>
+          {options.length === 0 && (
+            <li className="px-3 py-2 text-sm text-gray-500">
+              هیچ گزینه‌ای وجود ندارد
+            </li>
+          )}
+          {options.map((item) => (
+            <li
+              key={item.id}
+              role="option"
+              aria-selected={select?.id === item.id}
+              tabIndex={0}
+              onClick={() => handleSelect(item)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleSelect(item);
+                }
+              }}
+              className={`cursor-pointer p-3 text-sm hover:bg-gray-100 ${
+                select?.id === item.id ? "bg-gray-200 font-semibold" : ""
+              }`}
+            >
+              {item.label}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }

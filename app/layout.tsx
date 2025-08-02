@@ -28,13 +28,13 @@ interface IRootLayoutProps {
 export default function RootLayout({ children }: IRootLayoutProps) {
   return (
     <html lang="fa" dir="rtl" className="h-full font-kalameh font-medium">
-      <Modal>
-        <DropDown>
+      <DropDown>
+        <Modal>
           <body className="h-screen bg-[#f8f9fa] overflow-hidden">
             {children}
           </body>
-        </DropDown>
-      </Modal>
+        </Modal>
+      </DropDown>
     </html>
   );
 }

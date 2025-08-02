@@ -8,19 +8,25 @@ import { provinces } from "@/shared/constant/provinces";
 import { cities } from "@/shared/constant/cities";
 
 interface IWindowMenuCitiesProps {
-  defaultValue?: { id: number; label: string };
+  defaultProvince?: { id: number; label: string };
+  defaultCity?: { id: number; label: string };
   label: string;
   onClose?: () => void;
 }
 
 export default function WindowMenuCities({
-  defaultValue,
+  defaultProvince,
+  defaultCity,
   label,
   onClose,
 }: IWindowMenuCitiesProps) {
-  const [province, setProvince] = useState<{ id: number; label: string }>(
-    defaultValue || { id: -1, label: "" }
+  const [province, setProvince] = useState<
+    { id: number; label: string } | undefined
+  >(defaultProvince);
+  const [city, setCity] = useState<{ id: number; label: string } | undefined>(
+    defaultCity
   );
+
   const isSmUp = useMediaQuery("(min-width: 640px)");
 
   function handleClickEnter() {
@@ -33,38 +39,42 @@ export default function WindowMenuCities({
 
   function handleSelectProvince(item: { id: number; label: string }) {
     setProvince(item);
+    setCity(undefined);
   }
 
-  const provinceOptions = provinces.map(function (item) {
-    return { id: item.id, label: item.name };
-  });
+  function handleSelectCity(item: { id: number; label: string }) {
+    setCity(item);
+  }
 
-  const cityOptions = cities
-    .filter(function (item) {
-      return item.province_id === province.id;
-    })
-    .map(function (item) {
-      return { id: item.id, label: item.name };
-    });
+  const provinceOptions = provinces.map((item) => ({
+    id: item.id,
+    label: item.name,
+  }));
+
+  const cityOptions = province
+    ? cities
+        .filter((item) => item.province_id === province.id)
+        .map((item) => ({ id: item.id, label: item.name }))
+    : [];
 
   return (
     <div className="flex flex-col gap-5 sm:w-[500px]">
       <h3 className="text-text-primary font-semibold">{label}</h3>
 
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="flex flex-col sm:flex-row gap-3 w-full">
         <Menu
           label="استان مورد نظر خود را انتخاب کنید"
           options={provinceOptions}
-          value={province.id === -1 ? undefined : province}
+          value={province}
           onChange={handleSelectProvince}
         />
 
         <Menu
           label="شهر مورد نظر خود را انتخاب کنید"
           options={cityOptions}
-          value={province}
-          onChange={handleSelectProvince}
-          disabled={province.id === -1}
+          value={city}
+          onChange={handleSelectCity}
+          disabled={!province}
         />
       </div>
 
@@ -73,6 +83,7 @@ export default function WindowMenuCities({
           color="PRIMARY"
           size={isSmUp ? "MD" : "SM"}
           onClick={handleClickEnter}
+          disabled={!province || !city}
         >
           ثبت
         </Button>

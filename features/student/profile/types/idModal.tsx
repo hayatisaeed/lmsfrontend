@@ -2,7 +2,7 @@ export type id =
   | "phone"
   | "name"
   | "email"
-  | "national-code"
+  | "degree"
   | "city"
   | "study"
   | "school-name"
