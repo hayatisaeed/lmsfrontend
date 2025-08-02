@@ -52,9 +52,11 @@ export default function InputEdit({
         />
       </Modal.Window>
 
-      <Modal.Window id={`verify-code-${idModal as "email" | "phone"}`}>
-        <WindowInputOTP />
-      </Modal.Window>
+      {sendCode && (
+        <Modal.Window id={`verify-code-${idModal as "email" | "phone"}`}>
+          <WindowInputOTP />
+        </Modal.Window>
+      )}
     </div>
   );
 }

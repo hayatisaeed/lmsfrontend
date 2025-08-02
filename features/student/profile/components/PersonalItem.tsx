@@ -18,7 +18,6 @@ interface IAccountItemProps {
 
 export default function PersonalItem({
   label,
-
   labelModal,
   value,
   icon,

@@ -7,3 +7,6 @@ export { default as Spinner } from "@/shared/ui/Spinner";
 
 //Container
 export { default as Container } from "@/shared/ui/Container";
+
+//menu
+export { default as Menu } from "@/shared/ui/Menu";

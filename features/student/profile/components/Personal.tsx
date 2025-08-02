@@ -8,6 +8,7 @@ import {
   Notebook,
   Smartphone,
 } from "@/shared/icons";
+import CityEdit from "./CityEdit";
 
 export default function Personal() {
   return (
@@ -20,7 +21,6 @@ export default function Personal() {
         icon={<Card size="SM" />}
         sendCode={false}
       />
-
       <PersonalItem
         id="city"
         value=""

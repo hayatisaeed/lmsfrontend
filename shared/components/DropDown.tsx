@@ -109,7 +109,7 @@ function Window({ children, id }: IWindowProps) {
   return (
     <div
       ref={refDropDown}
-      className="fixed w-[213px] border border-liner-primary/7 rounded-xl divide-y-[1px] divide-liner-primary/7 bg-white-primary"
+      className="fixed w-[213px] border border-liner-primary/7 rounded-xl divide-y-[1px] divide-liner-primary/7 bg-white-primary max-h-80 overflow-auto"
       style={{ left: `${x - 213}px`, top: `${y + 15}px` }}
     >
       {children}
