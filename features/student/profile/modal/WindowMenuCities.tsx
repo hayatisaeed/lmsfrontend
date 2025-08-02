@@ -6,6 +6,7 @@ import { Button, Menu } from "@/shared/ui";
 
 import { provinces } from "@/shared/constant/provinces";
 import { cities } from "@/shared/constant/cities";
+import { DropDown } from "@/shared/components";
 
 interface IWindowMenuCitiesProps {
   defaultProvince?: { id: number; label: string };
@@ -60,7 +61,6 @@ export default function WindowMenuCities({
   return (
     <div className="flex flex-col gap-5 sm:w-[500px]">
       <h3 className="text-text-primary font-semibold">{label}</h3>
-
       <div className="flex flex-col sm:flex-row gap-3 w-full">
         <Menu
           label="استان مورد نظر خود را انتخاب کنید"

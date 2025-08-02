@@ -21,14 +21,14 @@ export default function Help({ color = "DARK", size = "MD" }: IHelpProps) {
           cy="9.49992"
           r="7.91667"
           stroke={COLORS[color]}
-          stroke-width="1.5"
+          strokeWidth="1.5"
         />
         <circle
           cx="9.49967"
           cy="9.49992"
           r="3.16667"
           stroke={COLORS[color]}
-          stroke-width="1.5"
+          strokeWidth="1.5"
         />
         <path
           d="M11.875 7.12492L15.0417 3.95825"

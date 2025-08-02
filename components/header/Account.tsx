@@ -26,27 +26,29 @@ export default function Account({ name, image }: IAccountProps) {
 
   return (
     <div className="flex items-center gap-2">
-      <DropDown.Window id="user">
-        <DropDown.Item
-          onClick={handleClickAccount}
-          icon={<UserRounded size="SM" />}
-        >
-          حساب کاربری
-        </DropDown.Item>
-        <DropDown.Item icon={<PhoneCalling size="SM" />}>
-          شماره موبایل
-        </DropDown.Item>
-        <DropDown.Item
-          className="text-errors"
-          onClick={handleClickLogout}
-          icon={<ArrowsALogout size="SM" />}
-        >
-          خروج
-        </DropDown.Item>
-      </DropDown.Window>
-      <DropDown.Toggler id="user">
-        <DropDown.Button id="user" />
-      </DropDown.Toggler>
+      <DropDown>
+        <DropDown.Window>
+          <DropDown.Item
+            onClick={handleClickAccount}
+            icon={<UserRounded size="SM" />}
+          >
+            حساب کاربری
+          </DropDown.Item>
+          <DropDown.Item icon={<PhoneCalling size="SM" />}>
+            شماره موبایل
+          </DropDown.Item>
+          <DropDown.Item
+            className="text-errors"
+            onClick={handleClickLogout}
+            icon={<ArrowsALogout size="SM" />}
+          >
+            خروج
+          </DropDown.Item>
+        </DropDown.Window>
+        <DropDown.Toggler>
+          <DropDown.Button />
+        </DropDown.Toggler>
+      </DropDown>
 
       <h3 className="text-sm md:text-[16px]">{name}</h3>
       <div className="relative size-8 md:size-10 rounded-full bg-box-primary">

@@ -1,36 +1,29 @@
 "use client";
 
-// React imports
 import {
   createContext,
   useState,
-  useEffect,
   useRef,
   useContext,
+  useEffect,
   cloneElement,
-  ButtonHTMLAttributes,
+  ReactNode,
   ReactElement,
+  MouseEvent,
+  ButtonHTMLAttributes,
 } from "react";
 
-//import types
-import { DropDownID } from "@/shared/types/dropDown";
-import { ReactNode, MouseEvent } from "react";
-
-//import ui
 import { ButtonIcon } from "@/shared/ui";
-
-//import clsx
-import clsx from "clsx";
-
-//improt icons
 import { AltArrow } from "@/shared/icons";
+import clsx from "clsx";
+import { createPortal } from "react-dom";
 
 interface IContextDropDownProps {
-  openId: DropDownID;
-  open: (id: DropDownID) => void;
+  isOpen: boolean;
+  open: () => void;
   close: () => void;
   position: { x: number; y: number };
-  changePosition: (x: number, y: number) => void;
+  setPosition: (x: number, y: number) => void;
 }
 
 const ContextDropDown = createContext<IContextDropDownProps | null>(null);
@@ -40,114 +33,82 @@ interface IDropDownProps {
 }
 
 export default function DropDown({ children }: IDropDownProps) {
-  const [openId, setOpenId] = useState<DropDownID>("none");
-  const [position, setPosition] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
+  const [isOpen, setIsOpen] = useState(false);
+  const [position, setPositionState] = useState({ x: 0, y: 0 });
 
-  function open(id: DropDownID) {
-    setOpenId(id);
-  }
-
-  function close() {
-    setOpenId("none");
-  }
-
-  function changePosition(x: number, y: number) {
-    setPosition({ x, y });
-  }
+  const open = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
+  const setPosition = (x: number, y: number) => setPositionState({ x, y });
 
   return (
     <ContextDropDown.Provider
-      value={{ openId, open, close, position, changePosition }}
+      value={{ isOpen, open, close, position, setPosition }}
     >
       {children}
     </ContextDropDown.Provider>
   );
 }
 
-interface IWindowProps {
-  children: ReactNode;
-  id: Exclude<DropDownID, "none">;
-}
-
-function Window({ children, id }: IWindowProps) {
+function Window({ children }: { children: ReactNode }) {
   const context = useContext(ContextDropDown);
-  const refDropDown = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
-  if (!context) {
-    throw new Error(
-      "DropDown.Window must be used within a <DropDown> component"
-    );
-  }
+  if (!context) throw new Error("DropDown.Window must be used within DropDown");
 
-  const {
-    openId,
-    position: { x, y },
-    close,
-  } = context;
+  const { isOpen, position, close } = context;
 
   useEffect(() => {
     function handleClickOutside(e: globalThis.MouseEvent) {
-      if (
-        refDropDown.current &&
-        !refDropDown.current.contains(e.target as Node) &&
-        openId !== "none"
-      ) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
         close();
       }
     }
-
     document.addEventListener("click", handleClickOutside);
-
     return () => document.removeEventListener("click", handleClickOutside);
-  }, [close, openId]);
+  }, [close]);
 
-  if (openId !== id) return null;
+  if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div
-      ref={refDropDown}
-      className="fixed w-[213px] border border-liner-primary/7 rounded-xl divide-y-[1px] divide-liner-primary/7 bg-white-primary max-h-80 overflow-auto"
-      style={{ left: `${x - 213}px`, top: `${y + 15}px` }}
+      ref={ref}
+      className="fixed w-[213px] border border-liner-primary/7 rounded-xl divide-y-[1px] divide-liner-primary/7 bg-white-primary max-h-80 overflow-auto z-50"
+      style={{ left: `${position.x}px`, top: `${position.y}px` }}
     >
       {children}
-    </div>
+    </div>,
+    document.documentElement
   );
 }
 
-interface ITogglerProps {
+function Toggler({
+  children,
+}: {
   children: ReactElement<ButtonHTMLAttributes<HTMLButtonElement>>;
-  id: Exclude<DropDownID, "none">;
-}
-
-function Toggler({ children, id }: ITogglerProps) {
+}) {
   const context = useContext(ContextDropDown);
 
-  if (!context) {
-    throw new Error(
-      "DropDown.Toggler must be used within a <DropDown> component"
-    );
-  }
+  if (!context)
+    throw new Error("DropDown.Toggler must be used within DropDown");
 
-  const { openId, changePosition, open, close } = context;
+  const { isOpen, open, close, setPosition } = context;
 
-  function handleClickToggler(e: MouseEvent<HTMLButtonElement>) {
-    if (id === openId) {
+  function handleClick(e: MouseEvent<HTMLButtonElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+
+    const offsetX = rect.right - 213;
+    const offsetY = rect.bottom + 15;
+
+    setPosition(offsetX, offsetY);
+
+    if (isOpen) {
       close();
     } else {
-      const rect = e.currentTarget.getBoundingClientRect();
-      console.log(rect);
-
-      changePosition(rect.right, rect.bottom);
-      open(id);
+      open();
     }
   }
 
-  return cloneElement(children, {
-    onClick: handleClickToggler,
-  });
+  return cloneElement(children, { onClick: handleClick });
 }
 
 interface IItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -157,31 +118,26 @@ interface IItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 function Item({ children, icon, className, onClick, ...props }: IItemProps) {
   const context = useContext(ContextDropDown);
-
-  if (!context) {
-    throw new Error(
-      "DropDown.Button must be used within a <DropDown> component"
-    );
-  }
+  if (!context) throw new Error("DropDown.Item must be used within DropDown");
 
   const { close } = context;
 
-  function handleClickItem(e: MouseEvent<HTMLButtonElement>) {
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     close();
     onClick?.(e);
-  }
+  };
 
   return (
     <button
       className={clsx(
-        "flex w-full justify-between items-cente cursor-pointer px-3 py-4 transition-all hover:bg-[#f9f9f9]",
+        "flex w-full justify-between items-center cursor-pointer px-3 py-4 transition-all hover:bg-[#f9f9f9]",
         className
       )}
       type="button"
-      onClick={handleClickItem}
+      onClick={handleClick}
       {...props}
     >
-      <div className="flex items-center justify-center text-sm gap-2">
+      <div className="flex items-center text-sm gap-2">
         {icon}
         <span>{children}</span>
       </div>
@@ -189,28 +145,16 @@ function Item({ children, icon, className, onClick, ...props }: IItemProps) {
   );
 }
 
-interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  id: Exclude<DropDownID, "none">;
-}
-
-function Button({ id, ...props }: IButtonProps) {
+function Button(props: ButtonHTMLAttributes<HTMLButtonElement>) {
   const context = useContext(ContextDropDown);
+  if (!context) throw new Error("DropDown.Button must be used within DropDown");
 
-  if (!context) {
-    throw new Error(
-      "DropDown.Button must be used within a <DropDown> component"
-    );
-  }
-
-  const { openId } = context;
+  const { isOpen } = context;
 
   return (
     <ButtonIcon
       size="SM"
-      className={clsx(
-        "transition-all",
-        openId === id ? "rotate-180" : "rotate-0"
-      )}
+      className={clsx("transition-all", isOpen ? "rotate-180" : "rotate-0")}
       {...props}
     >
       <AltArrow size="XS" />
@@ -218,6 +162,7 @@ function Button({ id, ...props }: IButtonProps) {
   );
 }
 
+// Attach components
 DropDown.Window = Window;
 DropDown.Toggler = Toggler;
 DropDown.Item = Item;
