@@ -3,7 +3,7 @@
 import { useState, useEffect, JSX } from "react";
 import { Brand } from "@/shared/components";
 import { ButtonIcon } from "@/shared/ui";
-import { Closet } from "@/shared/icons";
+import { Closet, HeadphonesRound, Help } from "@/shared/icons";
 import clsx from "clsx";
 import NavLink from "./NavLink";
 import { COLORS, SIZES } from "@/shared/constant/icons";
@@ -78,7 +78,7 @@ export default function Nav({ navs }: INavProps) {
             : "opacity-0 max-h-0 px-0 mt-0"
         )}
       >
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
           {navs.map((nav) => (
             <NavLink
               key={nav.link}
@@ -87,6 +87,14 @@ export default function Nav({ navs }: INavProps) {
               icon={nav.icon}
             />
           ))}
+
+          <div className="w-[90%] h-[1px] ms-[25px] bg-liner-primary/7"></div>
+          <NavLink
+            label="پشتیبانی"
+            path={`/student/support`}
+            icon={HeadphonesRound}
+          />
+          <NavLink label="راهنما" path={`/student/help`} icon={Help} />
         </div>
       </div>
     </div>
