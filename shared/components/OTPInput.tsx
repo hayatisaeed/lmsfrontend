@@ -10,7 +10,7 @@ import { ChangeEvent, KeyboardEvent, ClipboardEvent } from "react";
 import { SIZES, COLORS } from "@/shared/constant/otpInput";
 
 //import icons
-import { InfoSquare } from "@/shared/icons";
+import { InfoSquare } from "@/assets/icons";
 
 interface OTPInputProps {
   length?: number;

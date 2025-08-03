@@ -1,8 +1,8 @@
 ///import css
 import "@/styles/globals.css";
 
-//import golobal
-import { DropDown, Modal } from "@/shared/components";
+//import global
+import { Modal } from "@/shared/components";
 
 //import types
 import { Metadata } from "next";

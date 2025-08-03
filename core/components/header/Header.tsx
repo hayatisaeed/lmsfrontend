@@ -1,8 +1,8 @@
 //import account
-import Account from "@/components/header/Account";
+import Account from "@/core/components/header/Account";
 
 //import label
-import Label from "@/components/header/Label";
+import Label from "@/core/components/header/Label";
 
 interface IHeaderProps {
   role: "Student" | "Professor" | "Admin";

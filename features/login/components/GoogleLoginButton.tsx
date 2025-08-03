@@ -7,7 +7,7 @@ import { signIn } from "next-auth/react";
 import { Button } from "@/shared/ui";
 
 // import icon
-import { Google as GoogleIcon } from "@/shared/icons";
+import { Google as GoogleIcon } from "@/assets/icons";
 import { useState } from "react";
 
 export default function GoogleLoginButton() {

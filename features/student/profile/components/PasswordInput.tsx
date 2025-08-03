@@ -7,7 +7,7 @@ import { useState } from "react";
 import { InputHTMLAttributes } from "react";
 
 //import icons
-import { Eye, EyeClosed, Key } from "@/shared/icons";
+import { Eye, EyeClosed, Key } from "@/assets/icons";
 
 interface IPasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;

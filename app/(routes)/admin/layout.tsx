@@ -1,6 +1,6 @@
 //import navbar , header
-import { Footer, Header, NavDesktop } from "@/components/";
-import { sideBarAdmin } from "@/constant/sideBarAdmin";
+import { Footer, Header, NavDesktop } from "@/core/components";
+import { sideBarAdmin } from "@/core/constant/sideBarAdmin";
 
 //types
 import { ReactNode } from "react";

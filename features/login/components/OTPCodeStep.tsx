@@ -4,7 +4,7 @@
 import { Button } from "@/shared/ui";
 
 // import icons
-import { Logout } from "@/shared/icons";
+import { Logout } from "@/assets/icons";
 
 // import components
 import { OTPInput } from "@/shared/components/";

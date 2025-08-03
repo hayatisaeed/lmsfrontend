@@ -4,7 +4,7 @@
 import { DropDown } from "@/shared/components";
 
 //import icon
-import { ArrowsALogout, PhoneCalling, UserRounded } from "@/shared/icons";
+import { ArrowsALogout, PhoneCalling, UserRounded } from "@/assets/icons";
 
 //import image
 import Image from "next/image";

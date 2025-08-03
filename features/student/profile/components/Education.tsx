@@ -5,7 +5,7 @@ import {
   Notebook,
   NotebookMinimalistic,
   Smartphone,
-} from "@/shared/icons";
+} from "@/assets/icons";
 import {
   EducationItem,
   PersonalItemCity,

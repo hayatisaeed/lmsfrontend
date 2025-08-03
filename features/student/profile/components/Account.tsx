@@ -5,7 +5,7 @@ import { AccountItem } from "@/features/student/profile/components";
 import Uploader from "@/features/student/profile/components/Uploader";
 
 //import icons
-import { Letter, Smartphone, UserRounded } from "@/shared/icons";
+import { Letter, Smartphone, UserRounded } from "@/assets/icons";
 
 export default function Account() {
   return (

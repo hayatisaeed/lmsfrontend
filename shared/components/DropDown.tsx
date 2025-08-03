@@ -14,7 +14,7 @@ import {
 } from "react";
 
 import { ButtonIcon } from "@/shared/ui";
-import { AltArrow } from "@/shared/icons";
+import { AltArrow } from "@/assets/icons";
 import clsx from "clsx";
 import { createPortal } from "react-dom";
 

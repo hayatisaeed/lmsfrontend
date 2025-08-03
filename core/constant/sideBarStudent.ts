@@ -5,7 +5,7 @@ import {
   NotebookMinimalistic,
   Notebook,
   ArchiveCheck,
-} from "@/shared/icons";
+} from "@/assets/icons";
 
 export const sideBarStudent = [
   {

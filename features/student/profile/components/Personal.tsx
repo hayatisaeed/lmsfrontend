@@ -8,7 +8,7 @@ import {
   UserGroup,
   UserId,
   UserRounded,
-} from "@/shared/icons";
+} from "@/assets/icons";
 import { Button } from "@/shared/ui";
 import WindowIdentityInformation from "@/features/student/profile/modal/WindowIdentityInformation";
 

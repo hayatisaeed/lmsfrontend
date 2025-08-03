@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 
 // import icons
-import { Smartphone } from "@/shared/icons";
+import { Smartphone } from "@/assets/icons";
 
 // import types
 import { InputHTMLAttributes, ChangeEvent } from "react";

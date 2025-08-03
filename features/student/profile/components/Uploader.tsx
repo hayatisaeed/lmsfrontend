@@ -1,7 +1,7 @@
 "use client";
 
 //import icons
-import { Camera } from "@/shared/icons";
+import { Camera } from "@/assets/icons";
 
 //import image
 import Image from "next/image";

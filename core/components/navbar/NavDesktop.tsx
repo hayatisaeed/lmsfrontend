@@ -3,7 +3,7 @@
 import { useState, useEffect, JSX } from "react";
 import { Brand } from "@/shared/components";
 import { ButtonIcon } from "@/shared/ui";
-import { Closet, HeadphonesRound, Help } from "@/shared/icons";
+import { Closet, HeadphonesRound, Help } from "@/assets/icons";
 import clsx from "clsx";
 import NavLink from "./NavLink";
 import { COLORS, SIZES } from "@/shared/constant/icons";

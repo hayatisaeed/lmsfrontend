@@ -1,10 +1,10 @@
 "use client";
 
 //import constant
-import { user } from "@/constant/label";
+import { user } from "@/core/constant/label";
 
 //import icons
-import { SquareAcademicCap } from "@/shared/icons";
+import { SquareAcademicCap } from "@/assets/icons";
 
 //import clsx
 import clsx from "clsx";

@@ -1,5 +1,5 @@
 import CityEdit from "./CityEdit";
-import { City } from "@/shared/icons";
+import { City } from "@/assets/icons";
 
 interface IAccountItemProps {
   value: string;

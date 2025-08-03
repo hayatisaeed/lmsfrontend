@@ -4,7 +4,7 @@
 import { Modal } from "@/shared/components/";
 
 //import icons
-import { PenNewSquare } from "@/shared/icons";
+import { PenNewSquare } from "@/assets/icons";
 
 //import types
 import { ReactNode } from "react";
