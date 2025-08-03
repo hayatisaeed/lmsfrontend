@@ -138,12 +138,24 @@ function Th({ children, sortBy }: IThProps) {
 }
 
 // ---------- Td ----------
-interface ITdProps {
+interface ITdProps  {
   children: ReactNode;
+  isNum?: boolean;
+  className?:string;
 }
 
-function Td({ children }: ITdProps) {
-  return <td className="text-center overflow-hidden py-5">{children}</td>;
+function Td({ children, isNum = false,className }: ITdProps) {
+  return (
+    <td
+      className={clsx(
+        "text-center overflow-hidden py-5",
+        isNum ? "font-shabnam" : "font-kalameh",
+        className
+      )}
+    >
+      {children}
+    </td>
+  );
 }
 
 // ---------- Tr ----------

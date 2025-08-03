@@ -20,7 +20,7 @@ export const COLORS = {
     hover: "#024B2C",
   },
   NEUTRAL: {
-    background: "#FFFFFF",
+    background: "#FFFFFF/0",
     text: "#222222",
     hover: "#F5F5F5",
   },

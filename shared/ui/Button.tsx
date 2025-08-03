@@ -44,7 +44,10 @@ export default function Button({
       onMouseLeave={() => setIsHovered(false)}
       className={clsx(
         "transition-colors duration-200 ease-linear flex justify-center items-center gap-1",
-        loading?"cursor-progress":"cursor-pointer",
+        loading ? "cursor-progress" : "cursor-pointer",
+        color === "NEUTRAL" &&
+          "border border-text-primary bg-transparent hover:bg-transparent",
+
         className
       )}
       style={{
