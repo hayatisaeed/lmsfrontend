@@ -6,7 +6,6 @@ import { Button, Menu } from "@/shared/ui";
 
 import { provinces } from "@/shared/constant/provinces";
 import { cities } from "@/shared/constant/cities";
-import { DropDown } from "@/shared/components";
 
 interface IWindowMenuCitiesProps {
   defaultProvince?: { id: number; label: string };

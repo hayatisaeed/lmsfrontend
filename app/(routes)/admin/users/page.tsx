@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "داشبورد",
+  title: "مدیریت کاربران",
 };
 
-export default function Dashboard() {
+export default function Users() {
   return <div>page</div>;
 }

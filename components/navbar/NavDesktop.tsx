@@ -9,6 +9,7 @@ import NavLink from "./NavLink";
 import { COLORS, SIZES } from "@/shared/constant/icons";
 
 interface INavProps {
+  path: "student" | "admin" | "professor";
   navs: {
     label: string;
     icon: ({
@@ -22,7 +23,7 @@ interface INavProps {
   }[];
 }
 
-export default function Nav({ navs }: INavProps) {
+export default function Nav({ navs, path }: INavProps) {
   const [open, setOpen] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -83,7 +84,7 @@ export default function Nav({ navs }: INavProps) {
             <NavLink
               key={nav.link}
               label={nav.label}
-              path={`/student${nav.link}`}
+              path={`/${path}${nav.link}`}
               icon={nav.icon}
             />
           ))}
@@ -91,10 +92,10 @@ export default function Nav({ navs }: INavProps) {
           <div className="w-[90%] h-[1px] ms-[25px] bg-liner-primary/7"></div>
           <NavLink
             label="پشتیبانی"
-            path={`/student/support`}
+            path={`/${path}/support`}
             icon={HeadphonesRound}
           />
-          <NavLink label="راهنما" path={`/student/help`} icon={Help} />
+          <NavLink label="راهنما" path={`/${path}/help`} icon={Help} />
         </div>
       </div>
     </div>
