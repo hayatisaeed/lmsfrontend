@@ -71,3 +71,6 @@ export { default as Buildings } from "@/assets/icons/building/Buildings";
 
 //money
 export { default as Card } from "@/assets/icons/money/Card";
+
+//list
+export { default as Sort } from "@/assets/icons/list/Sort";

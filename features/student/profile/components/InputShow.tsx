@@ -1,6 +1,6 @@
 "use client";
 
-//import types
+//types
 import { ReactNode } from "react";
 
 interface IInputShowProps {

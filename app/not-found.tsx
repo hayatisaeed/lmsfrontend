@@ -1,12 +1,13 @@
-//import logo
+//logo
 import { Brand } from "@/shared/components";
 
-//import types
+//types
 import { Metadata } from "next";
 
-//import link
+//link
 import Link from "next/link";
 
+//metadata
 export const metadata: Metadata = {
   title: "خطای 404",
 };

@@ -1,5 +1,7 @@
+//types
 import { Metadata } from "next";
 
+//metadata
 export const metadata: Metadata = {
   title: "مدیریت کلاس ها",
 };
