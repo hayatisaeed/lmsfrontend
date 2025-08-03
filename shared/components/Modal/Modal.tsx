@@ -8,11 +8,12 @@ import {
   useState,
   ReactElement,
   useEffect,
+  
   useRef,
 } from "react";
 
 // Type import
-import { ModalID } from "@/shared/types/modal";
+import { ModalID } from "@/shared/components/Modal/Modal.types";
 import { ReactNode } from "react";
 
 interface IContextModalProps {

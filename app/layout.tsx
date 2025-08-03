@@ -1,12 +1,15 @@
-///import css
-import "@/styles/globals.css";
+//css
+import "@/core/styles/globals.css";
 
-//import global
+//global
 import { Modal } from "@/shared/components";
 
-//import types
+//types
 import { Metadata } from "next";
 import { ReactNode } from "react";
+
+//tanstack-query
+import TanstackQuery from "@/core/stores/TanstackQuery";
 
 //metadata
 export const metadata: Metadata = {
@@ -27,12 +30,14 @@ interface IRootLayoutProps {
 
 export default function RootLayout({ children }: IRootLayoutProps) {
   return (
-    <html lang="fa" dir="rtl" className="h-full font-kalameh font-medium">
-      <Modal>
-        <body className="h-screen bg-[#f8f9fa] overflow-hidden">
-          {children}
-        </body>
-      </Modal>
-    </html>
+    <TanstackQuery>
+      <html lang="fa" dir="rtl" className="h-full font-kalameh font-medium">
+        <Modal>
+          <body className="h-screen bg-[#f8f9fa] overflow-hidden">
+            {children}
+          </body>
+        </Modal>
+      </html>
+    </TanstackQuery>
   );
 }

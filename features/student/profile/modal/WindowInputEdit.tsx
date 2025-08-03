@@ -1,6 +1,6 @@
 "use client";
 
-import { useModal } from "@/shared/components/Modal";
+import { useModal } from "@/shared/components/Modal/Modal";
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 import { Button } from "@/shared/ui";
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from "react";
