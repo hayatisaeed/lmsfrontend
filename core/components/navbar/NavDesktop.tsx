@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, JSX } from "react";
+import { useState, useEffect, FC } from "react";
 import { Brand } from "@/shared/components";
 import { ButtonIcon } from "@/shared/ui";
 import { Closet, HeadphonesRound, Help } from "@/assets/icons";
@@ -12,13 +12,10 @@ interface INavProps {
   path: "student" | "admin" | "professor";
   navs: {
     label: string;
-    icon: ({
-      color,
-      size,
-    }: {
+    icon: FC<{
       color: keyof typeof COLORS;
       size: keyof typeof SIZES;
-    }) => JSX.Element;
+    }>;
     link: string;
   }[];
 }

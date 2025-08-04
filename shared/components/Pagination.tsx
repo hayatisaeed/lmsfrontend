@@ -36,6 +36,8 @@ export default function Pagination({ total, limit = 10 }: IPaginatopnProps) {
     router.replace(`${pathname}?${search.toString()}`);
   }
 
+  if (length === 1) return;
+
   return (
     <div className="flex items-center gap-2">
       {numList.map((item) => (

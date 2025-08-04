@@ -12,3 +12,9 @@ export { default as DropDown } from "@/shared/components/DropDown";
 
 //Table
 export { default as Table } from "@/shared/components/Table";
+
+//Pagination
+export { default as Pagination } from "@/shared/components/Pagination";
+
+//BoxSelect
+export { default as BoxSelect } from "@/shared/components/BoxSelect";

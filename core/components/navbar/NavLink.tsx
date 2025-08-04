@@ -9,18 +9,17 @@ import Link from "next/link";
 
 //import react hooks
 import { usePathname } from "next/navigation";
-import { JSX } from "react";
+
+//types
+import { ComponentType, FC } from "react";
 
 interface INavLinkProps {
   path: string;
   label: string;
-  icon: ({
-    color,
-    size,
-  }: {
+  icon: FC<{
     color: keyof typeof COLORS;
     size: keyof typeof SIZES;
-  }) => JSX.Element;
+  }>;
 }
 
 export default function NavLink({ label, path, icon: Icon }: INavLinkProps) {

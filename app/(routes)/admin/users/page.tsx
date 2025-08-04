@@ -1,3 +1,4 @@
+import { Container } from "@/shared/ui";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -5,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function Users() {
-  return <div>page</div>;
+  return <Container title="مدیریت کاربران">ز</Container>
 }
