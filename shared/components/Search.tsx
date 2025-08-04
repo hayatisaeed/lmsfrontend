@@ -1,15 +1,15 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 
 interface ISearchProps {
   placeholder?: string;
-  key?: string;
+  refresh?: string;
 }
 
 export default function Search({
-  key,
+  refresh,
   placeholder = " جستجو کنید بر اساس نام و نام خانوادگی ، شناسه کاربری و...",
 }: ISearchProps) {
   const searchParams = useSearchParams();
@@ -21,11 +21,19 @@ export default function Search({
   useEffect(() => {
     const newSearch = searchParams.get("search") || "";
     setSearch(newSearch);
-  }, [searchParams, key]);
+  }, [searchParams, refresh]);
 
   function handleChangeSearch(e: ChangeEvent<HTMLInputElement>) {
     const { value } = e.target;
     setSearch(value);
+  }
+
+  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
+    const { code } = e;
+
+    if (code === "Enter") {
+      handleClickSearch();
+    }
   }
 
   function handleClickSearch() {
@@ -41,6 +49,7 @@ export default function Search({
         placeholder={placeholder}
         value={search}
         onChange={handleChangeSearch}
+        onKeyDown={handleKeyDown}
       />
       <button
         type="button"

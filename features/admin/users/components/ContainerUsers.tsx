@@ -33,7 +33,7 @@ export default function ContainerUsers() {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-4">
       <div className="flex w-full justify-center py-3">
-        <Search key={select} />
+        <Search refresh={select} />
       </div>
       <div className="w-full md:w-96">
         <BoxSelect
