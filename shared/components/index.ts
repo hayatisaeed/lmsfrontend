@@ -18,3 +18,6 @@ export { default as Pagination } from "@/shared/components/Pagination";
 
 //BoxSelect
 export { default as BoxSelect } from "@/shared/components/BoxSelect";
+
+//search
+export { default as Search } from "@/shared/components/Search";

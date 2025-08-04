@@ -6,6 +6,7 @@ import { DocumentsMinimalistic, NotebookMinimalistic } from "@/assets/icons";
 import { useState } from "react";
 import TableProfessors from "./TableProfessors";
 import { usePathname, useRouter } from "next/navigation";
+import { Search } from "@/shared/components";
 
 const boxSelect = [
   { label: "استاید", value: "professors", icon: NotebookMinimalistic },
@@ -24,12 +25,16 @@ export default function ContainerUsers() {
   const pathname = usePathname();
 
   function changeSelect(newSelect: string) {
-    router.replace(pathname);
+    const params = new URLSearchParams();
+    router.replace(`${pathname}?${params.toString()}`);
     setSelect(newSelect as TSelect);
   }
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+      <div className="flex w-full justify-center py-3">
+        <Search key={select} />
+      </div>
       <div className="w-full md:w-96">
         <BoxSelect
           onComplete={changeSelect}

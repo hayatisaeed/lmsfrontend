@@ -27,6 +27,7 @@ export default function TableStudents() {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-between gap-4">
+        
       <Table className="w-full">
         <Table.Tr>
           <Table.Th>ردیف</Table.Th>
