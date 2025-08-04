@@ -32,15 +32,16 @@ export default function ContainerUsers() {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-4">
-      <div className="flex w-full justify-center py-3">
-        <Search refresh={select} />
-      </div>
       <div className="w-full md:w-96">
         <BoxSelect
           onComplete={changeSelect}
           items={boxSelect}
           defaultValue={select}
         />
+      </div>
+
+      <div className="flex w-full justify-center py-3">
+        <Search refresh={select} />
       </div>
       {select === "students" ? <TableStudents /> : <TableProfessors />}
     </div>

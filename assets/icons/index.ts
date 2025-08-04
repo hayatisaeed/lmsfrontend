@@ -20,6 +20,9 @@ export { default as Smartphone } from "@/assets/icons/devices/Smartphone3";
 export { default as Help } from "@/assets/icons/essentional/Help";
 export { default as InfoSquare } from "@/assets/icons/essentional/InfoSquare";
 export { default as Question } from "@/assets/icons/essentional/Question";
+export { default as Copy } from "@/assets/icons/essentional/Copy";
+export { default as CheckCircle } from "@/assets/icons/essentional/CheckCircle";
+export { default as CloseCircle } from "@/assets/icons/essentional/CloseCircle";
 
 // Google
 export { default as Google } from "@/assets/icons/google/Google";

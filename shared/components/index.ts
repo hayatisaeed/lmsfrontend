@@ -21,3 +21,6 @@ export { default as BoxSelect } from "@/shared/components/BoxSelect";
 
 //search
 export { default as Search } from "@/shared/components/Search";
+
+//input-edit
+export { default as InputEditText } from "@/shared/components/InputEditText";

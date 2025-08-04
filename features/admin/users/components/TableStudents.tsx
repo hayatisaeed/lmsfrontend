@@ -6,6 +6,7 @@ import { Modal, Pagination, Table } from "@/shared/components";
 //ui
 import { Button } from "@/shared/ui";
 import ChangeActivation from "../modal/ChangeActivation";
+import ViewStudent from "../modal/ViewStudent";
 
 export default function TableStudents() {
   const itemsFake = [
@@ -71,8 +72,13 @@ export default function TableStudents() {
               <Table.Td isNum>{item.date}</Table.Td>
               <Table.Td isNum> {item.nationalCode}</Table.Td>
               <Table.Td className="flex flex-col lg:flex-row items-stretch justify-center gap-2 px-10 lg:px-0">
-                <Button color="NEUTRAL">مشاهده</Button>
                 <Modal>
+                  <Modal.Open id="view">
+                    <Button color="NEUTRAL">مشاهده</Button>
+                  </Modal.Open>
+                  <Modal.Window id="view">
+                    <ViewStudent />
+                  </Modal.Window>
                   <Modal.Window id="activation">
                     <ChangeActivation activation={!item.isOK} />
                   </Modal.Window>
