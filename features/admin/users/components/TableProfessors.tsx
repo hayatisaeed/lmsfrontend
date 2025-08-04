@@ -1,10 +1,11 @@
 "use client";
 
 //components
-import { Pagination, Table } from "@/shared/components";
+import { Modal, Pagination, Table } from "@/shared/components";
 
 //ui
 import { Button } from "@/shared/ui";
+import ChangeActivation from "../modal/ChangeActivation";
 
 export default function TableStudents() {
   const itemsFake = [
@@ -22,12 +23,10 @@ export default function TableStudents() {
       nationalCode: "40217032102",
       isOK: true,
     },
-   
   ];
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-between gap-4">
-        
       <Table className="w-full">
         <Table.Tr>
           <Table.Th>ردیف</Table.Th>
@@ -45,9 +44,16 @@ export default function TableStudents() {
               <Table.Td isNum> {item.nationalCode}</Table.Td>
               <Table.Td className="flex flex-col lg:flex-row items-stretch justify-center gap-2 px-10 lg:px-0">
                 <Button color="NEUTRAL">مشاهده</Button>
-                <Button color="NEUTRAL">
-                  {item.isOK ? "فعال سازی" : " غیر فعال سازی"}
-                </Button>
+                <Modal>
+                  <Modal.Window id="activation">
+                    <ChangeActivation activation={!item.isOK} />
+                  </Modal.Window>
+                  <Modal.Open id="activation">
+                    <Button color="NEUTRAL">
+                      {item.isOK ? "فعال سازی" : " غیر فعال سازی"}
+                    </Button>
+                  </Modal.Open>
+                </Modal>
               </Table.Td>
             </Table.Tr>
           );

@@ -32,11 +32,9 @@ export default function RootLayout({ children }: IRootLayoutProps) {
   return (
     <TanstackQuery>
       <html lang="fa" dir="rtl" className="h-full font-kalameh font-medium">
-        <Modal>
-          <body className="h-screen bg-[#f8f9fa] overflow-hidden">
-            {children}
-          </body>
-        </Modal>
+        <body className="h-screen bg-[#f8f9fa] overflow-hidden">
+          {children}
+        </body>
       </html>
     </TanstackQuery>
   );

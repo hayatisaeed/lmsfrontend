@@ -8,17 +8,15 @@ import {
   useState,
   ReactElement,
   useEffect,
-  
   useRef,
 } from "react";
 
 // Type import
-import { ModalID } from "@/shared/components/Modal/Modal.types";
 import { ReactNode } from "react";
 
 interface IContextModalProps {
-  openId: ModalID;
-  open: (id: ModalID) => void;
+  openId: string;
+  open: (id: string) => void;
   close: () => void;
 }
 
@@ -29,9 +27,9 @@ interface IProviderModalProps {
 }
 
 export default function Modal({ children }: IProviderModalProps) {
-  const [openId, setOpenId] = useState<ModalID>("none");
+  const [openId, setOpenId] = useState<string>("none");
 
-  function open(id: ModalID) {
+  function open(id: string) {
     setOpenId(id);
   }
 
@@ -46,11 +44,9 @@ export default function Modal({ children }: IProviderModalProps) {
   );
 }
 
-type ModalIDWithoutNone = Exclude<ModalID, "none">;
-
 interface IWindowProps {
   children: ReactElement<{ onClose: () => void }>;
-  id: ModalIDWithoutNone;
+  id: string;
 }
 
 function Window({ children, id }: IWindowProps) {
@@ -102,7 +98,7 @@ function Window({ children, id }: IWindowProps) {
 
 interface IOpenProps {
   children: ReactElement<{ onClick: () => void }>;
-  id: ModalIDWithoutNone;
+  id: string;
 }
 
 function Open({ children, id }: IOpenProps) {

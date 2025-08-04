@@ -4,8 +4,6 @@ import { InputEdit } from "@/features/student/profile/components";
 //import types
 import { ReactNode } from "react";
 
-//import id modal
-import { id } from "@/features/student/profile/types/idModal";
 
 interface IAccountItemProps {
   label?: string;
@@ -13,7 +11,7 @@ interface IAccountItemProps {
   value: string;
   labelModal: string;
   sendCode?: boolean;
-  id: id;
+  id: string;
 }
 
 export default function EducationItem({

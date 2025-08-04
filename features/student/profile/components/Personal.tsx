@@ -27,12 +27,14 @@ export default function Personal() {
         <PersonalItem value="" label="جنسیت" icon={<UserCheck size="SM" />} />
       </div>
       <div className="flex w-full justify-end items-center">
-        <Modal.Open id="identity-information">
-          <Button type="button">تایید هویت</Button>
-        </Modal.Open>
-        <Modal.Window id="identity-information">
-          <WindowIdentityInformation />
-        </Modal.Window>
+        <Modal>
+          <Modal.Open id="identity-information">
+            <Button type="button">تایید هویت</Button>
+          </Modal.Open>
+          <Modal.Window id="identity-information">
+            <WindowIdentityInformation />
+          </Modal.Window>
+        </Modal>
       </div>
     </div>
   );

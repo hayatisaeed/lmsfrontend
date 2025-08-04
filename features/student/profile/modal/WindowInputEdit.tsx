@@ -1,10 +1,9 @@
 "use client";
 
-import { useModal } from "@/shared/components/Modal/Modal";
+import { useModal } from "@/shared/components/Modal";
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 import { Button } from "@/shared/ui";
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from "react";
-import { id } from "@/features/student/profile/types/idModal";
 
 interface IWindowInputEditProps {
   defaultValue: string;
@@ -12,7 +11,7 @@ interface IWindowInputEditProps {
   label: string;
   sendCode?: boolean;
   onClose?: () => void;
-  id: Exclude<id, "name">;
+  id: string;
 }
 
 export default function WindowInputEdit({
@@ -43,7 +42,7 @@ export default function WindowInputEdit({
 
     if (id === "email" || id === "phone") {
       setTimeout(() => {
-        open(`verify-code-${id}`);
+        open(`verify-code`);
       }, 250);
     }
   }

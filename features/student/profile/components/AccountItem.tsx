@@ -4,9 +4,6 @@ import { InputEdit } from "@/features/student/profile/components";
 //import types
 import { ReactNode } from "react";
 
-//import id modal
-import { id } from "@/features/student/profile/types/idModal";
-
 interface IAccountItemProps {
   label?: string;
   type?: "none" | "reject" | "pendding";
@@ -14,7 +11,7 @@ interface IAccountItemProps {
   value: string;
   labelModal: string;
   sendCode?: boolean;
-  id: id;
+  id: string;
 }
 
 export default function AccountItem({
@@ -24,7 +21,7 @@ export default function AccountItem({
   value,
   icon,
   sendCode,
-  id: idModal,
+  id,
 }: IAccountItemProps) {
   return (
     <div className="w-full flex flex-col justify-start gap-3">
@@ -37,7 +34,7 @@ export default function AccountItem({
         label={labelModal}
         icon={icon}
         sendCode={sendCode}
-        id={idModal}
+        id={id}
       />
     </div>
   );

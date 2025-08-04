@@ -5,7 +5,7 @@ export { default as OTPInput } from "@/shared/components/OTPInput";
 export { default as Brand } from "@/shared/components/Brand";
 
 //Modal
-export { default as Modal } from "@/shared/components/Modal/Modal";
+export { default as Modal } from "@/shared/components/Modal";
 
 //DropDown
 export { default as DropDown } from "@/shared/components/DropDown";

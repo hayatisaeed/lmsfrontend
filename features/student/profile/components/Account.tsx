@@ -22,7 +22,7 @@ export default function Account() {
           sendCode={false}
           labelModal="نام کاربری خود را وارد کنید."
           icon={<UserRounded size="SM" />}
-          id="name"
+          id="user-name"
         />
 
         <AccountItem

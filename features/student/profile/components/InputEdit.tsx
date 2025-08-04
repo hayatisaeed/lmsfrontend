@@ -8,8 +8,6 @@ import { PenNewSquare } from "@/assets/icons";
 
 //import types
 import { ReactNode } from "react";
-import { id } from "@/features/student/profile/types/idModal";
-
 //input window modal
 import {
   WindowInputOTP,
@@ -21,7 +19,7 @@ interface IInputEditProps {
   icon?: ReactNode;
   label: string;
   sendCode?: boolean;
-  id: id;
+  id: string;
 }
 
 export default function InputEdit({
@@ -29,34 +27,36 @@ export default function InputEdit({
   icon,
   label,
   sendCode,
-  id: idModal,
+  id,
 }: IInputEditProps) {
   return (
     <div className="flex justify-between items-center gap-2 p-4 rounded-xl bg-white-primary border border-text-primary/50">
       {icon}
       <h3 className="grow border-0 outline-0 ">{defaultValue}</h3>
 
-      <Modal.Open id={`edit-input-${idModal}`}>
-        <button type="button" className=" cursor-pointer">
-          <PenNewSquare size="SM" />
-        </button>
-      </Modal.Open>
+      <Modal>
+        <Modal.Open id={id}>
+          <button type="button" className=" cursor-pointer">
+            <PenNewSquare size="SM" />
+          </button>
+        </Modal.Open>
 
-      <Modal.Window id={`edit-input-${idModal}`}>
-        <WindowInputEdit
-          sendCode={sendCode}
-          defaultValue={defaultValue}
-          label={label}
-          icon={icon}
-          id={idModal as Exclude<id, "name">}
-        />
-      </Modal.Window>
-
-      {sendCode && (
-        <Modal.Window id={`verify-code-${idModal as "email" | "phone"}`}>
-          <WindowInputOTP />
+        <Modal.Window id={id}>
+          <WindowInputEdit
+            sendCode={sendCode}
+            defaultValue={defaultValue}
+            label={label}
+            icon={icon}
+            id={id}
+          />
         </Modal.Window>
-      )}
+
+        {sendCode && (
+          <Modal.Window id="input-otp">
+            <WindowInputOTP />
+          </Modal.Window>
+        )}
+      </Modal>
     </div>
   );
 }
