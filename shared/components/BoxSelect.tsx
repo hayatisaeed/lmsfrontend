@@ -11,10 +11,11 @@ interface IBoxSelectProps {
     icon?: FC<{ size?: keyof typeof SIZES; color?: keyof typeof COLORS }>;
   }[];
   onComplete: (value: string) => void;
+  defaultValue?: string;
 }
 
-export default function BoxSelect({ items, onComplete }: IBoxSelectProps) {
-  const [value, setValue] = useState("");
+export default function BoxSelect({ items, onComplete,defaultValue }: IBoxSelectProps) {
+  const [value, setValue] = useState(defaultValue);
 
   function handleChangeValue(newValue: string) {
     setValue(newValue);
@@ -31,7 +32,7 @@ export default function BoxSelect({ items, onComplete }: IBoxSelectProps) {
             type="button"
             className={clsx(
               "flex-1 min-w-0",
-              "flex items-center justify-start md:justify-center gap-2",
+              "flex items-center justify-start md:justify-center gap-2 text-sm",
               "py-3 px-3 rounded-lg",
               "transition-colors duration-200",
               isSelected

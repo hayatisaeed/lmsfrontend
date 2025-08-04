@@ -33,6 +33,7 @@ export { default as Plain } from "@/assets/icons/messages/Plain";
 // Notes
 export { default as ArchiveCheck } from "@/assets/icons/notes/ArchiveCheck";
 export { default as Notebook } from "@/assets/icons/notes/Notebook";
+export { default as DocumentsMinimalistic } from "@/assets/icons/notes/DocumentsMinimalistic";
 
 // Notifications
 export { default as BellBing } from "@/assets/icons/notifications/BellBing";

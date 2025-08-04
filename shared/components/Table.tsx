@@ -83,7 +83,7 @@ export default function Table({ children, className, ...props }: ITableProps) {
 
   return (
     <TableContext.Provider value={{ handleToggleSort, sortBy, sortType }}>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto w-full">
         <table className={clsx("w-full min-w-[600px]", className)} {...props}>
           <thead>{children}</thead>
         </table>
@@ -148,7 +148,7 @@ function Td({ children, isNum = false,className }: ITdProps) {
   return (
     <td
       className={clsx(
-        "text-center overflow-hidden py-5",
+        "text-center overflow-hidden py-5 px-7 text-sm md:text-[16px]",
         isNum ? "font-shabnam" : "font-kalameh",
         className
       )}
@@ -165,7 +165,7 @@ interface ITrProps {
 
 function Tr({ children }: ITrProps) {
   return (
-    <tr className="overflow-hidden odd:bg-white-primary even:bg-box-primary">
+    <tr className="overflow-hidden odd:bg-white-primary even:bg-box-primary text-sm md:text-[16px]">
       {children}
     </tr>
   );
