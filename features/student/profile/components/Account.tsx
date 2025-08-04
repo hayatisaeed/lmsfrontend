@@ -2,7 +2,9 @@
 
 //import componets profile
 import { AccountItem } from "@/features/student/profile/components";
-import Uploader from "@/features/student/profile/components/Uploader";
+
+//component
+import { Uploader } from "@/shared/components";
 
 //import icons
 import { Letter, Smartphone, UserRounded } from "@/assets/icons";

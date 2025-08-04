@@ -12,10 +12,11 @@ import { ChangeEvent } from "react";
 
 interface IUploaderProps {
   title?: string;
+  defaultImage?: string;
 }
 
-export default function Uploader({ title }: IUploaderProps) {
-  const [image, setImage] = useState<string>("");
+export default function Uploader({ title, defaultImage = "" }: IUploaderProps) {
+  const [image, setImage] = useState<string>(defaultImage);
 
   function upload(e: ChangeEvent<HTMLInputElement>) {
     const { files } = e.target;

@@ -4,7 +4,7 @@ export { default as Account } from "@/features/student/profile/components/Accoun
 export { default as AccountItem } from "@/features/student/profile/components/AccountItem";
 export { default as ChangePassword } from "@/features/student/profile/components/ChangePassword";
 export { default as ChangePasswordItem } from "@/features/student/profile/components/ChangePasswordItem";
-export { default as Uploader } from "@/features/student/profile/components/Uploader";
+export { default as Uploader } from "@/shared/components/Uploader";
 export { default as Personal } from "@/features/student/profile/components/Personal";
 export { default as PersonalItem } from "@/features/student/profile/components/PersonalItem";
 export { default as InputShow } from "@/features/student/profile/components/InputShow";
