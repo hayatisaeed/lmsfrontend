@@ -5,6 +5,7 @@ import TableStudents from "./TableStudents";
 import { DocumentsMinimalistic, NotebookMinimalistic } from "@/assets/icons";
 import { useState } from "react";
 import TableProfessors from "./TableProfessors";
+import { usePathname, useRouter } from "next/navigation";
 
 const boxSelect = [
   { label: "استاید", value: "professors", icon: NotebookMinimalistic },
@@ -19,8 +20,11 @@ type TSelect = "students" | "professors";
 
 export default function ContainerUsers() {
   const [select, setSelect] = useState<TSelect>("students");
+  const router = useRouter();
+  const pathname = usePathname();
 
   function changeSelect(newSelect: string) {
+    router.replace(pathname);
     setSelect(newSelect as TSelect);
   }
 
