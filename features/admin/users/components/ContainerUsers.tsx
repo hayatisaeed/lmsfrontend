@@ -41,7 +41,14 @@ export default function ContainerUsers() {
       </div>
 
       <div className="flex w-full justify-center py-3">
-        <Search refresh={select} />
+        <Search
+          refresh={select}
+          placeholder={
+            select === "students"
+              ? "جستجو بر اساس نام و نام خانوادگی ، کدملی ، کد دانشجویی"
+              : "جستجو بر اساس نام و نام خانوادگی ، کدملی ، کد استادی"
+          }
+        />
       </div>
       {select === "students" ? <TableStudents /> : <TableProfessors />}
     </div>

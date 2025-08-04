@@ -31,6 +31,7 @@ export default function TableStudents() {
         <Table.Tr>
           <Table.Th>ردیف</Table.Th>
           <Table.Th>نام و نام خانوادگی</Table.Th>
+          <Table.Th>کدملی</Table.Th>
           <Table.Th sortBy="date">تاریخ عضویت</Table.Th>
           <Table.Th> کد استادی</Table.Th>
           <Table.Th>دسترسی ها</Table.Th>
@@ -40,6 +41,7 @@ export default function TableStudents() {
             <Table.Tr key={item.num}>
               <Table.Td isNum>{item.num}</Table.Td>
               <Table.Td>{item.fullName}</Table.Td>
+              <Table.Td isNum>{item.nationalCode}</Table.Td>
               <Table.Td isNum>{item.date}</Table.Td>
               <Table.Td isNum> {item.nationalCode}</Table.Td>
               <Table.Td className="flex flex-col lg:flex-row items-stretch justify-center gap-2 px-10 lg:px-0">
@@ -49,7 +51,7 @@ export default function TableStudents() {
                     <ChangeActivation activation={!item.isOK} />
                   </Modal.Window>
                   <Modal.Open id="activation">
-                    <Button color="NEUTRAL">
+                    <Button color="NEUTRAL" className="whitespace-nowrap">
                       {item.isOK ? "فعال سازی" : " غیر فعال سازی"}
                     </Button>
                   </Modal.Open>

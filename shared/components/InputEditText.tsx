@@ -2,6 +2,7 @@
 
 //icon
 import { CheckCircle, CloseCircle, Copy, PenNewSquare } from "@/assets/icons";
+import clsx from "clsx";
 
 //react
 import { useRef, useState } from "react";
@@ -13,9 +14,11 @@ interface IInputEditTextProps {
   defaultValue?: string;
   mutate?: (value: string) => void;
   placeholder?: string;
+  isNum?: boolean;
 }
 
 export default function InputEditText({
+  isNum,
   placeholder,
   mutate,
   defaultValue = "",
@@ -60,7 +63,10 @@ export default function InputEditText({
           readOnly={!edit}
           placeholder={placeholder}
           onChange={handleChangeInput}
-          className="grow w-full border-0 outline-0"
+          className={clsx(
+            "grow w-full border-0 outline-0",
+            isNum ? "font-shabnam" : "font-kalameh"
+          )}
         />
         <div className="flex items-center gap-1">
           {edit ? (
