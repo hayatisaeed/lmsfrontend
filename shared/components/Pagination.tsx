@@ -38,8 +38,26 @@ export default function Pagination({ total, limit = 10 }: IPaginatopnProps) {
 
   if (length === 1) return;
 
+  console.log(numList);
+
   return (
     <div className="flex items-center gap-2">
+      {!(page === 1 || page === 2) && (
+        <>
+          <button
+            onClick={() => {
+              handleTogglePage(1);
+            }}
+            type="button"
+            className={clsx(
+              "size-10 text-sm rounded-full flex justify-center items-center font-shabnam bg-box-primary cursor-pointer"
+            )}
+          >
+            1
+          </button>
+          <h3 className="mb-2">...</h3>
+        </>
+      )}
       {numList.map((item) => (
         <button
           key={item}
@@ -58,6 +76,22 @@ export default function Pagination({ total, limit = 10 }: IPaginatopnProps) {
           {item}
         </button>
       ))}
+      {!(page === length || page === length - 1) && (
+        <>
+          <h3 className="mb-2">...</h3>
+          <button
+            onClick={() => {
+              handleTogglePage(length);
+            }}
+            type="button"
+            className={clsx(
+              "size-10 text-sm rounded-full flex justify-center items-center font-shabnam bg-box-primary cursor-pointer"
+            )}
+          >
+            {length}
+          </button>
+        </>
+      )}
     </div>
   );
 }
