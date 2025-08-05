@@ -19,7 +19,7 @@ export default function Label({ type }: ILabelProps) {
   return (
     <div
       className={clsx(
-        "min-w-[132px] p-3 rounded-lg  items-center justify-center gap-1 hidden md:flex",
+        "min-w-[132px] p-3 rounded-lg items-center justify-center gap-1 flex",
         type === "Admin"
           ? "bg-background-box-manager"
           : "bg-backgrdound-box-green"

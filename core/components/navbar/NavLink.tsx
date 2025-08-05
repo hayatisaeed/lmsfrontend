@@ -11,7 +11,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 //types
-import { ComponentType, FC } from "react";
+import { FC } from "react";
 
 interface INavLinkProps {
   path: string;

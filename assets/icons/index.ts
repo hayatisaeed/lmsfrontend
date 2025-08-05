@@ -23,6 +23,8 @@ export { default as Question } from "@/assets/icons/essentional/Question";
 export { default as Copy } from "@/assets/icons/essentional/Copy";
 export { default as CheckCircle } from "@/assets/icons/essentional/CheckCircle";
 export { default as CloseCircle } from "@/assets/icons/essentional/CloseCircle";
+export { default as Menu } from "@/assets/icons/essentional/Menu";
+export { default as Close } from "@/assets/icons/essentional/Close";
 
 // Google
 export { default as Google } from "@/assets/icons/google/Google";

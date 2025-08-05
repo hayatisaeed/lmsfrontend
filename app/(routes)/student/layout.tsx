@@ -17,7 +17,7 @@ export default function Studentlayout({ children }: IStudentLayoutProps) {
       </aside>
       <div className="flex flex-col w-full h-full overflow-hidden">
         <header>
-          <Header role="Student" />
+          <Header path="student" navs={sideBarStudent} role="Student" />
         </header>
         <div className="h-full overflow-y-auto flex flex-col gap-5">
           <main className="grow">{children}</main>

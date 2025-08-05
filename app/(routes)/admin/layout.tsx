@@ -17,7 +17,7 @@ export default function Adminlayout({ children }: IAdminLayoutProps) {
       </aside>
       <div className="flex flex-col w-full h-full overflow-hidden">
         <header>
-          <Header role="Admin" />
+          <Header path="admin" navs={sideBarAdmin} role="Admin" />
         </header>
         <div className="h-full overflow-y-auto flex flex-col gap-5">
           <main className="grow">{children}</main>
