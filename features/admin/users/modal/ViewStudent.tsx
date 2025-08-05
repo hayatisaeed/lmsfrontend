@@ -11,7 +11,7 @@ export default function ViewStudent({ onClose }: IViewStudentProps) {
   }
 
   return (
-    <div className="flex flex-col w-[300px] sm:min-w-[500px] lg:w-[900px] max-h-[550px] overflow-auto">
+    <div className="flex flex-col w-[320px] sm:min-w-[500px] lg:w-[900px] max-h-[550px] overflow-auto">
       <Container title="اطلاعات حساب" className="py-0 my-0 gap-0">
         <div className="flex gap-3">
           <Uploader title="تصویر حساب" />
@@ -45,7 +45,7 @@ export default function ViewStudent({ onClose }: IViewStudentProps) {
         </div>
       </Container>
       <div className="w-full flex justify-end ">
-        <Button type="button" color="SECONDARY" onClick={handleClose}>
+        <Button type="button" color="SECONDARY" onClick={handleClose}> 
           بستن
         </Button>
       </div>

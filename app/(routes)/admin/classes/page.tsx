@@ -1,4 +1,6 @@
 //types
+import ContainerClasses from "@/features/admin/classes/components/ContainerClasses";
+import { Container } from "@/shared/ui";
 import { Metadata } from "next";
 
 //metadata
@@ -7,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function Classes() {
-  return <div>page</div>;
+  return (
+    <Container className="h-full" title="مدیریت کلاس ها">
+      <ContainerClasses />
+    </Container>
+  );
 }
