@@ -6,36 +6,37 @@ import {
   Notebook,
   ArchiveCheck,
 } from "@/assets/icons";
+import { Navs } from "../types/navLinks";
 
-export const sideBarAdmin = [
+export const sideBarAdmin: Navs[] = [
   {
     label: "داشبورد",
     icon: Widget,
-    link: "/dashboard",
+    link: "/admin/dashboard",
   },
   {
     label: "ایجاد کلاس جدید",
     icon: NotebookMinimalistic,
-    link: "/create-class",
+    link: "/admin/create-class",
   },
   {
     label: "مدیریت کاربران",
     icon: NotebookMinimalistic,
-    link: "/users",
+    link: "/admin/users",
   },
   {
     label: "مدیریت کلاس ها",
     icon: Notebook,
-    link: "/classes",
+    link: "/admin/classes",
   },
   {
     label: "مدیریت آزمون",
     icon: Notebook,
-    link: "/exams",
+    link: "/admin/exams",
   },
   {
     label: "گزارش های مدیریتی",
     icon: ArchiveCheck,
-    link: "/reports",
+    link: "/admin/reports",
   },
 ];

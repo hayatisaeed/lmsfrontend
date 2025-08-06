@@ -34,6 +34,7 @@ export { default as ChatRoundDots } from "@/assets/icons/messages/ChatRoundDots"
 export { default as Letter } from "@/assets/icons/messages/Letter";
 export { default as PenNewSquare } from "@/assets/icons/messages/PenNewSquare";
 export { default as Plain } from "@/assets/icons/messages/Plain";
+export { default as Unread } from "@/assets/icons/messages/Unread";
 
 // Notes
 export { default as ArchiveCheck } from "@/assets/icons/notes/ArchiveCheck";

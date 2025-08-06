@@ -69,7 +69,15 @@ export default function NavMobile({ navs, path }: INavProps) {
         </div>
 
         <div className="flex items-center justify-between w-full p-6">
-          <Label type="Admin" />
+          <Label
+            type={
+              path === "admin"
+                ? "Admin"
+                : path === "professor"
+                ? "Professor"
+                : "Student"
+            }
+          />
           <p></p>
         </div>
 

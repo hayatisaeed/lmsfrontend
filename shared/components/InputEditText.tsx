@@ -10,6 +10,9 @@ import { useRef, useState } from "react";
 //types
 import { ChangeEvent } from "react";
 
+//spinner
+import { Spinner } from "../ui";
+
 interface IInputEditTextProps {
   defaultValue?: string;
   mutate?: (value: string) => void;
@@ -25,11 +28,31 @@ export default function InputEditText({
 }: IInputEditTextProps) {
   const [value, setValue] = useState(defaultValue);
   const [edit, setEdit] = useState<boolean>(false);
+  const [copy, setCopy] = useState<"copy" | "pending" | "success" | "error">(
+    "copy"
+  );
 
   const refInput = useRef<HTMLInputElement | null>(null);
 
   function handleClickCopy() {
-    navigator.clipboard.writeText(value);
+    try {
+      setCopy("pending");
+      navigator.clipboard.writeText(value);
+      setTimeout(() => {
+        setCopy("success");
+        setTimeout(() => {
+          setCopy("copy");
+        }, 1000);
+      }, 1000);
+    } catch {
+      setCopy("pending");
+      setTimeout(() => {
+        setCopy("error");
+        setTimeout(() => {
+          setCopy("copy");
+        }, 1000);
+      }, 1000);
+    }
   }
 
   function handleChangeInput(e: ChangeEvent<HTMLInputElement>) {
@@ -100,7 +123,15 @@ export default function InputEditText({
                 className="cursor-pointer"
                 onClick={handleClickCopy}
               >
-                <Copy size="SM" />
+                {copy === "copy" ? (
+                  <Copy size="SM" />
+                ) : copy === "pending" ? (
+                  <Spinner />
+                ) : copy === "success" ? (
+                  <CheckCircle size="SM" />
+                ) : (
+                  <CloseCircle />
+                )}
               </button>
             </>
           )}

@@ -1,23 +1,16 @@
 "use client";
 
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect } from "react";
 import { Brand } from "@/shared/components";
 import { ButtonIcon } from "@/shared/ui";
 import { Closet, HeadphonesRound, Help } from "@/assets/icons";
 import clsx from "clsx";
 import NavLink from "./NavLink";
-import { COLORS, SIZES } from "@/shared/constant/icons";
+import { Navs } from "@/core/types/navLinks";
 
 interface INavProps {
   path: "student" | "admin" | "professor";
-  navs: {
-    label: string;
-    icon: FC<{
-      color: keyof typeof COLORS;
-      size: keyof typeof SIZES;
-    }>;
-    link: string;
-  }[];
+  navs: Navs[];
 }
 
 export default function Nav({ navs, path }: INavProps) {
@@ -77,16 +70,19 @@ export default function Nav({ navs, path }: INavProps) {
         )}
       >
         <div className="flex flex-col gap-2">
-          {navs.map((nav) => (
+          {navs.map((nav, index) => (
             <NavLink
-              key={nav.link}
-              label={nav.label}
-              path={`/${path}${nav.link}`}
+              key={index}
               icon={nav.icon}
+              label={nav.label}
+              link={"link" in nav ? nav.link : undefined}
+              items={"children" in nav ? nav.children : undefined}
             />
           ))}
 
           <div className="w-[90%] h-[1px] ms-[25px] bg-liner-primary/7"></div>
+
+          {/* Static Items */}
           <NavLink
             label="پشتیبانی"
             path={`/${path}/support`}

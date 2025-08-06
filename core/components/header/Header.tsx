@@ -28,7 +28,7 @@ export default function Header({ role, navs, path }: IHeaderProps) {
         <Label type={role} />
       </div>
       <div className=" md:hidden">
-        <NavMobile navs={navs} path={path} />
+        <NavMobile navs={navs} path={path}  />
       </div>
       <Account name="امیرحسین شکری" />
     </div>
