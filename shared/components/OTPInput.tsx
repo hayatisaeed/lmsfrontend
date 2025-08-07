@@ -18,9 +18,11 @@ interface OTPInputProps {
   size?: keyof typeof SIZES;
   color?: keyof typeof COLORS;
   error?: boolean;
+  disabled?: boolean;
 }
 
 export default function OTPInput({
+  disabled = false,
   length = 6,
   onComplete,
   color = "PRIMARY",
@@ -138,6 +140,7 @@ export default function OTPInput({
       >
         {Array.from({ length }).map((_, index) => (
           <input
+            disabled={disabled}
             key={index}
             type="text"
             inputMode="numeric"

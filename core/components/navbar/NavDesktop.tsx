@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Brand } from "@/shared/components";
 import { ButtonIcon } from "@/shared/ui";
 import { Closet, HeadphonesRound, Help } from "@/assets/icons";
@@ -15,11 +15,6 @@ interface INavProps {
 
 export default function Nav({ navs, path }: INavProps) {
   const [open, setOpen] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const handleChangeOpen = () => {
     setOpen((prev) => !prev);
@@ -29,8 +24,7 @@ export default function Nav({ navs, path }: INavProps) {
     <div
       className={clsx(
         "h-full transition-all duration-300 ease-in-out rounded-2xl overflow-hidden flex flex-col bg-white-primary",
-        open ? "w-[300px]" : "w-[64px]",
-        !isMounted && "transition-none"
+        open ? "w-[300px]" : "w-[62px]"
       )}
     >
       {/* Header: Brand and Toggle */}
@@ -63,16 +57,15 @@ export default function Nav({ navs, path }: INavProps) {
       {/* Menu Items */}
       <div
         className={clsx(
-          "transition-all duration-300 overflow-hidden",
-          open
-            ? "opacity-100 max-h-screen pe-5 mt-5"
-            : "opacity-0 max-h-0 px-0 mt-0"
+          "transition-all duration-300 overflow-hidden opacity-100 max-h-screen mt-5",
+          open?"pe-5":"pe-3"
         )}
       >
         <div className="flex flex-col gap-2">
           {navs.map((nav, index) => (
             <NavLink
               key={index}
+              small={!open}
               icon={nav.icon}
               label={nav.label}
               link={"link" in nav ? nav.link : undefined}
@@ -80,15 +73,23 @@ export default function Nav({ navs, path }: INavProps) {
             />
           ))}
 
-          <div className="w-[90%] h-[1px] ms-[25px] bg-liner-primary/7"></div>
+          <div
+            className={clsx(open?"w-[90%] ms-[25px]":"w-[60%] ms-[22px]", " h-[1px]  bg-liner-primary/7")}
+          ></div>
 
           {/* Static Items */}
           <NavLink
             label="پشتیبانی"
             path={`/${path}/support`}
             icon={HeadphonesRound}
+            small={!open}
           />
-          <NavLink label="راهنما" path={`/${path}/help`} icon={Help} />
+          <NavLink
+            label="راهنما"
+            small={!open}
+            path={`/${path}/help`}
+            icon={Help}
+          />
         </div>
       </div>
     </div>

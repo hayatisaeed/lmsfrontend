@@ -7,6 +7,7 @@ import { useState, FC } from "react";
 import { COLORS, SIZES } from "@/shared/constant/icons";
 
 interface NavLinkProps {
+  small?: boolean;
   label: string;
   icon: FC<{ size: keyof typeof SIZES; color: keyof typeof COLORS }>;
   link?: string;
@@ -18,6 +19,7 @@ interface NavLinkProps {
 }
 
 export default function NavLink({
+  small = false,
   label,
   icon: Icon,
   link,
@@ -45,14 +47,15 @@ export default function NavLink({
         <Link
           href={targetLink}
           className={clsx(
-            "flex items-center gap-2 p-4 rounded-xl transition-all grow text-[15px] whitespace-nowrap",
+            small ? "rounded-full p-3" : "rounded-xl p-4",
+            "flex items-center gap-2 grow text-[15px] whitespace-nowrap",
             isActive
               ? "bg-primary text-white-primary"
               : "text-text-primary bg-white"
           )}
         >
           <Icon color={isActive ? "LIGHT" : "DARK"} size="SM" />
-          <span>{label}</span>
+          {!small && <span>{label}</span>}
         </Link>
       </div>
     );
