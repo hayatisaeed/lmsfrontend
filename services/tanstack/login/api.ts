@@ -1,7 +1,7 @@
 //API
 import api from "@/core/config/api";
 
-export async function sendOtpToPhoneApi(phone: string) {
+export async function postSendOtpToPhoneApi(phone: string) {
   try {
     const response = await api.post("/api/users/auth/login/otp/", { phone });
     return { success: true, data: response.data };
@@ -11,7 +11,7 @@ export async function sendOtpToPhoneApi(phone: string) {
   }
 }
 
-export async function verifyOtpForRegistrationApi({
+export async function postVerifyOtpForRegistrationApi({
   phone,
   code,
 }: {

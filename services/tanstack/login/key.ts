@@ -1,7 +1,7 @@
-export function sendOtpToPhoneKey() {
-  return ["sendOtpToPhone"];
+export function postSendOtpToPhoneKey() {
+  return ["send-otp-to-phone"];
 }
 
-export function verifyOtpForRegistrationKey() {
-  return ["verifyOtpForRegistration"];
+export function postVerifyOtpForRegistrationKey() {
+  return ["verify-otp-for-registration"];
 }

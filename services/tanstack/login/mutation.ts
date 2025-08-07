@@ -3,26 +3,26 @@ import { useMutation } from "@tanstack/react-query";
 
 //key
 import {
-  sendOtpToPhoneKey,
-  verifyOtpForRegistrationKey,
+  postSendOtpToPhoneKey,
+  postVerifyOtpForRegistrationKey,
 } from "@/services/tanstack/login/key";
 
 //api
 import {
-  sendOtpToPhoneApi,
-  verifyOtpForRegistrationApi,
+  postSendOtpToPhoneApi,
+  postVerifyOtpForRegistrationApi,
 } from "@/services/tanstack/login/api";
 
-export function useSendOtpToPhone() {
+export function usePostSendOtpToPhone() {
   return useMutation({
-    mutationKey: sendOtpToPhoneKey(),
-    mutationFn: sendOtpToPhoneApi,
+    mutationKey: postSendOtpToPhoneKey(),
+    mutationFn: postSendOtpToPhoneApi,
   });
 }
 
-export function useVerifyOtpForRegistration() {
+export function usePostVerifyOtpForRegistration() {
   return useMutation({
-    mutationKey: verifyOtpForRegistrationKey(),
-    mutationFn: verifyOtpForRegistrationApi,
+    mutationKey: postVerifyOtpForRegistrationKey(),
+    mutationFn: postVerifyOtpForRegistrationApi,
   });
 }
