@@ -17,7 +17,6 @@ export default function Goftino({ children, user }: IGoftinoProps) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //   @ts-ignore
       window?.Goftino?.setUser(user);
-      console.log("ok-user");
     });
   }, [user]);
 
