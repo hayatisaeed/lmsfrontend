@@ -5,6 +5,7 @@ import { Pagination, Table } from "@/shared/components";
 
 //ui
 import { Button } from "@/shared/ui";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function TableClasses() {
   const itemsFake = [
@@ -23,6 +24,13 @@ export default function TableClasses() {
       isOK: true,
     },
   ];
+
+  const router = useRouter();
+  const pathname = usePathname();
+
+  function handleShowClass(id: number | string) {
+    router.push(`${pathname}/${id}`);
+  }
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-between gap-4">
@@ -49,7 +57,14 @@ export default function TableClasses() {
                 )}
               </Table.Td>
               <Table.Td className="flex flex-col lg:flex-row items-stretch justify-center gap-2 px-10 lg:px-0">
-                <Button color="NEUTRAL">مشاهده</Button>
+                <Button
+                  color="NEUTRAL"
+                  onClick={() => {
+                    handleShowClass(item.num);
+                  }}
+                >
+                  مشاهده
+                </Button>
               </Table.Td>
             </Table.Tr>
           );

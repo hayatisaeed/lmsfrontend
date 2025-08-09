@@ -18,6 +18,7 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: keyof typeof SIZES;
   icon?: ReactNode;
   loading?: boolean;
+  iconLeft?: boolean;
 }
 
 export default function Button({
@@ -28,6 +29,7 @@ export default function Button({
   size = "MD",
   icon,
   loading,
+  iconLeft = false,
   ...props
 }: IButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
@@ -65,6 +67,11 @@ export default function Button({
       <>
         {loading ? (
           <Spinner />
+        ) : iconLeft ? (
+          <>
+            <span>{children}</span>
+            {icon}
+          </>
         ) : (
           <>
             {icon}
