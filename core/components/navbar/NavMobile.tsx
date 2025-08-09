@@ -12,31 +12,19 @@ import clsx from "clsx";
 //react
 import { useEffect, useState } from "react";
 
-//types
-import { FC } from "react";
-
 //nav-link
 import NavLink from "./NavLink";
-
-//constant
-import { COLORS, SIZES } from "@/shared/constant/icons";
 
 //next
 import { usePathname } from "next/navigation";
 
 //label
 import { Label } from "@/core/components";
+import { Navs } from "@/core/types/navLinks";
 
 interface INavProps {
   path: "student" | "admin" | "professor";
-  navs: {
-    label: string;
-    icon: FC<{
-      color: keyof typeof COLORS;
-      size: keyof typeof SIZES;
-    }>;
-    link: string;
-  }[];
+  navs: Navs[];
 }
 
 export default function NavMobile({ navs, path }: INavProps) {
@@ -82,12 +70,13 @@ export default function NavMobile({ navs, path }: INavProps) {
         </div>
 
         <div className="flex flex-col gap-2 pe-6">
-          {navs.map((nav) => (
+          {navs.map((nav, index) => (
             <NavLink
-              key={nav.link}
-              label={nav.label}
-              path={`/${path}${nav.link}`}
+              key={index}
               icon={nav.icon}
+              label={nav.label}
+              link={"link" in nav ? nav.link : undefined}
+              items={"children" in nav ? nav.children : undefined}
             />
           ))}
 

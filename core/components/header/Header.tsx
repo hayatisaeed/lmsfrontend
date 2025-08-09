@@ -4,21 +4,13 @@ import Account from "@/core/components/header/Account";
 //import label
 import Label from "@/core/components/Label";
 import NavMobile from "../navbar/NavMobile";
-import { COLORS, SIZES } from "@/shared/constant/icons";
-import { FC } from "react";
+import { Navs } from "@/core/types/navLinks";
 
 interface IHeaderProps {
   role: "Student" | "Professor" | "Admin";
   path: "student" | "professor" | "admin";
 
-  navs: {
-    label: string;
-    icon: FC<{
-      color: keyof typeof COLORS;
-      size: keyof typeof SIZES;
-    }>;
-    link: string;
-  }[];
+  navs: Navs[];
 }
 
 export default function Header({ role, navs, path }: IHeaderProps) {

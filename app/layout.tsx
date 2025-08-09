@@ -1,9 +1,6 @@
 //css
 import "@/core/styles/globals.css";
 
-//global
-import { Modal } from "@/shared/components";
-
 //types
 import { Metadata } from "next";
 import { ReactNode } from "react";

@@ -22,7 +22,7 @@ export const sideBarStudent: Navs[] = [
   {
     label: "مشاهده نتایج و پیشرفت تحصیلی",
     icon: Notebook,
-    link: "/student//view-academic",
+    link: "/student/view-academic",
   },
   {
     label: "مشاهده پاسخ های خود",
