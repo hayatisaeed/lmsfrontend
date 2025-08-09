@@ -41,6 +41,7 @@ export default function OTPCodeStep({
         type="button"
         color="PRIMARY"
         size="XL"
+        disabled={disabled}
         icon={<Logout size="SM" color="LIGHT" />}
       >
         تایید

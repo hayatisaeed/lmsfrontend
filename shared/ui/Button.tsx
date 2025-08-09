@@ -13,7 +13,7 @@ import { COLORS, SIZES } from "@/shared/constant/button";
 import { Spinner } from "@/shared/ui";
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children: ReactNode;
   color?: keyof typeof COLORS;
   size?: keyof typeof SIZES;
   icon?: ReactNode;

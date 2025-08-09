@@ -8,18 +8,23 @@ import { Logout } from "@/assets/icons";
 
 //import components login
 import { GoogleLoginButton, PhoneInput } from "@/features/login/components/";
+import { useState } from "react";
 
 interface IPhoneStepProps {
   isPhoneValid: boolean;
   onComplete: (phone: string) => void;
   onSendCode: () => void;
+  isLoading?: boolean;
 }
 
 export default function PhoneStep({
+  isLoading = false,
   isPhoneValid,
   onComplete,
   onSendCode,
 }: IPhoneStepProps) {
+  const [loadingGoogle, setLoadingGoogle] = useState<boolean>(false);
+
   return (
     <div className="w-full flex flex-col gap-5 sm:gap-6">
       <div className="w-full flex flex-col items-center gap-4 sm:gap-5">
@@ -31,13 +36,18 @@ export default function PhoneStep({
           type="button"
           color="PRIMARY"
           size="XXL"
-          disabled={!isPhoneValid}
+          disabled={!isPhoneValid || isLoading}
           onClick={onSendCode}
           icon={<Logout size="SM" color="LIGHT" />}
+          loading={isLoading}
         >
           ارسال رمز یکبار مصرف
         </Button>
-        <GoogleLoginButton />
+        <GoogleLoginButton
+          disabeld={isLoading}
+          loadingGoogle={loadingGoogle}
+          setLoadingGoogle={setLoadingGoogle}
+        />
       </div>
     </div>
   );

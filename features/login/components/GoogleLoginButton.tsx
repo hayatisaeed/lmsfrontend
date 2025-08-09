@@ -8,18 +8,25 @@ import { Button } from "@/shared/ui";
 
 // import icon
 import { Google as GoogleIcon } from "@/assets/icons";
-import { useState } from "react";
 
-export default function GoogleLoginButton() {
-  const [loading, setLoading] = useState<boolean>(false);
+interface IGoogleLoginButtonProps {
+  disabeld?: boolean;
+  setLoadingGoogle: (changeLoading: boolean) => void;
+  loadingGoogle: boolean;
+}
 
+export default function GoogleLoginButton({
+  loadingGoogle,
+  setLoadingGoogle,
+  disabeld = false,
+}: IGoogleLoginButtonProps) {
   async function handleSignInGoogle() {
     try {
-      setLoading(true);
+      setLoadingGoogle(true);
       await signIn("google");
     } catch (error) {
       console.error("Google sign-in failed:", error);
-      setLoading(false);
+      setLoadingGoogle(false);
     }
   }
 
@@ -28,9 +35,10 @@ export default function GoogleLoginButton() {
       type="button"
       color="SECONDARY"
       size="XXL"
+      disabled={disabeld || loadingGoogle}
       icon={<GoogleIcon size="SM" />}
       onClick={handleSignInGoogle}
-      loading={loading}
+      loading={loadingGoogle}
     >
       ورود با گوگل
     </Button>

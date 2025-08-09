@@ -1,12 +1,14 @@
 "use client";
-//import hooks
+//React
 import { useState } from "react";
 
-//import components
+//Cumponents Custom
 import { OTPCodeStep, PhoneStep } from "@/features/login/components/";
+
+//react-query
 import {
-  useSendOtpToPhone,
-  useVerifyOtpForRegistration,
+  usePostSendOtpToPhone,
+  usePostVerifyOtpForRegistration,
 } from "@/services/tanstack/login/mutation";
 
 export default function LoginForm() {
@@ -16,12 +18,12 @@ export default function LoginForm() {
 
   //api
   const { mutate: sendOtpToPhone, isPending: isPendingSendOtpToPhone } =
-    useSendOtpToPhone();
+    usePostSendOtpToPhone();
 
   const {
     mutate: verifyOtpForRegistration,
     isPending: isPendingVerifyOtpForRegistration,
-  } = useVerifyOtpForRegistration();
+  } = usePostVerifyOtpForRegistration();
 
   function handlePhoneComplete(phone: string) {
     setPhone(phone);
@@ -43,11 +45,12 @@ export default function LoginForm() {
   return isCodeSent ? (
     <OTPCodeStep
       onCompleteCode={handleCodeComplete}
-      disabled={isPendingVerifyOtpForRegistration}
+      disabled={isPendingVerifyOtpForRegistration || isPendingSendOtpToPhone}
     />
   ) : (
     <PhoneStep
-      isPhoneValid={isPhoneValid || isPendingSendOtpToPhone}
+      isPhoneValid={isPhoneValid || isPendingVerifyOtpForRegistration}
+      isLoading={isPendingSendOtpToPhone}
       onComplete={handlePhoneComplete}
       onSendCode={handleSendCode}
     />
