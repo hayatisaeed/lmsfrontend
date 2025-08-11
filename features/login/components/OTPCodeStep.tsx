@@ -15,11 +15,15 @@ import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 interface IOTPCodeStepProps {
   onCompleteCode: (code: number) => void;
   disabled?: boolean;
+  isLoading?: boolean;
+  isError?: boolean;
 }
 
 export default function OTPCodeStep({
   onCompleteCode,
   disabled,
+  isLoading = false,
+  isError = false,
 }: IOTPCodeStepProps) {
   const isSmUp = useMediaQuery("(min-width: 640px)"); // Tailwind 'sm' breakpoint
 
@@ -34,6 +38,7 @@ export default function OTPCodeStep({
           size={otpSize}
           onComplete={onCompleteCode}
           disabled={disabled}
+          isError={isError}
         />
       </div>
 
@@ -42,6 +47,7 @@ export default function OTPCodeStep({
         color="PRIMARY"
         size="XL"
         disabled={disabled}
+        loading={isLoading}
         icon={<Logout size="SM" color="LIGHT" />}
       >
         تایید

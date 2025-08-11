@@ -1,13 +1,4 @@
-//import items
-import {
-  Account,
-  ChangePassword,
-  Personal,
-  Education,
-} from "@/features/student/profile/components";
-
-//import ui
-import { Container } from "@/shared/ui";
+import ContainerProfile from "@/features/student/profile/components/ContainerProfile";
 
 //immport types
 import { Metadata } from "next";
@@ -17,24 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Profile() {
-  return (
-    <div className="flex flex-col gap-5">
-      <Container title="اطلاعات حساب">
-        <Account />
-      </Container>
-
-      <Container title="اطلاعات هویتی">
-        <Personal />
-      </Container>
-      <Container title="اطلاعات تحصیلی">
-        <Education />
-      </Container>
-
-      <Container title="تغییر رمز عبور">
-        <ChangePassword />
-      </Container>
-
-      <Container title="اعلان ها">اعلان</Container>
-    </div>
-  );
+  return <ContainerProfile />;
 }

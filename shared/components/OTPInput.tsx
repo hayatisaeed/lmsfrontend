@@ -11,6 +11,7 @@ import { SIZES, COLORS } from "@/shared/constant/otpInput";
 
 //import icons
 import { InfoSquare } from "@/assets/icons";
+import clsx from "clsx";
 
 interface OTPInputProps {
   length?: number;
@@ -19,9 +20,11 @@ interface OTPInputProps {
   color?: keyof typeof COLORS;
   error?: boolean;
   disabled?: boolean;
+  isError?: boolean;
 }
 
 export default function OTPInput({
+  isError = false,
   disabled = false,
   length = 6,
   onComplete,
@@ -129,7 +132,7 @@ export default function OTPInput({
   return (
     <div className="flex flex-col justify-start gap-4">
       <div
-        className="flex justify-center items-center rounded-xl"
+        className="flex justify-center items-center rounded-xl font-shabnam"
         dir="ltr"
         style={{
           backgroundColor: background,
@@ -145,7 +148,10 @@ export default function OTPInput({
             type="text"
             inputMode="numeric"
             maxLength={1}
-            className="bg-white rounded-[10px] outline-0 text-center"
+            className={clsx(
+              "bg-white rounded-[10px] outline-0 text-center",
+              isError && "border-[2.5px] border-errors"
+            )}
             style={{
               width: boxSIze,
               height: boxSIze,

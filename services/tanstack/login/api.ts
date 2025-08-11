@@ -1,14 +1,11 @@
 //API
-import api from "@/core/config/api";
+import api, { requestWrapper } from "@/core/config/api";
+
+//types
+import { TVerifyOtpForRegistration } from "./types";
 
 export async function postSendOtpToPhoneApi(phone: string) {
-  try {
-    const response = await api.post("/api/users/auth/login/otp/", { phone });
-    return { success: true, data: response.data };
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  return requestWrapper(api.post("/api/users/auth/login/", { phone }));
 }
 
 export async function postVerifyOtpForRegistrationApi({
@@ -18,14 +15,7 @@ export async function postVerifyOtpForRegistrationApi({
   phone: string;
   code: string;
 }) {
-  try {
-    const response = await api.post("/api/users/auth/register/", {
-      phone,
-      code,
-    });
-    return { success: true, data: response.data };
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  return requestWrapper<TVerifyOtpForRegistration>(
+    api.post("/api/users/auth/verify/otp/", { phone, code })
+  );
 }

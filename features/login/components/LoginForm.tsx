@@ -1,4 +1,8 @@
 "use client";
+
+//Next
+import { useRouter } from "next/navigation";
+
 //React
 import { useState } from "react";
 
@@ -14,7 +18,10 @@ import {
 export default function LoginForm() {
   const [isPhoneValid, setIsPhoneValid] = useState(false);
   const [isCodeSent, setIsCodeSent] = useState(false);
+
   const [phone, setPhone] = useState("");
+
+  const router = useRouter();
 
   //api
   const { mutate: sendOtpToPhone, isPending: isPendingSendOtpToPhone } =
@@ -23,6 +30,7 @@ export default function LoginForm() {
   const {
     mutate: verifyOtpForRegistration,
     isPending: isPendingVerifyOtpForRegistration,
+    isError: isErrorVerifyOtpForRegistration,
   } = usePostVerifyOtpForRegistration();
 
   function handlePhoneComplete(phone: string) {
@@ -39,13 +47,26 @@ export default function LoginForm() {
   }
 
   function handleCodeComplete(code: number) {
-    verifyOtpForRegistration({ phone, code: String(code) });
+    verifyOtpForRegistration(
+      { phone, code: String(code) },
+      {
+        onSuccess: (data) => {
+          localStorage.setItem("access_token", data.access);
+          localStorage.setItem("refresh_token", data.refresh);
+          console.log(data);
+
+          router.push("/");
+        },
+      }
+    );
   }
 
   return isCodeSent ? (
     <OTPCodeStep
       onCompleteCode={handleCodeComplete}
       disabled={isPendingVerifyOtpForRegistration || isPendingSendOtpToPhone}
+      isLoading={isPendingVerifyOtpForRegistration}
+      isError={isErrorVerifyOtpForRegistration}
     />
   ) : (
     <PhoneStep

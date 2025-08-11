@@ -4,6 +4,12 @@ import { Button } from "@/shared/ui";
 
 interface IWindowIdentityInformationProps {
   onClose?: () => void;
+  mutate?: (
+    national_id: string,
+    date_of_birth: string,
+    close?: () => void
+  ) => void;
+  isLoading?: boolean;
 }
 
 type IdentityFormData = {
@@ -12,22 +18,23 @@ type IdentityFormData = {
 };
 
 export default function WindowIdentityInformation({
+  isLoading = false,
   onClose,
+  mutate,
 }: IWindowIdentityInformationProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     setValue,
     watch,
   } = useForm<IdentityFormData>();
 
   const isSmUp = useMediaQuery("(min-width: 640px)");
 
-  const onSubmit = async (data: IdentityFormData) => {
+  const onSubmit = (data: IdentityFormData) => {
     try {
-      console.log("Form data:", data);
-      onClose?.();
+      mutate?.(data.nationalCode, data.birthDate, onClose);
     } catch (error) {
       console.error("Error submitting identity information:", error);
     }
@@ -135,15 +142,15 @@ export default function WindowIdentityInformation({
             type="submit"
             color="PRIMARY"
             size={isSmUp ? "MD" : "SM"}
-            disabled={isSubmitting}
+            disabled={isLoading}
           >
-            {isSubmitting ? "در حال بررسی..." : "تایید"}
+            تایید
           </Button>
           <Button
             type="button"
             color="SECONDARY"
             size={isSmUp ? "MD" : "SM"}
-            disabled={isSubmitting}
+            disabled={isLoading}
             onClick={handleClickCancel}
           >
             انصراف

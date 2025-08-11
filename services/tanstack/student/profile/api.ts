@@ -1,21 +1,19 @@
-import api from "@/core/config/api";
+import api, { requestWrapper } from "@/core/config/api";
 
-export async function getStudentEducationApi() {
-  try {
-    const response = await api.get("/api/users/profile/education/");
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+//types
+import { TStudentIdentity } from "@/types/student";
+
+export async function postStudentEducationApi(data: {
+  national_id: string;
+  date_of_birth: string;
+}) {
+  return requestWrapper<TStudentIdentity>(
+    api.post("/api/users/profile/identity/", data)
+  );
 }
 
-export async function postStudentEducationApi() {
-  try {
-    const response = await api.post("/api/users/profile/education/");
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+export async function getStudentEducationApi() {
+  return requestWrapper<TStudentIdentity>(
+    api.get("/api/users/profile/identity/")
+  );
 }

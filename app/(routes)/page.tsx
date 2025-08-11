@@ -1,5 +1,12 @@
-import { redirect } from "next/navigation";
+"use client";
+
+import { useGetProfileUser } from "@/services/tanstack/login/queries";
+import { useRouter } from "next/navigation";
 
 export default function Main() {
-  redirect("/student");
+  const { data, isLoading, isError } = useGetProfileUser();
+
+  const router = useRouter();
+
+  router.push("/student");
 }

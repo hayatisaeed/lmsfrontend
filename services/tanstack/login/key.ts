@@ -5,3 +5,7 @@ export function postSendOtpToPhoneKey() {
 export function postVerifyOtpForRegistrationKey() {
   return ["verify-otp-for-registration"];
 }
+
+export function getProfileUserKey() {
+  return ["user-profile"];
+}

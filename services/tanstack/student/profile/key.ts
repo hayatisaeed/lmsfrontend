@@ -1,7 +1,7 @@
-export function getStudentEducationKey() {
-  return ["student-education"];
+export function postStudentIdentityKey() {
+  return ["student-identity"];
 }
 
-export function postStudentEducationKey() {
-  return ["student-education"];
+export function getStudentIdentityKey() {
+  return ["student-identity"];
 }

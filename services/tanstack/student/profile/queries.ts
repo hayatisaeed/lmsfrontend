@@ -1,15 +1,15 @@
-//react-query
+//React-Query
 import { useQuery } from "@tanstack/react-query";
 
 //key
-import { getStudentEducationKey } from "@/services/tanstack/student/profile/key";
+import { getStudentIdentityKey } from "./key";
 
-//api
-import { getStudentEducationApi } from "@/services/tanstack/student/profile/api";
+//API
+import { getStudentEducationApi } from "./api";
 
-export function useGetStudentEducation() {
+export function useGetStudentIdentity() {
   return useQuery({
-    queryKey: getStudentEducationKey(),
+    queryKey: getStudentIdentityKey(),
     queryFn: getStudentEducationApi,
   });
 }
