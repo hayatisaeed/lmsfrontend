@@ -30,7 +30,7 @@ export default function NavLink({
   const [open, setOpen] = useState(false);
 
   const targetLink = link || path;
-  const isActive = targetLink ? pathname === targetLink : false;
+  const isActive = targetLink ? pathname.includes(targetLink) : false;
 
   const handleChangeOpen = () => setOpen((prev) => !prev);
 
