@@ -19,6 +19,7 @@ export default function TabelClass() {
       <Table.Td>
         <h3
           className={clsx(
+            "whitespace-nowrap",
             fakeItem.status === "فعال"
               ? "text-backgrdound-box-green"
               : "text-errors"

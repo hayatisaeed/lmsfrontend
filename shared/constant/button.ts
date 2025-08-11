@@ -22,7 +22,7 @@ export const COLORS = {
   NEUTRAL: {
     background: "#FFFFFF/0",
     text: "#222222",
-    hover: "#F5F5F5",
+    hover: "#FFFFFF/0",
   },
 };
 
