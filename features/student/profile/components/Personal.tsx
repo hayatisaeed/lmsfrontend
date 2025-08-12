@@ -32,9 +32,7 @@ import { TStudentIdentity } from "@/types/student";
 import { getStudentIdentityKey } from "@/services/tanstack/student/profile/key";
 
 interface IPersonalProps {
-  data?:
-    | { success: true; data: TStudentIdentity }
-    | { success: false; error: { message: string } };
+  data: TStudentIdentity;
 }
 
 export default function Personal({ data }: IPersonalProps) {
@@ -64,17 +62,15 @@ export default function Personal({ data }: IPersonalProps) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5">
         <PersonalItem
           value={
-            data?.success
-              ? `${data?.data.father_name || ""} ${
-                  data?.data.last_name || ""
-                }`.trim()
+            data?.national_id
+              ? `${data?.father_name || ""} ${data?.last_name || ""}`.trim()
               : ""
           }
           label="نام و نام خانوادگی"
           icon={<UserRounded size="SM" />}
         />
         <PersonalItem
-          value={data?.success ? data?.data.national_id : ""}
+          value={data.national_id ? data.national_id : ""}
           label="کدملی"
           isNum
           icon={<Card size="SM" />}
@@ -82,18 +78,18 @@ export default function Personal({ data }: IPersonalProps) {
         <PersonalItem
           isNum
           value={
-            data?.success ? data?.data.date_of_birth?.replaceAll("-", "/") : ""
+            data.national_id ? data.date_of_birth?.replaceAll("-", "/") : ""
           }
           label="تاریخ تولد"
           icon={<UserId size="SM" />}
         />
         <PersonalItem
-          value={data?.success ? data?.data.father_name : ""}
+          value={data.national_id ? data.father_name : ""}
           label="نام پدر"
           icon={<UserGroup size="SM" />}
         />
         <PersonalItem
-          value={data?.success ? (data.data.gender === "M" ? "مرد" : "زن") : ""}
+          value={data.national_id ? (data.gender === "M" ? "مرد" : "زن") : ""}
           label="جنسیت"
           icon={<UserCheck size="SM" />}
         />
@@ -101,7 +97,7 @@ export default function Personal({ data }: IPersonalProps) {
 
       <div className="flex w-full justify-end items-center">
         <Modal>
-          {data?.success ? (
+          {data.national_id ? (
             <></>
           ) : (
             <Modal.Open id="identity-information">
