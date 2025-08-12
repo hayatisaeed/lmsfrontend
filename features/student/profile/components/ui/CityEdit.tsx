@@ -10,8 +10,7 @@ import { PenNewSquare } from "@/assets/icons";
 import { ReactNode } from "react";
 
 //input window modal
-
-import WindowMenuCities from "../modal/WindowMenuCities";
+import WindowMenuCities from "../../modal/WindowMenuCities";
 
 interface IInputEditProps {
   defaultValue?: { id: number; label: string };

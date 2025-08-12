@@ -1,9 +1,19 @@
 "use client";
 
+//modal
 import { useModal } from "@/shared/components/Modal";
+
+//hooks
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
+
+//ui
 import { Button } from "@/shared/ui";
-import { ChangeEvent, ReactNode, useEffect, useRef, useState } from "react";
+
+//react
+import { useEffect, useRef, useState } from "react";
+
+//types
+import { ChangeEvent, ReactNode } from "react";
 
 interface IWindowInputEditProps {
   defaultValue: string;

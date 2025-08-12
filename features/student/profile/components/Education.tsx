@@ -1,3 +1,5 @@
+
+//icons
 import {
   Book,
   Bookmark,
@@ -6,6 +8,8 @@ import {
   NotebookMinimalistic,
   Smartphone,
 } from "@/assets/icons";
+
+//components
 import {
   EducationItem,
   PersonalItemCity,

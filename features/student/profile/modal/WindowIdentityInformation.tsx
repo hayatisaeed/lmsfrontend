@@ -1,5 +1,10 @@
+//react-hook-form
 import { useForm } from "react-hook-form";
+
+//hooks
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
+
+//ui
 import { Button } from "@/shared/ui";
 
 interface IWindowIdentityInformationProps {

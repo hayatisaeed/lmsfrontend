@@ -1,7 +1,12 @@
 "use client";
 
+//componnets
 import { PersonalItem } from "@/features/student/profile/components";
+
+//modal
 import { Modal } from "@/shared/components";
+
+//icon
 import {
   Card,
   UserCheck,
@@ -9,10 +14,22 @@ import {
   UserId,
   UserRounded,
 } from "@/assets/icons";
+
+//ui
 import { Button } from "@/shared/ui";
+
+//modal-window
 import WindowIdentityInformation from "@/features/student/profile/modal/WindowIdentityInformation";
+
+//react-query
+import { useQueryClient } from "@tanstack/react-query";
 import { usePostStudentIdentity } from "@/services/tanstack/student/profile/mutation";
+
+//typs
 import { TStudentIdentity } from "@/types/student";
+
+//key-react-query
+import { getStudentIdentityKey } from "@/services/tanstack/student/profile/key";
 
 interface IPersonalProps {
   data?:
@@ -21,6 +38,8 @@ interface IPersonalProps {
 }
 
 export default function Personal({ data }: IPersonalProps) {
+  const queryClient = useQueryClient();
+
   const { mutate, isPending: isPostPendingStudentIdentity } =
     usePostStudentIdentity();
 
@@ -33,6 +52,7 @@ export default function Personal({ data }: IPersonalProps) {
       { national_id, date_of_birth: date_of_birth.replaceAll("/", "-") },
       {
         onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: getStudentIdentityKey() });
           close?.();
         },
       }

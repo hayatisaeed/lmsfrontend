@@ -1,6 +1,13 @@
+//components
 import { OTPInput } from "@/shared/components";
+
+//hooks
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
+
+//ui
 import { Button } from "@/shared/ui";
+
+//react
 import { useState } from "react";
 
 interface IWindowInputOTPProps {
