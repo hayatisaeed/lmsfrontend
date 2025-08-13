@@ -5,3 +5,11 @@ export function postStudentIdentityKey() {
 export function getStudentIdentityKey() {
   return ["student-identity"];
 }
+
+export function postStudentEducationKey() {
+  return ["student-education"];
+}
+
+export function getStudentEducationKey() {
+  return ["student-education"];
+}

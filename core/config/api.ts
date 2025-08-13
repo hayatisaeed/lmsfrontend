@@ -25,7 +25,7 @@ api.interceptors.response.use(
 
     // Skip refresh attempt if it's already the refresh request
     if (originalRequest.url.includes("/api/token/refresh/")) {
-      window.location.href = "/login";
+      logout();
     }
 
     if (error?.response?.status === 401) {
@@ -46,14 +46,30 @@ api.interceptors.response.use(
           }
         } catch (err) {
           console.error("Refresh request failed:", err);
+          logout();
         }
       } else {
-        window.location.href = "/login";
+        logout();
       }
     }
 
     return Promise.reject(error);
   }
 );
+
+function logout() {
+  // Remove token localestorage
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("refresh_token");
+
+  // If in browser, redirect user to login page only if not already on login page
+  if (typeof window !== "undefined") {
+    // Check if already on login page
+    const currentPath = window.location.pathname;
+    if (currentPath !== "/login") {
+      window.location.href = "/login";
+    }
+  }
+}
 
 export default api;

@@ -1,4 +1,5 @@
 //react-hook-form
+"use client";
 import { useForm } from "react-hook-form";
 
 //hooks
@@ -53,18 +54,38 @@ export default function WindowIdentityInformation({
   };
 
   const handleBirthDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
-    value = value.replace(/[^0-9\/]/g, "");
+    let value = e.target.value.replace(/[^0-9]/g, "");
 
-    if (value.length === 4 && value.indexOf("/") === -1) {
-      value = value + "/";
-    } else if (value.length === 7 && value.lastIndexOf("/") === 4) {
-      value = value + "/";
+    if (!value.startsWith("13")) {
+      value = "13" + value.replace(/^13/, "");
     }
+
+    if (value.length > 4) value = value.slice(0, 4) + "/" + value.slice(4);
+    if (value.length > 7) value = value.slice(0, 7) + "/" + value.slice(7);
 
     if (value.length <= 10) {
       setValue("birthDate", value);
     }
+  };
+
+  const validateDate = (value: string) => {
+    if (!/^\d{4}\/\d{2}\/\d{2}$/.test(value))
+      return "فرمت تاریخ صحیح نیست (مثال: 1370/01/01)";
+
+    const [year, month, day] = value.split("/").map(Number);
+
+    if (month < 1 || month > 12) return "ماه معتبر نیست";
+    if (day < 1 || day > 31) return "روز معتبر نیست";
+
+    if ([1, 2, 3, 4, 5, 6].includes(month) && day > 31) return "روز معتبر نیست";
+    if ([7, 8, 9, 10, 11].includes(month) && day > 30) return "روز معتبر نیست";
+    if (month === 12 && day > 29) return "روز معتبر نیست";
+
+    const today = new Date();
+    const inputDate = new Date(year, month - 1, day);
+    if (inputDate > today) return "تاریخ نمی‌تواند در آینده باشد";
+
+    return true;
   };
 
   function handleClickCancel() {
@@ -91,18 +112,19 @@ export default function WindowIdentityInformation({
                 type="text"
                 inputMode="numeric"
                 className="outline-0 border-0 w-full bg-transparent font-shabnam"
-                placeholder=""
                 {...register("nationalCode", {
                   required: "کد ملی الزامی است",
-                  minLength: { value: 10, message: "کد ملی باید ۱۰ رقم باشد" },
-                  maxLength: { value: 10, message: "کد ملی باید ۱۰ رقم باشد" },
+                  pattern: {
+                    value: /^[0-9]{10}$/,
+                    message: "کد ملی باید ۱۰ رقم باشد",
+                  },
                 })}
                 onChange={handleNationalCodeChange}
                 value={watch("nationalCode") || ""}
               />
             </div>
             {errors.nationalCode && (
-              <p className="text-red-500 text-xs mt-1">
+              <p className="text-errors text-xs mt-1">
                 {errors.nationalCode.message}
               </p>
             )}
@@ -122,15 +144,19 @@ export default function WindowIdentityInformation({
                 type="text"
                 inputMode="numeric"
                 className="outline-0 border-0 w-full bg-transparent"
-                placeholder=""
                 {...register("birthDate", {
                   required: "تاریخ تولد الزامی است",
-                  pattern: {
-                    value: /^[0-9]{4}\/[0-9]{2}\/[0-9]{2}$/,
-                    message: "فرمت تاریخ صحیح نیست (مثال: 1370/01/01)",
-                  },
+                  validate: validateDate,
                 })}
                 onChange={handleBirthDateChange}
+                onKeyDown={(e) => {
+                  if (
+                    (e.key === "Backspace" || e.key === "Delete") &&
+                    watch("birthDate")?.length <= 2
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
                 value={watch("birthDate") || ""}
               />
             </div>

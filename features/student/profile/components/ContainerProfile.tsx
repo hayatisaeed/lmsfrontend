@@ -14,38 +14,23 @@ import {
 //react-query
 import { useGetStudentIdentity } from "@/services/tanstack/student/profile/queries";
 
-//typs
-import { TStudentIdentity } from "@/types/student";
+
 
 export default function ContainerProfile() {
   const {
     data: studentIdentity,
     isPending: isPendingStudentIdentity,
     isError,
-    error,
   } = useGetStudentIdentity();
 
   const isPending = isPendingStudentIdentity;
 
   if (isPending)
     return (
-      <div className="w-full h-screen flex items-center justify-center">
+      <div className="w-full h-full flex items-center justify-center">
         LOADING
       </div>
     );
-
-  const dataPersonal: TStudentIdentity = isError
-    ? {
-        date_of_birth: "",
-        father_name: "",
-        first_name: "",
-        gender: "M",
-        is_verified: false,
-        last_name: "",
-        national_id: "",
-        submission_count: 1,
-      }
-    : studentIdentity;
 
   return (
     <div className="flex flex-col gap-5">
@@ -54,7 +39,7 @@ export default function ContainerProfile() {
       </Container>
 
       <Container title="اطلاعات هویتی">
-        <Personal data={dataPersonal} />
+        <Personal data={studentIdentity} />
       </Container>
       <Container title="اطلاعات تحصیلی">
         <Education />
