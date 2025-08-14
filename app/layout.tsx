@@ -9,6 +9,7 @@ import { ReactNode } from "react";
 import TanstackQuery from "@/core/stores/TanstackQuery";
 
 import Script from "next/script";
+import { Toaster } from "react-hot-toast";
 
 //metadata
 export const metadata: Metadata = {
@@ -29,9 +30,24 @@ interface IRootLayoutProps {
 
 export default function RootLayout({ children }: IRootLayoutProps) {
   return (
+    //tanstack-query
     <TanstackQuery>
       <html lang="fa" dir="rtl" className="h-full font-kalameh font-medium">
+        <Toaster
+          position="top-left"
+          toastOptions={{
+            duration: 5000,
+            success: {
+              className: "border border-[#61D345]",
+            },
+            error: {
+              className: "border border-[#FF4B4B]",
+            },
+          }}
+        />
+
         <head>
+          {/* goftino */}
           <Script
             id="goftino-widget"
             strategy="afterInteractive"

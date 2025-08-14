@@ -9,6 +9,4 @@ export type TStudentIdentity = {
   submission_count: number;
 };
 
-export type TStudentEducation = {
-  data: "";
-};
+export type TStudentEducation = any;
