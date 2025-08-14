@@ -12,23 +12,36 @@ import {
 } from "@/features/student/profile/components";
 
 //react-query
-import { useGetStudentIdentity } from "@/services/tanstack/student/profile/queries";
-
-
+import {
+  useGetStudentEducation,
+  useGetStudentIdentity,
+} from "@/services/tanstack/student/profile/queries";
 
 export default function ContainerProfile() {
   const {
     data: studentIdentity,
     isPending: isPendingStudentIdentity,
-    isError,
+    isError: isErrorStudentIdentity,
   } = useGetStudentIdentity();
 
-  const isPending = isPendingStudentIdentity;
+  const {
+    data: studentEducation,
+    isPending: isPendingStudentEducation,
+    isError: isErrorStudentEducation,
+  } = useGetStudentEducation();
 
-  if (isPending)
+  const isPending = isPendingStudentIdentity || isPendingStudentEducation;
+
+  const isError = isErrorStudentIdentity || isErrorStudentEducation;
+
+  if (isPending || isError)
     return (
-      <div className="w-full h-full flex items-center justify-center">
-        LOADING
+      <div className="w-full h-full flex items-center justify-center bg-white rounded-2xl">
+        {isError ? (
+          <h3> مشکلی پیش آمده لطفا دوباره امتحان کنید.</h3>
+        ) : (
+          "LOADING"
+        )}
       </div>
     );
 
@@ -42,7 +55,7 @@ export default function ContainerProfile() {
         <Personal data={studentIdentity} />
       </Container>
       <Container title="اطلاعات تحصیلی">
-        <Education />
+        <Education data={studentEducation} />
       </Container>
 
       <Container title="تغییر رمز عبور">

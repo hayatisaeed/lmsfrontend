@@ -12,6 +12,11 @@ interface IAccountItemProps {
   labelModal: string;
   sendCode?: boolean;
   id: string;
+  mutate?: (value: string, onClose?: () => void) => void;
+  isPending?: boolean;
+  isNum?: boolean;
+  pattern?: RegExp;
+  error?: string;
 }
 
 export default function AccountItem({
@@ -22,12 +27,16 @@ export default function AccountItem({
   icon,
   sendCode,
   id,
+  error,
+  isNum,
+  isPending,
+  mutate,
+  pattern,
 }: IAccountItemProps) {
   return (
     <div className="w-full flex flex-col justify-start gap-3">
       <div className="flex w-full justify-start">
         <h3 className="text-text-primary text-sm">{label}</h3>
-        {}
       </div>
       <InputEdit
         defaultValue={value}
@@ -35,6 +44,11 @@ export default function AccountItem({
         icon={icon}
         sendCode={sendCode}
         id={id}
+        isPending={isPending}
+        pattern={pattern}
+        error={error}
+        isNum={isNum}
+        mutate={mutate}
       />
     </div>
   );

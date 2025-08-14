@@ -174,6 +174,7 @@ export default function WindowIdentityInformation({
             color="PRIMARY"
             size={isSmUp ? "MD" : "SM"}
             disabled={isLoading}
+            loading={isLoading}
           >
             تایید
           </Button>

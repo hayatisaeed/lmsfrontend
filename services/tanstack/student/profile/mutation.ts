@@ -5,12 +5,14 @@ import { useMutation } from "@tanstack/react-query";
 import {
   postStudentIdentityKey,
   postStudentEducationKey,
+  postStudentParentKey,
 } from "@/services/tanstack/student/profile/key";
 
 //api
 import {
   postStudentIdentityApi,
   postStudentEducationApi,
+  postStudentParentApi,
 } from "@/services/tanstack/student/profile/api";
 
 export function usePostStudentIdentity() {
@@ -24,5 +26,12 @@ export function usePostStudentEducation() {
   return useMutation({
     mutationKey: postStudentEducationKey(),
     mutationFn: postStudentEducationApi,
+  });
+}
+
+export function usePostStudentParent() {
+  return useMutation({
+    mutationKey: postStudentParentKey(),
+    mutationFn: postStudentParentApi,
   });
 }

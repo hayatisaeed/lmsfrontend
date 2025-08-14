@@ -43,6 +43,8 @@ api.interceptors.response.use(
             error.config.headers["Authorization"] = `Bearer ${data?.access}`;
 
             return api.request(error.config);
+          } else {
+            logout();
           }
         } catch (err) {
           console.error("Refresh request failed:", err);

@@ -1,18 +1,13 @@
 "use client";
 
-//import modal
 import { Modal } from "@/shared/components/";
-
-//import icons
 import { PenNewSquare } from "@/assets/icons";
-
-//import types
 import { ReactNode } from "react";
-//input window modal
 import {
   WindowInputOTP,
   WindowInputEdit,
 } from "@/features/student/profile/modal/";
+import clsx from "clsx";
 
 interface IInputEditProps {
   defaultValue: string;
@@ -20,6 +15,11 @@ interface IInputEditProps {
   label: string;
   sendCode?: boolean;
   id: string;
+  mutate?: (value: string, onClose?: () => void) => void;
+  isPending?: boolean;
+  isNum?: boolean;
+  pattern?: RegExp;
+  error?: string;
 }
 
 export default function InputEdit({
@@ -28,15 +28,27 @@ export default function InputEdit({
   label,
   sendCode,
   id,
+  mutate,
+  isPending,
+  isNum = false,
+  pattern,
+  error,
 }: IInputEditProps) {
   return (
     <div className="flex justify-between items-center gap-2 p-4 rounded-xl bg-white-primary border border-text-primary/50">
       {icon}
-      <h3 className="grow border-0 outline-0 ">{defaultValue}</h3>
+      <h3
+        className={clsx(
+          "grow border-0 outline-0",
+          isNum ? "font-shabnam" : "font-kalameh"
+        )}
+      >
+        {defaultValue}
+      </h3>
 
       <Modal>
         <Modal.Open id={id}>
-          <button type="button" className=" cursor-pointer">
+          <button type="button" className="cursor-pointer">
             <PenNewSquare size="SM" />
           </button>
         </Modal.Open>
@@ -48,12 +60,22 @@ export default function InputEdit({
             label={label}
             icon={icon}
             id={id}
+            muate={mutate}
+            isPending={isPending}
+            isNum={isNum}
+            pattern={pattern}
+            error={error}
           />
         </Modal.Window>
 
         {sendCode && (
           <Modal.Window id="input-otp">
-            <WindowInputOTP />
+            <WindowInputOTP
+              // onSubmit={(otp) => {
+              //   console.log("OTP وارد شده:", otp);
+              // }}
+              // isPending={isPending}
+            />
           </Modal.Window>
         )}
       </Modal>

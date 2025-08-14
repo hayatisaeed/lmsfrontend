@@ -34,6 +34,8 @@ export default function Account() {
           labelModal="ایمیل خود را وارد کنید."
           icon={<Letter size="SM" />}
           id="email"
+          pattern={/^\D.*@.+\..+$/}
+          error="ایمیل"
         />
 
         <AccountItem
@@ -43,6 +45,9 @@ export default function Account() {
           labelModal="شماره موبایل خود را وارد کنید."
           icon={<Smartphone size="SM" />}
           id="phone"
+          isNum
+          error="شماره موبایل"
+          pattern={/^0?9\d{9}$/}
         />
       </div>
     </div>

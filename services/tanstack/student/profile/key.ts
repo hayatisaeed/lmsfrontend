@@ -13,3 +13,7 @@ export function postStudentEducationKey() {
 export function getStudentEducationKey() {
   return ["student-education"];
 }
+
+export function postStudentParentKey() {
+  return ["student-parent"];
+}

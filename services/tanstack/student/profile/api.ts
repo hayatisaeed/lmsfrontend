@@ -1,7 +1,10 @@
 import api from "@/core/config/api";
 
 //types
-import { TStudentIdentity } from "@/types/student";
+import {
+  TStudentEducation,
+  TStudentIdentity,
+} from "@/services/tanstack/student/profile/types";
 import { AxiosError } from "axios";
 
 export async function postStudentIdentityApi(data: {
@@ -55,9 +58,27 @@ export async function postStudentEducationApi(data: {
   }
 }
 
-export async function getStudentEducationApi(): Promise<TStudentIdentity> {
+export async function getStudentEducationApi(): Promise<TStudentEducation> {
   try {
     const response = await api.get("/api/users/profile/education/");
+    return response.data;
+  } catch (error) {
+    if ((error as AxiosError).response?.status === 404) {
+      return {
+        data: "",
+      };
+    }
+    throw error;
+  }
+}
+
+export async function postStudentParentApi(phone: string) {
+  try {
+    const response = await api.post("/api/users/profile/parent", {
+      phone,
+      relation: "father",
+    });
+
     return response.data;
   } catch (error) {
     console.error(error);

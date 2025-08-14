@@ -1,3 +1,4 @@
+"use client";
 
 //icons
 import {
@@ -15,7 +16,28 @@ import {
   PersonalItemCity,
 } from "@/features/student/profile/components";
 
-export default function Education() {
+//api
+import { usePostStudentParent } from "@/services/tanstack/student/profile/mutation";
+
+//types
+import { TStudentEducation } from "@/services/tanstack/student/profile/types";
+
+interface IEducationProps {
+  data?: TStudentEducation;
+}
+
+export default function Education({ data }: IEducationProps) {
+  const { mutate: postStudentParent, isPending: isPendingStudentParent } =
+    usePostStudentParent();
+
+  function mutateStudentParent(phone: string, onClose?: () => void) {
+    postStudentParent(phone, {
+      onSuccess: () => {
+        onClose?.();
+      },
+    });
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5">
       <PersonalItemCity value="" />
@@ -62,6 +84,11 @@ export default function Education() {
         labelModal="شماره تماس اولیا خود را وارد کنید"
         label="شماره موبایل اولیا"
         sendCode={false}
+        mutate={mutateStudentParent}
+        isPending={isPendingStudentParent}
+        isNum
+        error="شماره تماس "
+        pattern={/^0?9\d{9}$/}
       />
       <EducationItem
         id="olympiad"

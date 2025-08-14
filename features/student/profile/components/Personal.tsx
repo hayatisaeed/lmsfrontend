@@ -26,7 +26,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { usePostStudentIdentity } from "@/services/tanstack/student/profile/mutation";
 
 //typs
-import { TStudentIdentity } from "@/types/student";
+import { TStudentIdentity } from "@/services/tanstack/student/profile/types";
 
 //key-react-query
 import { getStudentIdentityKey } from "@/services/tanstack/student/profile/key";
@@ -38,7 +38,7 @@ interface IPersonalProps {
 export default function Personal({ data }: IPersonalProps) {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending: isPostPendingStudentIdentity } =
+  const { mutate, isPending: isPendingStudentIdentity } =
     usePostStudentIdentity();
 
   function studentIdentity(
@@ -107,7 +107,7 @@ export default function Personal({ data }: IPersonalProps) {
           <Modal.Window id="identity-information">
             <WindowIdentityInformation
               mutate={studentIdentity}
-              isLoading={isPostPendingStudentIdentity}
+              isLoading={isPendingStudentIdentity}
             />
           </Modal.Window>
         </Modal>
