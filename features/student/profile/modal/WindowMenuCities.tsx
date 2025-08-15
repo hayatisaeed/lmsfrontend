@@ -1,31 +1,33 @@
 "use client";
 
-import { useState } from "react";
+//math-media
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
+
+//uiD
 import { Button, Menu } from "@/shared/ui";
 //types
 import { TCitie, TState } from "@/services/tanstack/student/profile/types";
-import { TCities } from "../types";
+import { TMenu } from "../types";
 
 interface IWindowMenuCitiesProps {
-  defaultProvince?: { id: number; label: string };
-  defaultCity?: { id: number; label: string };
   label: string;
   onClose?: () => void;
   states?: TState[];
-  province?: TCities;
-  setProvince: (value: TCities) => void;
-  setCity: (value?: TCities) => void;
-  city?: TCities;
+  province?: TMenu;
+  setProvince: (value: TMenu) => void;
+  setCity: (value?: TMenu) => void;
+  city?: TMenu;
   cities?: TCitie[];
+  isLoadingStates?: boolean;
+  isLoadingCities?: boolean;
 }
 
 export default function WindowMenuCities({
   setProvince,
   province,
   cities,
-  defaultProvince,
-  defaultCity,
+  isLoadingCities = false,
+  isLoadingStates = false,
   label,
   onClose,
   setCity,
@@ -70,6 +72,7 @@ export default function WindowMenuCities({
           options={provinceOptions}
           value={province}
           onChange={handleSelectProvince}
+          disabled={isLoadingStates}
         />
 
         <Menu
@@ -77,7 +80,7 @@ export default function WindowMenuCities({
           options={citiesOptions}
           value={city}
           onChange={handleSelectCity}
-          disabled={!province}
+          disabled={!province || isLoadingCities}
         />
       </div>
 

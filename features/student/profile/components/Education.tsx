@@ -18,6 +18,7 @@ import {
 
 //api
 import { usePostStudentParent } from "@/services/tanstack/student/profile/mutation";
+import { useGetOlympiads } from "@/services/tanstack/student/profile/queries";
 
 //types
 import { TStudentEducation } from "@/services/tanstack/student/profile/types";
@@ -30,6 +31,8 @@ interface IEducationProps {
 }
 
 export default function Education({ data }: IEducationProps) {
+  const { data: olympiads, isLoading: isLoadingOlympiads } = useGetOlympiads();
+
   const { mutate: postStudentParent, isPending: isPendingStudentParent } =
     usePostStudentParent();
 
@@ -98,12 +101,14 @@ export default function Education({ data }: IEducationProps) {
         pattern={/^0?9\d{9}$/}
       />
       <EducationItem
-        id="olympiad"
-        value=""
-        labelModal="المپیاد مدنظر خود را وارد کنید"
+        isList={true}
+        data={olympiads}
+        id="olmpiads"
+        labelModal="المپیاد مدنظر خود را انتخاب کنید"
         label="المپیاد مدنظر"
         icon={<Notebook size="SM" />}
-        sendCode={false}
+        isPending={isLoadingOlympiads}
+
       />
     </div>
   );

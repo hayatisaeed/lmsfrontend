@@ -1,11 +1,12 @@
 "use client";
 
+//react
 import { useState, useRef, useEffect } from "react";
 
 interface IMenuProps {
   label: string;
   options?: { id: number; label: string }[];
-  value?: { id: number; label: string };
+  value?: { id: number };
   onChange: (item: { id: number; label: string }) => void;
   disabled?: boolean;
 }
@@ -65,12 +66,12 @@ export default function Menu({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
-        {value?.label || label}
+        {options.find((option) => option.id === value?.id)?.label || label}
       </button>
 
       {isOpen && (
         <ul
-          role="listbox"
+          // role="listbox"
           className="absolute z-50 mt-2 w-full max-h-60 overflow-auto rounded-xl border border-text-primary/30 bg-white shadow-lg"
           tabIndex={-1}
         >

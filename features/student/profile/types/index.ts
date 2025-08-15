@@ -1,1 +1,1 @@
-export type TCities = { id: number; label: string };
+export type TMenu = { id: number };

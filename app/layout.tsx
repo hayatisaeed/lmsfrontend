@@ -8,7 +8,10 @@ import { ReactNode } from "react";
 //tanstack-query
 import TanstackQuery from "@/core/stores/TanstackQuery";
 
+//script
 import Script from "next/script";
+
+//toast
 import { Toaster } from "react-hot-toast";
 
 //metadata

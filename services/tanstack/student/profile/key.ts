@@ -25,3 +25,7 @@ export function getStatesKey() {
 export function getCitiesKey(id?: number) {
   return ["cities", id];
 }
+
+export function getOlympiadsKey() {
+  return ["olympiads"];
+}

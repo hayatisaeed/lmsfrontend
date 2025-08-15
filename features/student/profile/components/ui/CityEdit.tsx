@@ -9,7 +9,7 @@ import { PenNewSquare } from "@/assets/icons";
 //import types
 import { ReactNode } from "react";
 import { TCitie, TState } from "@/services/tanstack/student/profile/types";
-import { TCities } from "../../types";
+import { TMenu } from "../../types";
 
 //input window modal
 import WindowMenuCities from "../../modal/WindowMenuCities";
@@ -18,14 +18,18 @@ interface IInputEditProps {
   defaultValue?: { id: number; label: string };
   icon?: ReactNode;
   states?: TState[];
-  province?: TCities;
-  city?: TCities;
+  province?: TMenu;
+  city?: TMenu;
   cities?: TCitie[];
-  setCity: (value?: TCities) => void;
-  setProvince: (value?: TCities) => void;
+  setCity: (value?: TMenu) => void;
+  setProvince: (value?: TMenu) => void;
+  isLoadingStates?: boolean;
+  isLoadingCities?: boolean;
 }
 
 export default function CityEdit({
+  isLoadingCities=false,
+  isLoadingStates=false,
   defaultValue,
   icon,
   states,
@@ -54,6 +58,8 @@ export default function CityEdit({
             city={city}
             setCity={setCity}
             states={states}
+            isLoadingStates={isLoadingStates}
+            isLoadingCities={isLoadingCities}
             label="محل سکونت خود را وارد کنید"
           />
         </Modal.Window>

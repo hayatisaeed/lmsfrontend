@@ -22,3 +22,10 @@ export type TCitie = {
   state: number;
   state_name: string;
 };
+
+export type TOlympiads = {
+  id: number;
+  name: string;
+  published: boolean;
+  olympiad_degree: number;
+};
