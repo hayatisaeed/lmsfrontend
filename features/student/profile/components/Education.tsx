@@ -21,6 +21,7 @@ import { usePostStudentParent } from "@/services/tanstack/student/profile/mutati
 import {
   useGetEducationalLevels,
   useGetOlympiads,
+  useGetStudyBranches,
 } from "@/services/tanstack/student/profile/queries";
 
 //types
@@ -39,6 +40,9 @@ export default function Education({ data }: IEducationProps) {
 
   const { data: educationalLevels, isLoading: isLoadingEducationalLevels } =
     useGetEducationalLevels();
+
+  const { data: studyBranches, isLoading: isLoadingStudyBranches } =
+    useGetStudyBranches();
 
   const { mutate: postStudentParent, isPending: isPendingStudentParent } =
     usePostStudentParent();
@@ -70,12 +74,13 @@ export default function Education({ data }: IEducationProps) {
       />
 
       <EducationItem
+        isList
         id="study"
-        value=""
         labelModal="رشته تحصیلی خود را وارد کنید"
         label="رشته تحصیلی"
         icon={<NotebookMinimalistic size="SM" />}
-        sendCode={false}
+        data={studyBranches}
+        isPending={isLoadingStudyBranches}
       />
 
       <EducationItem

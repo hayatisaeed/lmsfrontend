@@ -35,3 +35,10 @@ export type TEducationalLevels = {
   name: string;
   is_high_school: boolean;
 };
+
+export type TStudyBranches = {
+  id: number;
+  educational_level: number;
+  level_name: string;
+  name: string;
+};

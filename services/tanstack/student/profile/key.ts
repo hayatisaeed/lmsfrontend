@@ -33,3 +33,7 @@ export function getOlympiadsKey() {
 export function getEducationalLevelsKey() {
   return ["educational", "levels"];
 }
+
+export function getStudyBranchesKey(id?: number) {
+  return ["study", "branches", id];
+}

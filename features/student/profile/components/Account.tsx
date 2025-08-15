@@ -14,7 +14,6 @@ export default function Account() {
     <div className="flex w-full flex-col justify-start gap-5">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <Uploader title="بارگذاری تصویر حساب" />
-        <Uploader title="بارگذاری تصویر شناسنامه" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">

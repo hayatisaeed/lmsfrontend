@@ -8,6 +8,7 @@ import {
   TState,
   TStudentEducation,
   TStudentIdentity,
+  TStudyBranches,
 } from "@/services/tanstack/student/profile/types";
 import { AxiosError } from "axios";
 
@@ -123,6 +124,18 @@ export async function getOlympiadsApi(): Promise<TOlympiads[]> {
 export async function getEducationalLevelsApi(): Promise<TEducationalLevels[]> {
   try {
     const response = await api.get(`/api/users/educational-levels/`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getStudyBranchesApi(
+  id?: number
+): Promise<TStudyBranches[]> {
+  try {
+    const response = await api.get(`/api/users/study-branches/?level=${id}`);
     return response.data;
   } catch (error) {
     console.error(error);
