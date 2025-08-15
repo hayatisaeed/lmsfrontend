@@ -18,9 +18,6 @@ export default function Menu({
   disabled = false,
 }: IMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [select, setSelect] = useState<
-    { id: number; label: string } | undefined
-  >(value);
 
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -49,7 +46,6 @@ export default function Menu({
   }
 
   function handleSelect(item: { id: number; label: string }) {
-    setSelect(item);
     onChange(item);
     setIsOpen(false);
   }
@@ -69,7 +65,7 @@ export default function Menu({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
-        {select?.label || label}
+        {value?.label || label}
       </button>
 
       {isOpen && (
@@ -87,7 +83,7 @@ export default function Menu({
             <li
               key={item.id}
               role="option"
-              aria-selected={select?.id === item.id}
+              aria-selected={value?.id === item.id}
               tabIndex={0}
               onClick={() => handleSelect(item)}
               onKeyDown={(e) => {
@@ -97,7 +93,7 @@ export default function Menu({
                 }
               }}
               className={`cursor-pointer p-3 text-sm hover:bg-gray-100 ${
-                select?.id === item.id ? "bg-gray-200 font-semibold" : ""
+                value?.id === item.id ? "bg-gray-200 font-semibold" : ""
               }`}
             >
               {item.label}

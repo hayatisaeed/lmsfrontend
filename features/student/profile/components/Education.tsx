@@ -22,6 +22,9 @@ import { usePostStudentParent } from "@/services/tanstack/student/profile/mutati
 //types
 import { TStudentEducation } from "@/services/tanstack/student/profile/types";
 
+//toast
+import toast from "react-hot-toast";
+
 interface IEducationProps {
   data?: TStudentEducation;
 }
@@ -33,7 +36,11 @@ export default function Education({ data }: IEducationProps) {
   function mutateStudentParent(phone: string, onClose?: () => void) {
     postStudentParent(phone, {
       onSuccess: () => {
+        toast.success("اطلاعات شما با موفقیت ثبت شد.");
         onClose?.();
+      },
+      onError: () => {
+        toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
       },
     });
   }

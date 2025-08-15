@@ -15,6 +15,9 @@ import {
   usePostVerifyOtpForRegistration,
 } from "@/services/tanstack/login/mutation";
 
+//toast
+import toast from "react-hot-toast";
+
 export default function LoginForm() {
   const [isPhoneValid, setIsPhoneValid] = useState(false);
   const [isCodeSent, setIsCodeSent] = useState(false);
@@ -42,6 +45,10 @@ export default function LoginForm() {
     sendOtpToPhone(phone, {
       onSuccess: () => {
         setIsCodeSent(true);
+        toast.success("کد تایید با موفقیت برای شما ارسال شد.");
+      },
+      onError: () => {
+        toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
       },
     });
   }
@@ -51,11 +58,21 @@ export default function LoginForm() {
       { phone, code: String(code) },
       {
         onSuccess: (data) => {
+          toast.success("ورود شما با موفقیت انجام شد.");
+
           localStorage.setItem("access_token", data.access);
           localStorage.setItem("refresh_token", data.refresh);
-          console.log(data);
 
           router.push("/");
+        },
+        onError: (err) => {
+          console.log(err.message === "Request failed with status code 400");
+
+          if (err.message === "Request failed with status code 400") {
+            toast.error("کد وارد شده صحیح نمی باشد.");
+            return;
+          }
+          toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
         },
       }
     );

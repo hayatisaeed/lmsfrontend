@@ -17,3 +17,11 @@ export function getStudentEducationKey() {
 export function postStudentParentKey() {
   return ["student-parent"];
 }
+
+export function getStatesKey() {
+  return ["states"];
+}
+
+export function getCitiesKey(id?: number) {
+  return ["cities", id];
+}

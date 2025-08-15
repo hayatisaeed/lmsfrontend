@@ -31,6 +31,9 @@ import { TStudentIdentity } from "@/services/tanstack/student/profile/types";
 //key-react-query
 import { getStudentIdentityKey } from "@/services/tanstack/student/profile/key";
 
+//toast
+import toast from "react-hot-toast";
+
 interface IPersonalProps {
   data?: TStudentIdentity;
 }
@@ -51,7 +54,11 @@ export default function Personal({ data }: IPersonalProps) {
       {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: getStudentIdentityKey() });
+          toast.success("اطلاعات شما با موفقیت ثبت شد.");
           close?.();
+        },
+        onError: () => {
+          toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
         },
       }
     );

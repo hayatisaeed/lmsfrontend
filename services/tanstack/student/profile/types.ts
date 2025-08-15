@@ -10,3 +10,15 @@ export type TStudentIdentity = {
 };
 
 export type TStudentEducation = any;
+
+export type TState = {
+  id: number;
+  name: string;
+};
+
+export type TCitie = {
+  id: number;
+  name: string;
+  state: number;
+  state_name: string;
+};

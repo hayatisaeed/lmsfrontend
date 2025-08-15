@@ -3,30 +3,35 @@
 import { useState } from "react";
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 import { Button, Menu } from "@/shared/ui";
-
-import { provinces } from "@/shared/constant/provinces";
-import { cities } from "@/shared/constant/cities";
+//types
+import { TCitie, TState } from "@/services/tanstack/student/profile/types";
+import { TCities } from "../types";
 
 interface IWindowMenuCitiesProps {
   defaultProvince?: { id: number; label: string };
   defaultCity?: { id: number; label: string };
   label: string;
   onClose?: () => void;
+  states?: TState[];
+  province?: TCities;
+  setProvince: (value: TCities) => void;
+  setCity: (value?: TCities) => void;
+  city?: TCities;
+  cities?: TCitie[];
 }
 
 export default function WindowMenuCities({
+  setProvince,
+  province,
+  cities,
   defaultProvince,
   defaultCity,
   label,
   onClose,
+  setCity,
+  city,
+  states,
 }: IWindowMenuCitiesProps) {
-  const [province, setProvince] = useState<
-    { id: number; label: string } | undefined
-  >(defaultProvince);
-  const [city, setCity] = useState<{ id: number; label: string } | undefined>(
-    defaultCity
-  );
-
   const isSmUp = useMediaQuery("(min-width: 640px)");
 
   function handleClickEnter() {
@@ -46,16 +51,15 @@ export default function WindowMenuCities({
     setCity(item);
   }
 
-  const provinceOptions = provinces.map((item) => ({
+  const provinceOptions = states?.map((item) => ({
     id: item.id,
     label: item.name,
   }));
 
-  const cityOptions = province
-    ? cities
-        .filter((item) => item.province_id === province.id)
-        .map((item) => ({ id: item.id, label: item.name }))
-    : [];
+  const citiesOptions = cities?.map((item) => ({
+    id: item.id,
+    label: item.name,
+  }));
 
   return (
     <div className="flex flex-col gap-5 sm:w-[500px]">
@@ -70,7 +74,7 @@ export default function WindowMenuCities({
 
         <Menu
           label="شهر مورد نظر خود را انتخاب کنید"
-          options={cityOptions}
+          options={citiesOptions}
           value={city}
           onChange={handleSelectCity}
           disabled={!province}

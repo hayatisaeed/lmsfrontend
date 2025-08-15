@@ -2,6 +2,8 @@ import api from "@/core/config/api";
 
 //types
 import {
+  TCitie,
+  TState,
   TStudentEducation,
   TStudentIdentity,
 } from "@/services/tanstack/student/profile/types";
@@ -79,6 +81,26 @@ export async function postStudentParentApi(phone: string) {
       relation: "father",
     });
 
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getStatesApi(): Promise<TState[]> {
+  try {
+    const response = await api.get("/api/users/states/");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getCitiesApi(id?: number): Promise<TCitie[]> {
+  try {
+    const response = await api.get(`/api/users/cities?state=${id}`);
     return response.data;
   } catch (error) {
     console.error(error);
