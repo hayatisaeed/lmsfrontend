@@ -8,6 +8,7 @@ import {
   getStatesKey,
   getCitiesKey,
   getOlympiadsKey,
+  getEducationalLevelsKey,
 } from "./key";
 
 //API
@@ -17,6 +18,7 @@ import {
   getStatesApi,
   getCitiesApi,
   getOlympiadsApi,
+  getEducationalLevelsApi,
 } from "./api";
 
 export function useGetStudentIdentity() {
@@ -52,6 +54,14 @@ export function useGetOlympiads() {
   return useQuery({
     queryKey: getOlympiadsKey(),
     queryFn: getOlympiadsApi,
+    select: (items) => items.map((item) => ({ id: item.id, label: item.name })),
+  });
+}
+
+export function useGetEducationalLevels() {
+  return useQuery({
+    queryKey: getEducationalLevelsKey(),
+    queryFn: getEducationalLevelsApi,
     select: (items) => items.map((item) => ({ id: item.id, label: item.name })),
   });
 }

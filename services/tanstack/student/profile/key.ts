@@ -29,3 +29,7 @@ export function getCitiesKey(id?: number) {
 export function getOlympiadsKey() {
   return ["olympiads"];
 }
+
+export function getEducationalLevelsKey() {
+  return ["educational", "levels"];
+}

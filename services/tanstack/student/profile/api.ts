@@ -3,6 +3,7 @@ import api from "@/core/config/api";
 //types
 import {
   TCitie,
+  TEducationalLevels,
   TOlympiads,
   TState,
   TStudentEducation,
@@ -112,6 +113,16 @@ export async function getCitiesApi(id?: number): Promise<TCitie[]> {
 export async function getOlympiadsApi(): Promise<TOlympiads[]> {
   try {
     const response = await api.get(`/api/users/olympiads/`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getEducationalLevelsApi(): Promise<TEducationalLevels[]> {
+  try {
+    const response = await api.get(`/api/users/educational-levels/`);
     return response.data;
   } catch (error) {
     console.error(error);

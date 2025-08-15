@@ -18,7 +18,10 @@ import {
 
 //api
 import { usePostStudentParent } from "@/services/tanstack/student/profile/mutation";
-import { useGetOlympiads } from "@/services/tanstack/student/profile/queries";
+import {
+  useGetEducationalLevels,
+  useGetOlympiads,
+} from "@/services/tanstack/student/profile/queries";
 
 //types
 import { TStudentEducation } from "@/services/tanstack/student/profile/types";
@@ -31,7 +34,11 @@ interface IEducationProps {
 }
 
 export default function Education({ data }: IEducationProps) {
+  // fetch
   const { data: olympiads, isLoading: isLoadingOlympiads } = useGetOlympiads();
+
+  const { data: educationalLevels, isLoading: isLoadingEducationalLevels } =
+    useGetEducationalLevels();
 
   const { mutate: postStudentParent, isPending: isPendingStudentParent } =
     usePostStudentParent();
@@ -51,13 +58,15 @@ export default function Education({ data }: IEducationProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5">
       <PersonalItemCity value="" />
+
       <EducationItem
+        isList
         id="degree"
-        value=""
         labelModal="مقطع تحصیلی خود را وارد کنید"
         label="مقطع تحصیلی"
         icon={<Book size="SM" />}
-        sendCode={false}
+        data={educationalLevels}
+        isPending={isLoadingEducationalLevels}
       />
 
       <EducationItem
@@ -108,7 +117,6 @@ export default function Education({ data }: IEducationProps) {
         label="المپیاد مدنظر"
         icon={<Notebook size="SM" />}
         isPending={isLoadingOlympiads}
-
       />
     </div>
   );

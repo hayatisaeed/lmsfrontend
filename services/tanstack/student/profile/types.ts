@@ -29,3 +29,9 @@ export type TOlympiads = {
   published: boolean;
   olympiad_degree: number;
 };
+
+export type TEducationalLevels = {
+  id: number;
+  name: string;
+  is_high_school: boolean;
+};
