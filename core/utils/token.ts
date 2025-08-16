@@ -9,7 +9,7 @@ export function setTokens({
   refresh: string;
 }) {
   cookie.set("access", access, {
-    expires: new Date(Date.now() + 1 * 60 * 60 * 1000),
+    expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
     path: "/",
   });
 

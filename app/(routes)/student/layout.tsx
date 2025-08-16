@@ -3,6 +3,12 @@ import { Footer, Header, NavDesktop } from "@/core/components";
 import { sideBarStudent } from "@/core/constant/sideBarStudent";
 import Goftino from "@/core/context/Goftino";
 
+//NEXT
+import { redirect } from "next/navigation";
+
+//axios
+import api from "@/core/config/api";
+
 //types
 import { ReactNode } from "react";
 
@@ -10,7 +16,17 @@ interface IStudentLayoutProps {
   children: ReactNode;
 }
 
-export default function Studentlayout({ children }: IStudentLayoutProps) {
+export default async function Studentlayout({ children }: IStudentLayoutProps) {
+  const response = await api.get("/api/users/profile/");
+
+  if (
+    response.status !== 200 ||
+    !response.data?.role ||
+    response.data.role !== "STUDENT"
+  ) {
+    redirect("/");
+  }
+
   const fakeUser = {
     name: "امیرحسین",
     phone: "09184397973",

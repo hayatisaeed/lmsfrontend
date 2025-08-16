@@ -1,8 +1,13 @@
 //logo
+import ArrowLeft from "@/assets/icons/arrows/ArrowLeft";
 import { Brand } from "@/shared/components";
+import { Button } from "@/shared/ui";
 
 //types
 import { Metadata } from "next";
+
+//NEXT
+import Image from "next/image";
 
 //link
 import Link from "next/link";
@@ -14,14 +19,35 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center gap-6">
-      <Brand />
-      <h3 className="text-2xl">صفحه مورد نظر پیدا نشد! 😕</h3>
+    <div className="w-full h-full flex flex-col gap-3 justify-center items-center p-4">
+      {/* تصویر با اندازه واقعی خودش */}
+      <div className="relative">
+        <Image
+          src="/images/not-found.png"
+          alt="image"
+          fill
+          className="object-contain"
+          sizes="(max-width: 640px) 90px, (max-width: 768px) 120px, 220px"
+        />
+      </div>
+
+      {/* متن */}
+      <h3 className="text-[32px] text-center">
+        صفحه ای که دنبالش بودی پیدا نشد!
+      </h3>
+      <p className="text-2xl font-[400] text-center">
+        ممکنه آدرس رو اشتباه وارد کرده باشی یا این صفحه دیگه وجود نداشته باشه.
+      </p>
+
+      {/* لینک بازگشت */}
       <Link
         href="/"
-        className=" py-4 px-7 rounded-xl text-sm bg-primary transition-all hover:bg-[#0038c4] text-white-primary"
+        className="flex items-center justify-center gap-4 rounded-full bg-primary py-3 px-5"
       >
-        بازگشت به صفحه اصلی
+        <span className="text-white-primary text-sm">بازگشت به صفحه قبلی</span>
+        <div className="rotate-45">
+          <ArrowLeft color="LIGHT" size="SM" />
+        </div>
       </Link>
     </div>
   );

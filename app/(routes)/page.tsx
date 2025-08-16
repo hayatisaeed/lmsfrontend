@@ -1,11 +1,27 @@
-"use client";
+// axios
+import api from "@/core/config/api";
 
-import { useRouter } from "next/navigation";
+// NEXT
+import { redirect } from "next/navigation";
 
-export default function Main() {
+export default async function Main() {
+  try {
+    const response = await api.get("/api/users/profile/");
 
+    if (response.status !== 200 || !response.data?.role) {
+      return redirect("/login");
+    }
 
-  const router = useRouter();
+    const role = response.data.role;
 
-  router.push("/student");
+    const roleRoutes: Record<string, string> = {
+      ADMIN: "/admin",
+      STUDENT: "/student",
+      PROFESSOR: "/professor",
+    };
+
+    return redirect(roleRoutes[role] ?? "/login");
+  } catch {
+    return redirect("/login");
+  }
 }
