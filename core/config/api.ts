@@ -1,6 +1,14 @@
 //core/config/api.ts
 import axios from "axios";
 
+// cookie
+import {
+  setTokens,
+  getAccessToken,
+  getRefreshToken,
+  clearTokens,
+} from "@/core/utils/token";
+
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   withCredentials: true,
@@ -10,7 +18,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (request) => {
-    const access = localStorage.getItem("access_token");
+    const access = getAccessToken();
     if (access) request.headers["Authorization"] = `Bearer ${access}`;
 
     return request;
@@ -29,7 +37,7 @@ api.interceptors.response.use(
     }
 
     if (error?.response?.status === 401) {
-      const refresh = localStorage.getItem("refresh_token");
+      const refresh = getRefreshToken();
 
       if (refresh) {
         try {
@@ -37,8 +45,7 @@ api.interceptors.response.use(
           const data = response.data;
 
           if (data) {
-            localStorage.setItem("access_token", data?.access);
-            localStorage.setItem("refresh_token", data?.refresh);
+            setTokens(data);
 
             error.config.headers["Authorization"] = `Bearer ${data?.access}`;
 
@@ -60,9 +67,8 @@ api.interceptors.response.use(
 );
 
 function logout() {
-  // Remove token localestorage
-  localStorage.removeItem("access_token");
-  localStorage.removeItem("refresh_token");
+  // Remove token cookie
+  clearTokens();
 
   // If in browser, redirect user to login page only if not already on login page
   if (typeof window !== "undefined") {

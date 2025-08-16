@@ -18,6 +18,9 @@ import {
 //toast
 import toast from "react-hot-toast";
 
+//token
+import { setTokens } from "@/core/utils/token";
+
 export default function LoginForm() {
   const [isPhoneValid, setIsPhoneValid] = useState(false);
   const [isCodeSent, setIsCodeSent] = useState(false);
@@ -60,8 +63,7 @@ export default function LoginForm() {
         onSuccess: (data) => {
           toast.success("ورود شما با موفقیت انجام شد.");
 
-          localStorage.setItem("access_token", data.access);
-          localStorage.setItem("refresh_token", data.refresh);
+          setTokens(data);
 
           router.push("/");
         },
