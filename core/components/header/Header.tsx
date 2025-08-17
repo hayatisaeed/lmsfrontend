@@ -6,10 +6,12 @@ import Label from "@/core/components/Label";
 import NavMobile from "../navbar/NavMobile";
 import { Navs } from "@/core/types/navLinks";
 
-interface IHeaderProps {
-  role: "Student" | "Professor" | "Admin";
-  path: "student" | "professor" | "admin";
+//types
+import { Role } from "@/core/types/role";
 
+interface IHeaderProps {
+  path: "student" | "professor" | "admin";
+  role: Role;
   navs: Navs[];
 }
 
@@ -20,9 +22,9 @@ export default function Header({ role, navs, path }: IHeaderProps) {
         <Label type={role} />
       </div>
       <div className=" md:hidden">
-        <NavMobile navs={navs} path={path}  />
+        <NavMobile navs={navs} path={path} />
       </div>
-      <Account name="امیرحسین شکری" />
+      <Account name="امیرحسین شکری" role={role} />
     </div>
   );
 }

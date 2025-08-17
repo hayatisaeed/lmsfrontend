@@ -1,8 +1,5 @@
 "use server";
-//core/config/api.ts
 import axios from "axios";
-
-//cookie
 import { cookies } from "next/headers";
 
 const api = axios.create({
@@ -12,28 +9,58 @@ const api = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-api.interceptors.request.use(
-  async (request) => {
-    const access = (await cookies()).get("access");
-    if (access) request.headers["Authorization"] = `Bearer ${access}`;
+async function getAccessToken() {
+  const cookieStore = await cookies();
+  return cookieStore.get("access")?.value;
+}
 
-    return request;
-  },
-  (error) => Promise.reject(error)
-);
+async function setTokens({
+  access,
+  refresh,
+}: {
+  access: string;
+  refresh: string;
+}) {
+  const cookieStore = await cookies();
+  cookieStore.set("access", access, {
+    httpOnly: true,
+    path: "/",
+    maxAge: 24 * 60 * 60,
+  });
+  cookieStore.set("refresh", refresh, {
+    httpOnly: true,
+    path: "/",
+    maxAge: 7 * 24 * 60 * 60,
+  });
+}
+
+async function logout() {
+  const cookieStore = await cookies();
+  cookieStore.delete("access");
+  cookieStore.delete("refresh");
+}
+
+api.interceptors.request.use(async (request) => {
+  const access = await getAccessToken();
+  if (access) request.headers["Authorization"] = `Bearer ${access}`;
+  return request;
+});
 
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    // Skip refresh attempt if it's already the refresh request
     if (originalRequest.url.includes("/api/token/refresh/")) {
-      logout();
+      await logout();
+      return Promise.reject(error);
     }
 
     if (error?.response?.status === 401) {
-      const refresh = (await cookies()).get("refresh");
+      const cookieStore =await cookies();
+      const refresh = cookieStore
+      
+      .get("refresh")?.value;
 
       if (refresh) {
         try {
@@ -41,41 +68,23 @@ api.interceptors.response.use(
           const data = response.data;
 
           if (data) {
-            (await cookies()).set("access", data.access);
-            (await cookies()).set("access", data.refreshD);
-
-            error.config.headers["Authorization"] = `Bearer ${data?.access}`;
-
-            return api.request(error.config);
+            await setTokens({ access: data.access, refresh: data.refresh });
+            originalRequest.headers["Authorization"] = `Bearer ${data.access}`;
+            return api.request(originalRequest);
           } else {
-            logout();
+            await logout();
           }
         } catch (err) {
           console.error("Refresh request failed:", err);
-          logout();
+          await logout();
         }
       } else {
-        logout();
+        await logout();
       }
     }
 
     return Promise.reject(error);
   }
 );
-
-async function logout() {
-  // Remove token cookie
-  (await cookies()).delete("access");
-  (await cookies()).delete("refresh");
-
-  // If in browser, redirect user to login page only if not already on login page
-  if (typeof window !== "undefined") {
-    // Check if already on login page
-    const currentPath = window.location.pathname;
-    if (currentPath !== "/login") {
-      window.location.href = "/login";
-    }
-  }
-}
 
 export default api;
