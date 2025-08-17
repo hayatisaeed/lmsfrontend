@@ -7,11 +7,15 @@ interface ICardProps {
   avatar?: string;
   name?: string;
   tags?: string[];
+  link: string;
 }
 
-export default function Card({ image, avatar, name, tags }: ICardProps) {
+export default function Card({ image, avatar, name, tags, link }: ICardProps) {
   return (
-    <Link href={"/"} className="w-full h-full bg-box-primary rounded-2xl p-3 flex flex-col gap-4">
+    <Link
+      href={link}
+      className="w-full h-full bg-box-primary rounded-2xl p-3 flex flex-col gap-4"
+    >
       <Image
         src={image || "/images/class.png"}
         width={200}
@@ -24,12 +28,12 @@ export default function Card({ image, avatar, name, tags }: ICardProps) {
           <Avatar image={avatar} className="bg-white-primary" />
           <h3>{name}</h3>
         </div>
-        <button
+        {/* <button
           type="button"
           className="bg-transparent border-0 outline-0 text-lg"
         >
           ...
-        </button>
+        </button> */}
       </div>
       <div className="flex gap-2 flex-wrap mb-3">
         {tags?.map((tag, index) => (

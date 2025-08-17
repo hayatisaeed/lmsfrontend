@@ -49,6 +49,7 @@ export default function Button({
         loading ? "cursor-progress" : "cursor-pointer",
         color === "NEUTRAL" &&
           "border border-text-primary bg-transparent hover:bg-transparent",
+        props.disabled ? "!cursor-default" : "cursor-pointer",
 
         className
       )}
