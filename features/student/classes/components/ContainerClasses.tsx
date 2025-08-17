@@ -14,7 +14,7 @@ import FilterCategory from "./FilterCategory";
 
 export default function ContainerClasses() {
   return (
-    <div className="w-full h-full grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-5">
+    <div className="w-full min-h-full grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-5">
       <div className="flex md:flex-col gap-5">
         <Container title="دسته بندی ها">
           <FilterCategory

@@ -81,3 +81,6 @@ export { default as Card } from "@/assets/icons/money/Card";
 
 //list
 export { default as Sort } from "@/assets/icons/list/Sort";
+
+//time
+export { default as Alarm } from "@/assets/icons/time/Alarm";

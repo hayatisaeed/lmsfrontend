@@ -37,7 +37,7 @@ export default function FilterCategory({ filters }: IFilterCategoryProps) {
             size="FULL"
             disabled={active}
             className={clsx(
-              "justify-start rounded-2xl",
+              "justify-start rounded-2xl !py-[14px]",
               active && "!bg-[#0033B3]"
             )}
           >

@@ -17,5 +17,5 @@ export default async function page({ params }: IPageProps) {
   //   } else {
   //     redirect(`/student/classes/${idClass}/enroll`);
   //   }
-  redirect(`/student/classes/${idClass}/content`);
+  redirect(`/student/classes/${idClass}/enroll`);
 }

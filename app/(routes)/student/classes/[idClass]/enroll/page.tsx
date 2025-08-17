@@ -1,17 +1,10 @@
-interface IPageProps {
-  params: { idClass: string };
-}
+import ContainerEnroll from "@/features/student/idClasses/enroll/ContainerEnroll";
+import { Metadata } from "next";
 
-export default async function page({ params }: IPageProps) {
-  const { idClass } = params;
+export const metadata: Metadata = {
+  title: "ثبت نام کلاس",
+};
 
-  // گرفتن اطلاعات دوره از سرور
-
-  return (
-    <div>
-      <h1>{idClass}</h1>
-      <p>ثبت نام نکرده</p>
-      {/* سایر اطلاعات دوره */}
-    </div>
-  );
+export default async function page() {
+  return <ContainerEnroll />;
 }
