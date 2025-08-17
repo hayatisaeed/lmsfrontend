@@ -1,13 +1,17 @@
-//import navbar , header
+//components
 import { Footer, Header, NavDesktop } from "@/core/components";
+
+//content
 import { sideBarStudent } from "@/core/constant/sideBarStudent";
+
+//api
+import { getUserProfileApi } from "@/services/api/common/server/api";
+
+//goftino
 import Goftino from "@/core/context/Goftino";
 
-// //NEXT
-// import { redirect } from "next/navigation";
-
-// //axios
-// import api from "@/core/config/apiServer/api";
+//NEXT
+import { redirect } from "next/navigation";
 
 //types
 import { ReactNode } from "react";
@@ -17,25 +21,21 @@ interface IStudentLayoutProps {
 }
 
 export default async function Studentlayout({ children }: IStudentLayoutProps) {
-  // const response = await api.get("/api/users/profile/");
+  const data = await getUserProfileApi();
 
-  // if (
-  //   response.status !== 200 ||
-  //   !response.data?.role ||
-  //   response.data.role !== "STUDENT"
-  // ) {
-  //   redirect("/");
-  // }
+  if (!data?.role || data?.role !== "Student") {
+    redirect("/");
+  }
 
-  const fakeUser = {
-    name: "امیرحسین",
-    phone: "09184397973",
-    email: "amirhosien.shokrii@gmail.com",
+  const user = {
+    name: "این فعلا نیست",
+    phone: data.phone,
+    email: data.email,
     avatar: "",
   };
 
   return (
-    <Goftino user={fakeUser}>
+    <Goftino user={user}>
       <div className="flex h-full gap-5 overflow-hidden p-0 lg:p-5">
         <aside className="lg:inline-block hidden">
           <NavDesktop path="student" navs={sideBarStudent} />

@@ -8,7 +8,12 @@ import { ReactNode } from "react";
 
 interface IGoftinoProps {
   children: ReactNode;
-  user: { name: string; phone: string; email?: string; avatar?: string };
+  user: {
+    name?: string;
+    phone: string;
+    email?: string | null;
+    avatar?: string | null;
+  };
 }
 
 export default function Goftino({ children, user }: IGoftinoProps) {

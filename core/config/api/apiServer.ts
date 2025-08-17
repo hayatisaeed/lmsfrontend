@@ -1,5 +1,9 @@
 "use server";
+
+//axios
 import axios from "axios";
+
+//cookies
 import { cookies } from "next/headers";
 
 const api = axios.create({
@@ -57,10 +61,8 @@ api.interceptors.response.use(
     }
 
     if (error?.response?.status === 401) {
-      const cookieStore =await cookies();
-      const refresh = cookieStore
-      
-      .get("refresh")?.value;
+      const cookieStore = await cookies();
+      const refresh = cookieStore.get("refresh")?.value;
 
       if (refresh) {
         try {
