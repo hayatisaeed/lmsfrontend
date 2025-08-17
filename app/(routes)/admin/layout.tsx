@@ -1,6 +1,14 @@
 //import navbar , header
 import { Footer, Header, NavDesktop } from "@/core/components";
+
+//constant
 import { sideBarAdmin } from "@/core/constant/sideBarAdmin";
+
+// //axios
+// import api from "@/core/config/apiServer/api";
+
+// //NEXT
+// import { redirect } from "next/navigation";
 
 //types
 import { ReactNode } from "react";
@@ -9,7 +17,17 @@ interface IAdminLayoutProps {
   children: ReactNode;
 }
 
-export default function Adminlayout({ children }: IAdminLayoutProps) {
+export default async function Adminlayout({ children }: IAdminLayoutProps) {
+  // const response = await api.get("/api/users/profile/");
+
+  // if (
+  //   response.status !== 200 ||
+  //   !response.data?.role ||
+  //   response.data.role !== "ADMIN"
+  // ) {
+  //   redirect("/");
+  // }
+
   return (
     <div className="flex h-full gap-5 overflow-hidden p-0 lg:p-5">
       <aside className="lg:inline-block hidden">

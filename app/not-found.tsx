@@ -1,7 +1,6 @@
 //logo
 import ArrowLeft from "@/assets/icons/arrows/ArrowLeft";
-import { Brand } from "@/shared/components";
-import { Button } from "@/shared/ui";
+
 
 //types
 import { Metadata } from "next";

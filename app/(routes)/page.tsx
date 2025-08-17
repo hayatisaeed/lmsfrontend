@@ -1,5 +1,5 @@
 // axios
-import api from "@/core/config/api";
+import api from "@/core/config/api/apiServer";
 
 // NEXT
 import { redirect } from "next/navigation";

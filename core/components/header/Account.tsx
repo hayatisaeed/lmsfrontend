@@ -1,15 +1,18 @@
 "use client";
 
 //import dropdown
-import { DropDown } from "@/shared/components";
+import { Avatar, DropDown } from "@/shared/components";
 
 //import icon
 import { ArrowsALogout, PhoneCalling, UserRounded } from "@/assets/icons";
 
-//import image
-import Image from "next/image";
-
 import { useRouter } from "next/navigation";
+
+//token
+import { clearTokens } from "@/core/utils/token";
+
+//toast
+import toast from "react-hot-toast";
 
 interface IAccountProps {
   name: string;
@@ -22,7 +25,15 @@ export default function Account({ name, image }: IAccountProps) {
   function handleClickAccount() {
     router.replace(`profile`);
   }
-  function handleClickLogout() {}
+  function handleClickLogout() {
+    try {
+      clearTokens();
+      router.push("/login");
+      toast.success("خروج از حساب کاربری شما با موفقیت انجام شد");
+    } catch {
+      toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
+    }
+  }
 
   return (
     <div className="flex items-center gap-2">
@@ -51,14 +62,7 @@ export default function Account({ name, image }: IAccountProps) {
       </DropDown>
 
       <h3 className="text-sm md:text-[16px]">{name}</h3>
-      <div className="relative size-8 md:size-10 rounded-full bg-box-primary">
-        <Image
-          fill
-          alt="user"
-          className="object-contain p-2"
-          src={image || "/images/user.png"}
-        />
-      </div>
+      <Avatar />
     </div>
   );
 }

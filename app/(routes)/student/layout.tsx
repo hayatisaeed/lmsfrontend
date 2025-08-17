@@ -3,11 +3,11 @@ import { Footer, Header, NavDesktop } from "@/core/components";
 import { sideBarStudent } from "@/core/constant/sideBarStudent";
 import Goftino from "@/core/context/Goftino";
 
-//NEXT
-import { redirect } from "next/navigation";
+// //NEXT
+// import { redirect } from "next/navigation";
 
-//axios
-import api from "@/core/config/api";
+// //axios
+// import api from "@/core/config/apiServer/api";
 
 //types
 import { ReactNode } from "react";
@@ -17,15 +17,15 @@ interface IStudentLayoutProps {
 }
 
 export default async function Studentlayout({ children }: IStudentLayoutProps) {
-  const response = await api.get("/api/users/profile/");
+  // const response = await api.get("/api/users/profile/");
 
-  if (
-    response.status !== 200 ||
-    !response.data?.role ||
-    response.data.role !== "STUDENT"
-  ) {
-    redirect("/");
-  }
+  // if (
+  //   response.status !== 200 ||
+  //   !response.data?.role ||
+  //   response.data.role !== "STUDENT"
+  // ) {
+  //   redirect("/");
+  // }
 
   const fakeUser = {
     name: "امیرحسین",
@@ -45,7 +45,7 @@ export default async function Studentlayout({ children }: IStudentLayoutProps) {
             <Header path="student" navs={sideBarStudent} role="Student" />
           </header>
           <div className="h-full overflow-y-auto flex flex-col gap-5">
-            <main className="grow">{children}</main>
+            <main className="grow px-5 lg:p-0">{children}</main>
             <footer>
               <Footer />
             </footer>

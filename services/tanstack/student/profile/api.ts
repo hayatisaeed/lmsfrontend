@@ -1,4 +1,4 @@
-import api from "@/core/config/api";
+import api from "@/core/config/api/apiClient";
 
 //types
 import {

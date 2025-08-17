@@ -25,8 +25,8 @@ export { default as Search } from "@/shared/components/Search";
 //input-edit
 export { default as InputEditText } from "@/shared/components/InputEditText";
 
-
 //Uploader
 export { default as Uploader } from "@/shared/components/Uploader";
 
-
+//Avatar
+export { default as Avatar } from "@/shared/components/Avatar";
