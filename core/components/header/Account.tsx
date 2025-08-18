@@ -23,7 +23,7 @@ export default function Account({
   const rolePaths: Record<Role, string> = {
     Admin: "admin",
     Student: "student",
-    Professor: "professor",
+    Teacher: "teacher",
   };
 
   function handleClickAccount() {
@@ -34,6 +34,7 @@ export default function Account({
   function handleClickLogout() {
     try {
       clearTokens();
+      localStorage.clear();
       router.push("/login");
       toast.success("خروج از حساب کاربری شما با موفقیت انجام شد");
     } catch (err) {

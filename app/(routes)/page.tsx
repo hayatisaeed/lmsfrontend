@@ -16,7 +16,7 @@ export default async function Main() {
   const roleRoutes: Record<string, string> = {
     Admin: "/admin",
     Student: "/student",
-    Professor: "/professor",
+    Teacher: "/teacher",
   };
 
   return redirect(roleRoutes[role] ?? "/login");

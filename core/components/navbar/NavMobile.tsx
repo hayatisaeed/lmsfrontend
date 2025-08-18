@@ -23,7 +23,7 @@ import { Label } from "@/core/components";
 import { Navs } from "@/core/types/navLinks";
 
 interface INavProps {
-  path: "student" | "admin" | "professor";
+  path: "student" | "admin" | "teacher";
   navs: Navs[];
 }
 
@@ -61,8 +61,8 @@ export default function NavMobile({ navs, path }: INavProps) {
             type={
               path === "admin"
                 ? "Admin"
-                : path === "professor"
-                ? "Professor"
+                : path === "teacher"
+                ? "Teacher"
                 : "Student"
             }
           />

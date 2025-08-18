@@ -10,7 +10,7 @@ import { Navs } from "@/core/types/navLinks";
 import { Role } from "@/core/types/role";
 
 interface IHeaderProps {
-  path: "student" | "professor" | "admin";
+  path: "student" | "teacher" | "admin";
   role: Role;
   navs: Navs[];
 }

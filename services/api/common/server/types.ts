@@ -3,7 +3,7 @@ export type TgetUserProfile = {
   display_name: string;
   email: string | null;
   is_profile_complete: boolean;
-  role: "Student" | "Admin" | "Professor";
+  role: "Student" | "Admin" | "Teacher";
   state: string | null;
   city: string | null;
   created_at: string;

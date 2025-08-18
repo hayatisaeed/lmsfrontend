@@ -8,9 +8,10 @@ import { SquareAcademicCap } from "@/assets/icons";
 
 //import clsx
 import clsx from "clsx";
+import { Role } from "../types/role";
 
 interface ILabelProps {
-  type: "Student" | "Professor" | "Admin";
+  type: Role;
 }
 
 export default function Label({ type }: ILabelProps) {

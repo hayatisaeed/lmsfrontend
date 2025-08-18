@@ -4,7 +4,7 @@ export const user = [
     lable: "دانش آموز",
   },
   {
-    type: "Professor",
+    type: "Teacher",
     lable: "استاد",
   },
   {
@@ -12,4 +12,3 @@ export const user = [
     lable: "مدیر",
   },
 ];
-
