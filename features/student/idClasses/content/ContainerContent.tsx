@@ -3,25 +3,28 @@
 import { BoxLink } from "@/shared/components";
 import ClassDashboard from "./components/ClassDashboard";
 import Sessions from "./components/Sessions";
+import { usePathname } from "next/navigation";
 
 export default function ContainerContent() {
+  const pathname = usePathname();
+
   return (
     <div className="grid grid-cols-1 grid-rows-[auto_1fr] md:grid-cols-3 gap-5 min-h-full">
       <BoxLink
         title="مشاهده لیست آزمون ها"
-        href=""
+        href={`${pathname}/tests`}
         type="mortarboard"
         subtitle="آزمون ها"
       />
       <BoxLink
         title="کتابچه های شما"
-        href=""
+        href={`${pathname}/booklet`}
         type="assessment"
         subtitle="کتابچه"
       />
       <BoxLink
         title="نظر آزمایی گفتگو ها"
-        href=""
+        href={`${pathname}/chat`}
         type="chat"
         subtitle="تالار گفتگو"
       />

@@ -4,6 +4,6 @@ export const metadata:Metadata={
   title:"کتابچه"
 }
 
-export default function psge() {
+export default function page() {
   return <div>psge</div>;
 }
