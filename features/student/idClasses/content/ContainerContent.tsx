@@ -1,6 +1,8 @@
 "use client";
 
 import { BoxLink } from "@/shared/components";
+import ClassDashboard from "./components/ClassDashboard";
+import Sessions from "./components/Sessions";
 
 export default function ContainerContent() {
   return (
@@ -23,8 +25,12 @@ export default function ContainerContent() {
         type="chat"
         subtitle="تالار گفتگو"
       />
-      <div className="bg-amber-800 w-full md:col-span-2"></div>
-      <div className="bg-blue-800 w-full col-span-1"></div>
+      <div className="w-full md:col-span-2">
+        <ClassDashboard />
+      </div>
+      <div className="w-full col-span-1">
+        <Sessions />
+      </div>
     </div>
   );
 }

@@ -20,7 +20,7 @@ export default function Container({
   return (
     <div
       className={clsx(
-        "w-full flex flex-col justify-between bg-white-primary p-5  rounded-2xl gap-7 pb-7",
+        "w-full flex flex-col justify-start bg-white-primary p-5  rounded-2xl gap-7 pb-7",
         className
       )}
     >
