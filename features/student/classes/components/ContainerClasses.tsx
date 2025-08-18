@@ -31,12 +31,12 @@ export default function ContainerClasses() {
         <div className="w-full flex flex-col items-center gap-7">
           <div className="w-full grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-3">
             <Card
-              link={`/student/classes/${2}`}
+              link={`/student/classes/${2}/content`}
               tags={["ادبیات", "شیمی", "ریاضی", "ادبیات"]}
               name="استاد رحمانی"
             />
             <Card
-              link={`/student/classes/${223423}`}
+              link={`/student/classes/${223423}/content`}
               tags={["ادبیات", "شیمی", "ریاضی", "ادبیات"]}
               name="استاد رحمانی"
             />

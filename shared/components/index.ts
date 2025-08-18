@@ -30,3 +30,6 @@ export { default as Uploader } from "@/shared/components/Uploader";
 
 //Avatar
 export { default as Avatar } from "@/shared/components/Avatar";
+
+//BoxLink
+export { default as BoxLink } from "@/shared/components/BoxLink";
