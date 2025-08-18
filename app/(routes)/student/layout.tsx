@@ -29,7 +29,7 @@ export default async function Studentlayout({ children }: IStudentLayoutProps) {
 
   const user = {
     name: data.display_name,
-    phone: data.phone.split(" ").join(""),
+    phone: data.phone.replace(/\D/g, ""),
     email: data.email,
     avatar: "",
   };

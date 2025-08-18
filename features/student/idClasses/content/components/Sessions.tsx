@@ -1,4 +1,5 @@
 import { Button, Container } from "@/shared/ui";
+import SessionItem from "./SessionItem";
 
 export default function Sessions() {
   return (
@@ -16,7 +17,15 @@ export default function Sessions() {
         </Button>
       }
     >
-      Sessions
+      <div className="flex flex-col gap-3">
+        <SessionItem title="جلسه ارزیبایی ادبیات" />
+        <SessionItem title="جلسه ارزیبایی ادبیات" />
+        <SessionItem title="جلسه ارزیبایی ادبیات" />
+        <SessionItem title="جلسه ارزیبایی ادبیات" />
+        <SessionItem title="جلسه ارزیبایی ادبیات" />
+
+       
+      </div>
     </Container>
   );
 }
