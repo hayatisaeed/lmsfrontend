@@ -21,7 +21,7 @@ export default async function Adminlayout({ children }: IAdminLayoutProps) {
   const data = await getUserProfileApi();
 
   if (!data?.role || data?.role !== "Admin") {
-    redirect("/");
+    return redirect("/");
   }
 
   return (

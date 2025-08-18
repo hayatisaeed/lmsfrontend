@@ -12,7 +12,6 @@ export async function getUserProfileApi(): Promise<TgetUserProfile> {
     const response = await api.get("/api/users/profile/");
     return response.data;
   } catch {
-    console.error();
-    redirect("/login");
+    return redirect("/login");
   }
 }

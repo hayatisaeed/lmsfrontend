@@ -24,12 +24,12 @@ export default async function Studentlayout({ children }: IStudentLayoutProps) {
   const data = await getUserProfileApi();
 
   if (!data?.role || data?.role !== "Student") {
-    redirect("/");
+    return redirect("/");
   }
 
   const user = {
-    name: "این فعلا نیست",
-    phone: data.phone,
+    name: data.display_name,
+    phone: data.phone.split(" ").join(""),
     email: data.email,
     avatar: "",
   };

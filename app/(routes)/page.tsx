@@ -8,7 +8,7 @@ export default async function Main() {
   const data = await getUserProfileApi();
 
   if (!data?.role) {
-    redirect("/login");
+    return redirect("/login");
   }
 
   const role = data.role;
@@ -19,5 +19,5 @@ export default async function Main() {
     Professor: "/professor",
   };
 
-  redirect(roleRoutes[role] ?? "/login");
+  return redirect(roleRoutes[role] ?? "/login");
 }

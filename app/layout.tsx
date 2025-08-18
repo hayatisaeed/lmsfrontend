@@ -36,19 +36,6 @@ export default function RootLayout({ children }: IRootLayoutProps) {
     //tanstack-query
     <TanstackQuery>
       <html lang="fa" dir="rtl" className="h-full font-kalameh font-medium">
-        <Toaster
-          position="top-left"
-          toastOptions={{
-            duration: 5000,
-            success: {
-              className: "border border-[#61D345]",
-            },
-            error: {
-              className: "border border-[#FF4B4B]",
-            },
-          }}
-        />
-
         <head>
           {/* goftino */}
           <Script
@@ -62,6 +49,18 @@ export default function RootLayout({ children }: IRootLayoutProps) {
           />
         </head>
         <body className="h-screen bg-[#f8f9fa] overflow-hidden">
+          <Toaster
+            position="top-left"
+            toastOptions={{
+              duration: 5000,
+              success: {
+                className: "border border-[#61D345]",
+              },
+              error: {
+                className: "border border-[#FF4B4B]",
+              },
+            }}
+          />
           {children}
         </body>
       </html>
