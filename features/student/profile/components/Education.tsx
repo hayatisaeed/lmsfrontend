@@ -17,7 +17,10 @@ import {
 } from "@/features/student/profile/components";
 
 //key
-import { getStudentEducationKey } from "@/services/tanstack/student/profile/key";
+import {
+  getStudentEducationKey,
+  getStudentParentKey,
+} from "@/services/tanstack/student/profile/key";
 
 //api
 import {
@@ -41,9 +44,10 @@ import toast from "react-hot-toast";
 
 interface IEducationProps {
   data?: TStudentEducation;
+  parentPhone?: string | null;
 }
 
-export default function Education({ data }: IEducationProps) {
+export default function Education({ data, parentPhone }: IEducationProps) {
   const { data: olympiads, isLoading: isLoadingOlympiads } = useGetOlympiads();
   const { data: educationalLevels, isLoading: isLoadingEducationalLevels } =
     useGetEducationalLevels();
@@ -60,7 +64,6 @@ export default function Education({ data }: IEducationProps) {
   function showToast(success: boolean, onClose?: () => void) {
     if (success) {
       toast.success("اطلاعات شما با موفقیت ثبت شد.");
-      queryClient.invalidateQueries({ queryKey: getStudentEducationKey() });
       onClose?.();
     } else {
       toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
@@ -79,7 +82,10 @@ export default function Education({ data }: IEducationProps) {
     postLocation(
       { province: data.province, city: data.city },
       {
-        onSuccess: () => showToast(true, onClose),
+        onSuccess: () => {
+          showToast(true, onClose);
+          queryClient.invalidateQueries({ queryKey: getStudentEducationKey() });
+        },
         onError: () => showToast(false),
       }
     );
@@ -87,7 +93,9 @@ export default function Education({ data }: IEducationProps) {
 
   const mutateStudentParent = (phone: string, onClose?: () => void) => {
     postStudentParent(phone, {
-      onSuccess: () => showToast(true, onClose),
+      onSuccess: () => {
+        showToast(true, onClose);
+      },
       onError: () => showToast(false),
     });
   };
@@ -140,7 +148,7 @@ export default function Education({ data }: IEducationProps) {
 
       <EducationItem
         id="parents-phone"
-        value=""
+        value={parentPhone?.replace(/\D/g, "") ?? ""}
         icon={<Smartphone size="SM" />}
         labelModal="شماره تماس اولیا خود را وارد کنید"
         label="شماره موبایل اولیا"

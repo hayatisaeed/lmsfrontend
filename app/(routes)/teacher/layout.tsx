@@ -23,9 +23,9 @@ interface IStudentLayoutProps {
 export default async function Teacherlayout({ children }: IStudentLayoutProps) {
   const data = await getUserProfileApi();
 
-  // if (!data?.role || data?.role !== "Teacher") {
-  //   return redirect("/");
-  // }
+  if (!data?.role || data?.role !== "Teacher") {
+    return redirect("/");
+  }
 
   const user = {
     name: data.display_name,

@@ -42,3 +42,9 @@ export type TStudyBranches = {
   level_name: string;
   name: string;
 };
+
+export type TStudentParent = {
+  phone: string;
+  relation: string;
+  is_verified: boolean;
+};

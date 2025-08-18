@@ -8,6 +8,7 @@ import {
   TState,
   TStudentEducation,
   TStudentIdentity,
+  TStudentParent,
   TStudyBranches,
 } from "@/services/tanstack/student/profile/types";
 import { AxiosError } from "axios";
@@ -79,10 +80,22 @@ export async function getStudentEducationApi(): Promise<TStudentEducation> {
 
 export async function postStudentParentApi(phone: string) {
   try {
-    const response = await api.post("/api/users/profile/parent", {
+    const response = await api.post("/api/users/profile/parent/", {
       phone,
       relation: "father",
+      is_verified: true,
     });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getStudentParentApi(): Promise<TStudentParent> {
+  try {
+    const response = await api.get("/api/users/profile/parent");
 
     return response.data;
   } catch (error) {

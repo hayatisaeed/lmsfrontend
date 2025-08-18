@@ -1,5 +1,5 @@
 //react-query
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 //key
 import {
@@ -7,6 +7,7 @@ import {
   postStudentEducationKey,
   postStudentParentKey,
   postLocationKey,
+  getStudentParentKey,
 } from "@/services/tanstack/student/profile/key";
 
 //api
@@ -32,9 +33,29 @@ export function usePostStudentEducation() {
 }
 
 export function usePostStudentParent() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: postStudentParentKey(),
     mutationFn: postStudentParentApi,
+
+    onMutate: (phone: string) => {
+      const prevParent = queryClient.getQueryData(getStudentParentKey());
+
+      queryClient.setQueryData(getStudentParentKey(), {
+        phone,
+        relation: "father",
+        is_verified: true,
+      });
+
+      return { prevParent };
+    },
+
+    onError: (_err, _phone, context) => {
+      if (context?.prevParent) {
+        queryClient.setQueryData(getStudentParentKey(), context.prevParent);
+      }
+    },
   });
 }
 

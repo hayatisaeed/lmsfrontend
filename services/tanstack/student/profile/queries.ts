@@ -10,6 +10,7 @@ import {
   getOlympiadsKey,
   getEducationalLevelsKey,
   getStudyBranchesKey,
+  getStudentParentKey,
 } from "./key";
 
 //API
@@ -21,6 +22,7 @@ import {
   getOlympiadsApi,
   getEducationalLevelsApi,
   getStudyBranchesApi,
+  getStudentParentApi,
 } from "./api";
 
 export function useGetStudentIdentity() {
@@ -41,6 +43,13 @@ export function useGetStates() {
   return useQuery({
     queryKey: getStatesKey(),
     queryFn: getStatesApi,
+  });
+}
+
+export function useGetStudentParent() {
+  return useQuery({
+    queryKey: getStudentParentKey(),
+    queryFn: getStudentParentApi,
   });
 }
 

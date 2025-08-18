@@ -15,6 +15,7 @@ import {
 import {
   useGetStudentEducation,
   useGetStudentIdentity,
+  useGetStudentParent,
 } from "@/services/tanstack/student/profile/queries";
 
 export default function ContainerProfile() {
@@ -30,9 +31,19 @@ export default function ContainerProfile() {
     isError: isErrorStudentEducation,
   } = useGetStudentEducation();
 
-  const isPending = isPendingStudentIdentity || isPendingStudentEducation;
+  const {
+    data: studentParent,
+    isPending: isPendingStudentParent,
+    isError: isErrorStudentParent,
+  } = useGetStudentParent();
 
-  const isError = isErrorStudentIdentity || isErrorStudentEducation;
+  const isPending =
+    isPendingStudentIdentity ||
+    isPendingStudentEducation ||
+    isPendingStudentParent;
+
+  const isError =
+    isErrorStudentIdentity || isErrorStudentEducation || isErrorStudentParent;
 
   if (isPending || isError)
     return (
@@ -55,7 +66,7 @@ export default function ContainerProfile() {
         <Personal data={studentIdentity} />
       </Container>
       <Container title="اطلاعات تحصیلی">
-        <Education data={studentEducation} />
+        <Education data={studentEducation} parentPhone={studentParent.phone} />
       </Container>
 
       <Container title="تغییر رمز عبور">
