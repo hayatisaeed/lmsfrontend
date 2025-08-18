@@ -50,6 +50,7 @@ export { default as Book } from "@/assets/icons/school/Book2";
 export { default as Bookmark } from "@/assets/icons/school/Bookmark";
 export { default as NotebookMinimalistic } from "@/assets/icons/school/NotebookMinimalistic";
 export { default as SquareAcademicCap } from "@/assets/icons/school/SquareAcademicCap2";
+export { default as NotebookBookmark } from "@/assets/icons/school/NotebookBookmark";
 
 // Security
 export { default as Eye } from "@/assets/icons/security/Eye";

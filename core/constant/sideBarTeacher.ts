@@ -1,12 +1,16 @@
 "use client";
 
+//icons
 import {
   ArchiveCheck,
   Book,
   Notebook,
+  NotebookBookmark,
   NotebookMinimalistic,
   Widget,
 } from "@/assets/icons";
+
+//typesD
 import { Navs } from "@/core/types/navLinks";
 
 export const sideBarTeacher: Navs[] = [
@@ -22,7 +26,7 @@ export const sideBarTeacher: Navs[] = [
   },
   {
     label: "تصحیح آزمون ها",
-    icon: Widget,
+    icon: NotebookBookmark,
     link: "/teacher/exam-grading",
   },
   {
