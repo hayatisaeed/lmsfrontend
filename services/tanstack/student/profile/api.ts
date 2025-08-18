@@ -142,3 +142,17 @@ export async function getStudyBranchesApi(
     throw error;
   }
 }
+
+export async function postLocationApi(location: {
+  province: string;
+  city: string;
+}) {
+  try {
+    const response = await api.post("/api/users/profile/location/", location);
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

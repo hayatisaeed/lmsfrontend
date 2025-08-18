@@ -13,10 +13,11 @@ import { useState } from "react";
 import { TMenu } from "../types";
 
 interface IWindowMenuItemsProps {
-  defaultValue?: number;
+  defaultValue?: { id: number; label: string };
   label: string;
   onClose?: () => void;
-  muate?: (value: number, onClose?: () => void) => void;
+  mutate?: (id: number, label: string, onClose?: () => void) => void;
+
   isPending?: boolean;
   data?: { id: number; label: string }[];
 }
@@ -25,20 +26,22 @@ export default function WindowMenuItems({
   defaultValue,
   label,
   onClose,
-  muate,
+  mutate,
   isPending = false,
   data,
 }: IWindowMenuItemsProps) {
-  const [value, setValue] = useState<number>(defaultValue || -1);
+  const [value, setValue] = useState<TMenu>(
+    defaultValue || { id: -1, label: "" }
+  );
 
   const isSmUp = useMediaQuery("(min-width: 640px)");
 
   function onChangeItem(item: TMenu) {
-    setValue(item.id);
+    setValue(item);
   }
 
   async function handleClickEnter() {
-    muate?.(value, onClose);
+    mutate?.(value.id, value.label, onClose);
   }
 
   function handleClickCancel() {
@@ -51,7 +54,7 @@ export default function WindowMenuItems({
       <Menu
         onChange={onChangeItem}
         options={data}
-        value={{ id: value }}
+        value={value}
         label={label}
       />
       <div className="flex justify-start gap-2">

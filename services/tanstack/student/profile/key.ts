@@ -37,3 +37,7 @@ export function getEducationalLevelsKey() {
 export function getStudyBranchesKey(id?: number) {
   return ["study", "branches", id];
 }
+
+export function postLocationKey() {
+  return ["location"];
+}

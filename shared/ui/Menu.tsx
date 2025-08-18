@@ -1,12 +1,11 @@
 "use client";
 
-//react
 import { useState, useRef, useEffect } from "react";
 
 interface IMenuProps {
   label: string;
   options?: { id: number; label: string }[];
-  value?: { id: number };
+  value?: { id?: number; label?: string };
   onChange: (item: { id: number; label: string }) => void;
   disabled?: boolean;
 }
@@ -19,7 +18,6 @@ export default function Menu({
   disabled = false,
 }: IMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
-
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -29,14 +27,23 @@ export default function Menu({
       }
     }
 
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    }
+
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleEscape);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
     };
   }, [isOpen]);
 
@@ -66,12 +73,14 @@ export default function Menu({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
-        {options.find((option) => option.id === value?.id)?.label || label}
+        {options.find((option) =>
+          value?.id ? option.id === value.id : option.label === value?.label
+        )?.label || label}
       </button>
 
       {isOpen && (
         <ul
-          // role="listbox"
+          role="listbox"
           className="absolute z-50 mt-2 w-full max-h-60 overflow-auto rounded-xl border border-text-primary/30 bg-white shadow-lg"
           tabIndex={-1}
         >
@@ -84,7 +93,9 @@ export default function Menu({
             <li
               key={item.id}
               role="option"
-              aria-selected={value?.id === item.id}
+              aria-selected={
+                value?.id ? value.id === item.id : value?.label === item.label
+              }
               tabIndex={0}
               onClick={() => handleSelect(item)}
               onKeyDown={(e) => {
@@ -94,7 +105,9 @@ export default function Menu({
                 }
               }}
               className={`cursor-pointer p-3 text-sm hover:bg-gray-100 ${
-                value?.id === item.id ? "bg-gray-200 font-semibold" : ""
+                value?.id === item.id || value?.label === item.label
+                  ? "bg-gray-200 font-semibold"
+                  : ""
               }`}
             >
               {item.label}

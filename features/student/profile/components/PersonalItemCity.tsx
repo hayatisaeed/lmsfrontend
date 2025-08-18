@@ -17,9 +17,24 @@ import { TMenu } from "../types";
 
 interface IAccountItemProps {
   value: string;
+  mutate: (
+    data: {
+      idProvince: number;
+      province: string;
+      idCity: number;
+      city: string;
+    },
+    onClose?: () => void
+  ) => void;
+
+  isLoading?: boolean;
 }
 
-export default function PersonalItemCity({ value }: IAccountItemProps) {
+export default function PersonalItemCity({
+  value,
+  mutate,
+  isLoading,
+}: IAccountItemProps) {
   const [province, setProvince] = useState<TMenu | undefined>();
   const [city, setCity] = useState<TMenu | undefined>();
 
@@ -43,6 +58,8 @@ export default function PersonalItemCity({ value }: IAccountItemProps) {
         province={province}
         setProvince={setProvince}
         icon={<City size="SM" />}
+        mutate={mutate}
+        isLoading={isLoading}
       />
     </div>
   );

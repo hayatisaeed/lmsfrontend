@@ -16,8 +16,14 @@ import {
   PersonalItemCity,
 } from "@/features/student/profile/components";
 
+//key
+import { getStudentEducationKey } from "@/services/tanstack/student/profile/key";
+
 //api
-import { usePostStudentParent } from "@/services/tanstack/student/profile/mutation";
+import {
+  usePostLocation,
+  usePostStudentParent,
+} from "@/services/tanstack/student/profile/mutation";
 import {
   useGetEducationalLevels,
   useGetOlympiads,
@@ -27,6 +33,9 @@ import {
 //types
 import { TStudentEducation } from "@/services/tanstack/student/profile/types";
 
+//react-query
+import { useQueryClient } from "@tanstack/react-query";
+
 //toast
 import toast from "react-hot-toast";
 
@@ -35,33 +44,61 @@ interface IEducationProps {
 }
 
 export default function Education({ data }: IEducationProps) {
-  // fetch
   const { data: olympiads, isLoading: isLoadingOlympiads } = useGetOlympiads();
-
   const { data: educationalLevels, isLoading: isLoadingEducationalLevels } =
     useGetEducationalLevels();
-
   const { data: studyBranches, isLoading: isLoadingStudyBranches } =
     useGetStudyBranches();
 
-  const { mutate: postStudentParent, isPending: isPendingStudentParent } =
+  const { mutate: postStudentParent, isPending: isSubmittingParentPhone } =
     usePostStudentParent();
+  const { mutate: postLocation, isPending: isSubmittingLocation } =
+    usePostLocation();
 
-  function mutateStudentParent(phone: string, onClose?: () => void) {
-    postStudentParent(phone, {
-      onSuccess: () => {
-        toast.success("اطلاعات شما با موفقیت ثبت شد.");
-        onClose?.();
-      },
-      onError: () => {
-        toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
-      },
-    });
+  const queryClient = useQueryClient();
+
+  function showToast(success: boolean, onClose?: () => void) {
+    if (success) {
+      toast.success("اطلاعات شما با موفقیت ثبت شد.");
+      queryClient.invalidateQueries({ queryKey: getStudentEducationKey() });
+      onClose?.();
+    } else {
+      toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
+    }
   }
+
+  const mutateLocation = (
+    data: {
+      idProvince: number;
+      province: string;
+      idCity: number;
+      city: string;
+    },
+    onClose?: () => void
+  ) => {
+    postLocation(
+      { province: data.province, city: data.city },
+      {
+        onSuccess: () => showToast(true, onClose),
+        onError: () => showToast(false),
+      }
+    );
+  };
+
+  const mutateStudentParent = (phone: string, onClose?: () => void) => {
+    postStudentParent(phone, {
+      onSuccess: () => showToast(true, onClose),
+      onError: () => showToast(false),
+    });
+  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5">
-      <PersonalItemCity value="" />
+      <PersonalItemCity
+        value=""
+        mutate={mutateLocation}
+        isLoading={isSubmittingLocation}
+      />
 
       <EducationItem
         isList
@@ -109,7 +146,7 @@ export default function Education({ data }: IEducationProps) {
         label="شماره موبایل اولیا"
         sendCode={false}
         mutate={mutateStudentParent}
-        isPending={isPendingStudentParent}
+        isPending={isSubmittingParentPhone}
         isNum
         error="شماره تماس "
         pattern={/^0?9\d{9}$/}

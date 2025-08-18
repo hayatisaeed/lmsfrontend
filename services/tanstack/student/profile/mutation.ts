@@ -6,6 +6,7 @@ import {
   postStudentIdentityKey,
   postStudentEducationKey,
   postStudentParentKey,
+  postLocationKey,
 } from "@/services/tanstack/student/profile/key";
 
 //api
@@ -13,6 +14,7 @@ import {
   postStudentIdentityApi,
   postStudentEducationApi,
   postStudentParentApi,
+  postLocationApi,
 } from "@/services/tanstack/student/profile/api";
 
 export function usePostStudentIdentity() {
@@ -33,5 +35,12 @@ export function usePostStudentParent() {
   return useMutation({
     mutationKey: postStudentParentKey(),
     mutationFn: postStudentParentApi,
+  });
+}
+
+export function usePostLocation() {
+  return useMutation({
+    mutationKey: postLocationKey(),
+    mutationFn: postLocationApi,
   });
 }

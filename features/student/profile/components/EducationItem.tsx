@@ -21,9 +21,9 @@ interface BaseAccountItemProps {
 // Interface for list type items
 interface ListItemProps extends BaseAccountItemProps {
   isList: true;
-  value?: number;
+  value?: { id: number; label: string };
   data?: { id: number; label: string }[];
-  mutate?: (value: number, onClose?: () => void) => void;
+  mutate?: (id: number, label: string, onClose?: () => void) => void;
 }
 
 // Interface for input type items

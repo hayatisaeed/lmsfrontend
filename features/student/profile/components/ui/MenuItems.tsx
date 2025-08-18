@@ -13,11 +13,12 @@ import { ReactNode } from "react";
 import WindowMenuItems from "../../modal/WindowMenuItems";
 
 interface IMenuItemsProps {
-  defaultValue?: number;
+  defaultValue?: { id: number; label: string };
   icon?: ReactNode;
   label: string;
   id: string;
-  mutate?: (value: number, onClose?: () => void) => void;
+  mutate?: (id: number, label: string, onClose?: () => void) => void;
+
   isPending?: boolean;
   data?: { id: number; label: string }[];
 }
@@ -34,7 +35,7 @@ export default function MenuItems({
   return (
     <div className="flex justify-between items-center gap-2 p-4 rounded-xl bg-white-primary border border-text-primary/50">
       {icon}
-      <h3 className={"grow border-0 outline-0"}>{defaultValue}</h3>
+      <h3 className={"grow border-0 outline-0"}>{defaultValue?.label || ""}</h3>
 
       <Modal>
         <Modal.Open id={id}>
@@ -47,7 +48,7 @@ export default function MenuItems({
           <WindowMenuItems
             defaultValue={defaultValue}
             label={label}
-            muate={mutate}
+            mutate={mutate}
             isPending={isPending}
             data={data}
           />

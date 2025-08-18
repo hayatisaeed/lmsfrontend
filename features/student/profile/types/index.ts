@@ -1,1 +1,1 @@
-export type TMenu = { id: number };
+export type TMenu = { id: number; label: string };

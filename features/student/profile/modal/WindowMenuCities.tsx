@@ -20,6 +20,16 @@ interface IWindowMenuCitiesProps {
   cities?: TCitie[];
   isLoadingStates?: boolean;
   isLoadingCities?: boolean;
+  mutate?: (
+    data: {
+      idProvince: number;
+      province: string;
+      idCity: number;
+      city: string;
+    },
+    onClose?: () => void
+  ) => void;
+  isLoading?: boolean;
 }
 
 export default function WindowMenuCities({
@@ -33,11 +43,23 @@ export default function WindowMenuCities({
   setCity,
   city,
   states,
+  mutate,
+  isLoading = false,
 }: IWindowMenuCitiesProps) {
   const isSmUp = useMediaQuery("(min-width: 640px)");
 
   function handleClickEnter() {
-    onClose?.();
+    if (province?.id && city?.id) {
+      mutate?.(
+        {
+          city: city.label,
+          idCity: city.id,
+          idProvince: province.id,
+          province: province.label,
+        },
+        onClose
+      );
+    }
   }
 
   function handleClickCancel() {
@@ -89,7 +111,8 @@ export default function WindowMenuCities({
           color="PRIMARY"
           size={isSmUp ? "MD" : "SM"}
           onClick={handleClickEnter}
-          disabled={!province || !city}
+          disabled={isLoading || !province || !city}
+          loading={isLoading}
         >
           ثبت
         </Button>
@@ -98,6 +121,7 @@ export default function WindowMenuCities({
           color="SECONDARY"
           size={isSmUp ? "MD" : "SM"}
           onClick={handleClickCancel}
+          disabled={isLoading}
         >
           انصراف
         </Button>

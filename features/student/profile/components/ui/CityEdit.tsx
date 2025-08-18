@@ -25,11 +25,22 @@ interface IInputEditProps {
   setProvince: (value?: TMenu) => void;
   isLoadingStates?: boolean;
   isLoadingCities?: boolean;
+  mutate?: (
+    data: {
+      idProvince: number;
+      province: string;
+      idCity: number;
+      city: string;
+    },
+    onClose?: () => void
+  ) => void;
+
+  isLoading?: boolean;
 }
 
 export default function CityEdit({
-  isLoadingCities=false,
-  isLoadingStates=false,
+  isLoadingCities = false,
+  isLoadingStates = false,
   defaultValue,
   icon,
   states,
@@ -38,6 +49,8 @@ export default function CityEdit({
   setCity,
   city,
   cities,
+  mutate,
+  isLoading,
 }: IInputEditProps) {
   return (
     <div className="flex justify-between items-center gap-2 p-4 rounded-xl bg-white-primary border border-text-primary/50">
@@ -61,6 +74,8 @@ export default function CityEdit({
             isLoadingStates={isLoadingStates}
             isLoadingCities={isLoadingCities}
             label="محل سکونت خود را وارد کنید"
+            mutate={mutate}
+            isLoading={isLoading}
           />
         </Modal.Window>
       </Modal>
