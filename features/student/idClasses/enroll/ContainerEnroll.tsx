@@ -1,13 +1,15 @@
 "use client";
 import { ArrowBack } from "@/assets/icons";
 import { Button, Container } from "@/shared/ui";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Reserve from "./components/Reserve";
 import Course from "./components/Course";
 
-export default function ContainerEnroll() {
-  const { idClass } = useParams();
+interface IContainerEnrollProps {
+  idClass: string;
+}
 
+export default function ContainerEnroll({}: IContainerEnrollProps) {
   const router = useRouter();
 
   function handleClickBack() {

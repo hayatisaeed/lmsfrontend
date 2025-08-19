@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "ثبت نام کلاس",
 };
 
-export default async function page() {
-  return <ContainerEnroll />;
+interface IPageProps {
+  params: Promise<{ idClass: string }>;
+}
+
+export default async function page({ params }: IPageProps) {
+  const { idClass } = await params;
+  return <ContainerEnroll idClass={idClass} />;
 }
