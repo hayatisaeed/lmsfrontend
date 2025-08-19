@@ -18,6 +18,9 @@ import {
   postLocationApi,
 } from "@/services/tanstack/student/profile/api";
 
+//types
+import { TStudentParent } from "@/services/tanstack/student/profile/types";
+
 export function usePostStudentIdentity() {
   return useMutation({
     mutationKey: postStudentIdentityKey(),
@@ -40,7 +43,9 @@ export function usePostStudentParent() {
     mutationFn: postStudentParentApi,
 
     onMutate: (phone: string) => {
-      const prevParent = queryClient.getQueryData(getStudentParentKey());
+      const prevParent = queryClient.getQueryData(
+        getStudentParentKey()
+      ) as TStudentParent;
 
       queryClient.setQueryData(getStudentParentKey(), {
         phone,

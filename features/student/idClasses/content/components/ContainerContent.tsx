@@ -1,8 +1,8 @@
 "use client";
 
 import { BoxLink } from "@/shared/components";
-import ClassDashboard from "./components/ClassDashboard";
-import Sessions from "./components/Sessions";
+import ClassDashboard from "./ClassDashboard";
+import Sessions from "./Sessions";
 import { usePathname } from "next/navigation";
 
 export default function ContainerContent() {

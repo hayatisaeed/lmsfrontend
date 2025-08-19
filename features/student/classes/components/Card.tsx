@@ -1,16 +1,15 @@
-import { Avatar } from "@/shared/components";
+import {  NotebookBookmark } from "@/assets/icons";
 import Image from "next/image";
 import Link from "next/link";
 
 interface ICardProps {
   image?: string;
-  avatar?: string;
   name?: string;
   tags?: string[];
   link: string;
 }
 
-export default function Card({ image, avatar, name, tags, link }: ICardProps) {
+export default function Card({ image, name, tags, link }: ICardProps) {
   return (
     <Link
       href={link}
@@ -25,7 +24,9 @@ export default function Card({ image, avatar, name, tags, link }: ICardProps) {
       />
       <div className="w-full flex justify-between items-center">
         <div className="flex items-center justify-center gap-2">
-          <Avatar image={avatar} className="bg-white-primary" />
+          <div className="p-2 rounded-full bg-white-primary">
+            <NotebookBookmark color="DARK" size="SM" />
+          </div>
           <h3>{name}</h3>
         </div>
         {/* <button
