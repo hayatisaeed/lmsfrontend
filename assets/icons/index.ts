@@ -35,6 +35,8 @@ export { default as Letter } from "@/assets/icons/messages/Letter";
 export { default as PenNewSquare } from "@/assets/icons/messages/PenNewSquare";
 export { default as Plain } from "@/assets/icons/messages/Plain";
 export { default as Unread } from "@/assets/icons/messages/Unread";
+export { default as CheckRead } from "@/assets/icons/messages/CheckRead";
+export { default as MultipleForward } from "@/assets/icons/messages/MultipleForward";
 
 // Notes
 export { default as ArchiveCheck } from "@/assets/icons/notes/ArchiveCheck";
