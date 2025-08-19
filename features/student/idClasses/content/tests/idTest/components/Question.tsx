@@ -43,7 +43,7 @@ export default function Question({
         <p className="font-shabnam text-xs">{score && `(${score} نمره)`}</p>
       </div>
       {/* question */}
-      <h3 className="leading-7">{question}</h3>
+      <h3 className="leading-7 text-justify">{question}</h3>
 
       {/* answers */}
       <div className="flex flex-col gap-4">
@@ -69,28 +69,30 @@ export default function Question({
       </div>
 
       {/* text */}
-      <div className="flex flex-col w-full bg-white-primary rounded-xl p-4">
-        <textarea
-          className="w-full bg-white-primary p-1 outline-0 rounded-xl placeholder:text-sm text-sm resize-none"
-          placeholder="جواب سوال :"
-          rows={5}
-        />
+      {text && (
+        <div className="flex flex-col w-full bg-white-primary rounded-xl p-4">
+          <textarea
+            className="w-full bg-white-primary p-1 outline-0 rounded-xl placeholder:text-sm text-sm resize-none"
+            placeholder="جواب سوال :"
+            rows={5}
+          />
 
-        <div className="w-full flex justify-end">
-          <input ref={fileInputRef} type="file" accept="image/*" hidden />
-          <Button
-            size="SM"
-            color="PRIMARY"
-            type="submit"
-            iconLeft
-            icon={<Paperclip size="SM" color="PRIMARY" />}
-            onClick={handleClick}
-            className="!bg-[#f2f5fd] text-xs !text-primary !rounded-xl !px-4 !py-3"
-          >
-            ارسال فایل
-          </Button>
+          <div className="w-full flex justify-end">
+            <input ref={fileInputRef} type="file" accept="image/*" hidden />
+            <Button
+              size="SM"
+              color="PRIMARY"
+              type="submit"
+              iconLeft
+              icon={<Paperclip size="SM" color="PRIMARY" />}
+              onClick={handleClick}
+              className="!bg-[#f2f5fd] text-xs !text-primary !rounded-xl !px-4 !py-3"
+            >
+              ارسال فایل
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

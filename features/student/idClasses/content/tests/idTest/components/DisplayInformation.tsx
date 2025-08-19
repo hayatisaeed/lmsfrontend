@@ -4,7 +4,15 @@ import ItemDisplayInformation from "./ItemDisplayInformation";
 //icon
 import { Alarm, CheckRead, MultipleForward, CheckCircle } from "@/assets/icons";
 
-export default function DisplayInformation() {
+interface IDisplayInformationProps {
+  data: {
+    questionAll: number;
+    answers: number;
+    remaining: number;
+  };
+}
+
+export default function DisplayInformation({ data }: IDisplayInformationProps) {
   return (
     <div className="w-full bg-text-primary py-5 px-4 rounded-2xl flex flex-col md:flex-row md:justify-between md:items-center items-start gap-8">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full md:max-w-[70%]">
@@ -14,18 +22,18 @@ export default function DisplayInformation() {
           icon={<Alarm color="LIGHT" size="MD" />}
         />
         <ItemDisplayInformation
-          content="10"
+          content={data.questionAll}
           title="تعداد کل سوالات"
           icon={<h3 className="text-white-primary text-xl">?</h3>}
         />
         <ItemDisplayInformation
-          content="10"
+          content={data.answers}
           title="پاسخ داده شده"
           icon={<CheckRead color="LIGHT" size="MD" />}
         />
 
         <ItemDisplayInformation
-          content="10"
+          content={data.remaining}
           title="باقی مانده"
           icon={<MultipleForward color="LIGHT" size="MD" />}
         />

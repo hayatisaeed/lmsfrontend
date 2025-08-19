@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 interface IItemDisplayInformationProps {
-  content?: string;
+  content?: number | string;
   icon?: ReactNode;
   title?: string;
 }

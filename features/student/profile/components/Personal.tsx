@@ -33,6 +33,7 @@ import { getStudentIdentityKey } from "@/services/tanstack/student/profile/key";
 
 //toast
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
 interface IPersonalProps {
   data?: TStudentIdentity;
@@ -57,7 +58,24 @@ export default function Personal({ data }: IPersonalProps) {
           toast.success("اطلاعات شما با موفقیت ثبت شد.");
           close?.();
         },
-        onError: () => {
+        onError: (error) => {
+          const err = error as AxiosError;
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          const nationalIdError = err.response?.data?.national_id;
+
+          if (
+            Array.isArray(nationalIdError) &&
+            nationalIdError.some((msg: string) =>
+              msg.includes(
+                "Identity Information with this national id already exists."
+              )
+            )
+          ) {
+            toast.error("قبلا مشخصاتی به این کدملی ثبت شده است");
+            return;
+          }
+
           toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
         },
       }
