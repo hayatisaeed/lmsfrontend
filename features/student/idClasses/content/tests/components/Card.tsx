@@ -9,11 +9,11 @@ import Tests from "../modal/Tests";
 
 interface ICardProps {
   name?: string;
-  tags?: string[];
+
   id: string;
 }
 
-export default function Card({ name, tags, id }: ICardProps) {
+export default function Card({ name, id }: ICardProps) {
   return (
     <>
       <Modal.Open id={id}>
@@ -37,7 +37,7 @@ export default function Card({ name, tags, id }: ICardProps) {
           </div>
         </Button>
       </Modal.Open>
-      <Modal.Window id="tests">
+      <Modal.Window id={id}>
         <Tests id={id} />
       </Modal.Window>
     </>
