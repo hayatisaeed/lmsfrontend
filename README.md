@@ -1,6 +1,6 @@
 # 🎓 LMS Frontend
 
-A Learning Management System (LMS) built with **Next.js 15** and **TypeScript**, featuring a modular architecture and optimized folder structure for different roles (student, professor, admin).
+A Learning Management System (LMS) built with **Next.js 15** and **TypeScript**, featuring a modular architecture and optimized folder structure for different roles (student, Teacher, admin).
 
 ---
 
@@ -52,18 +52,20 @@ A Learning Management System (LMS) built with **Next.js 15** and **TypeScript**,
 ## ⚙️ Environment Variables
 
 ### Authentication
-- `NEXTAUTH_URL`  
-  - `http://localhost:3000/` → for development  
+
+- `NEXTAUTH_URL`
+  - `http://localhost:3000/` → for development
   - `https://your-production-domain.com/` → for production
 - `NEXTAUTH_SECRET` → your NextAuth secret
 
 ### Google OAuth
+
 - `GOOGLE_ID` → your Google client ID
 - `GOOGLE_SECRET` → your Google client secret
 
 ### API Base URL
-- `NEXT_PUBLIC_BASE_URL` → your API URL (e.g., `http://87.107.111.109:8000`)
 
+- `NEXT_PUBLIC_BASE_URL` → your API URL (e.g., `http://87.107.111.109:8000`)
 
 ---
 
@@ -112,8 +114,8 @@ app/                        # Root pages of the project
     │   └── page.tsx        # Login page
     ├── student/
     │   └── ...             # Student routes (Dashboard, Profile, etc.)
-    ├── profssor/
-    │   └── ...             # Professor routes (Dashboard, Profile, etc.)
+    ├── teacher/
+    │   └── ...             # Teacher routes (Dashboard, Profile, etc.)
     └── api/
         └── auth/
             └── [...nextauth]/route.ts  # OAuth authentication route
@@ -144,7 +146,7 @@ core/                       # Core: components, configs, styles
 │   ├── label.ts             # Labels and names
 │   ├── sideBarAdmin.ts      # Admin sidebar menu
 │   ├── sideBarStudent.ts    # Student sidebar menu
-│   └── sideBarProfssor.ts   # Professor sidebar menu
+│   └── sideBarTeacher.ts   # Teacher sidebar menu
 ├── context/
 │   └── Goftino.tsx          # Context for global state management
 ├── stores/
@@ -183,7 +185,7 @@ services/                    # API and React Query management
     │   └── ...
     ├── login/
     │   └── ...
-    └── profssor/
+    └── teacher/
         └── ...
 
 features/                    # Feature modules for each role
@@ -199,7 +201,7 @@ features/                    # Feature modules for each role
 │   └── ...
 ├── admin/
 ├── login/
-└── profssor/
+└── teacher/
 
 types/                       # Shared types across the project
 └── ...
@@ -228,6 +230,3 @@ types/                       # Shared types across the project
 ## 📄 License
 
 MIT License © 2025
-
-
-
