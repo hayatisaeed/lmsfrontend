@@ -5,6 +5,7 @@ export const COLORS = {
   GREEN: "#24C25B",
   DANGER: "#B3261E",
   WARNING: "#FFC700",
+  PRIMARY: "#0040D8",
 };
 
 export const SIZES = {

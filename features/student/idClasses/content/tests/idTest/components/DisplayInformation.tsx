@@ -1,12 +1,8 @@
 import { Button } from "@/shared/ui";
 import ItemDisplayInformation from "./ItemDisplayInformation";
-import {
-  Alarm,
-  CheckRead,
-  MultipleForward,
-  CheckCircle,
-  UserCheck,
-} from "@/assets/icons";
+
+//icon
+import { Alarm, CheckRead, MultipleForward, CheckCircle } from "@/assets/icons";
 
 export default function DisplayInformation() {
   return (

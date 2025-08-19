@@ -37,6 +37,7 @@ export { default as Plain } from "@/assets/icons/messages/Plain";
 export { default as Unread } from "@/assets/icons/messages/Unread";
 export { default as CheckRead } from "@/assets/icons/messages/CheckRead";
 export { default as MultipleForward } from "@/assets/icons/messages/MultipleForward";
+export { default as Paperclip } from "@/assets/icons/messages/Paperclip";
 
 // Notes
 export { default as ArchiveCheck } from "@/assets/icons/notes/ArchiveCheck";
