@@ -1,15 +1,11 @@
 import ContainerClassesID from "@/features/admin/idClasses/components/ContainerClassesID";
 
-// export function generatorMetadata({ params }) {
-//     r
-// }
-
 interface IIdClassesProps {
-  params: { idClasses: string };
+  params: Promise<{ idClasses: string }>;
 }
 
-export default function IdClasses({ params }: IIdClassesProps) {
-  const { idClasses: id } = params;
+export default async function IdClasses({ params }: IIdClassesProps) {
+  const { idClasses: id } = await params;
 
   return <ContainerClassesID id={id} />;
 }

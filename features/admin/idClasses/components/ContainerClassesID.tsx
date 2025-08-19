@@ -16,6 +16,8 @@ export default function ContainerClassesID({ id }: IContainerClassesIDProps) {
     router.back();
   }
 
+  console.log(id);
+
   return (
     <div className="flex flex-col w-full gap-5">
       <Container
