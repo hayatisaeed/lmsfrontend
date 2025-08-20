@@ -7,4 +7,5 @@ export type TClassesTests = {
   started: boolean;
   attempt_status: "in_progress";
   expires_at: string;
+  duration: number;
 };

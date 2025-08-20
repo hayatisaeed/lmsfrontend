@@ -1,7 +1,7 @@
 "use client";
 
 //modal
-import { Modal, Pagination } from "@/shared/components";
+import { Modal } from "@/shared/components";
 
 //container
 import { Container } from "@/shared/ui";
@@ -35,29 +35,6 @@ export default function ContainerTests() {
   //     </div>
   //   );
 
-  const tests = [
-    { id: "math-midterm", name: "آزمون میان‌ترم ریاضی", tags: ["ریاضی"] },
-    { id: "physics-final", name: "آزمون پایان‌ترم فیزیک", tags: ["فیزیک"] },
-    { id: "chemistry-quiz", name: "آزمون کوییز شیمی", tags: ["شیمی", "کوییز"] },
-    {
-      id: "biology-practice",
-      name: "آزمون تمرینی زیست",
-      tags: ["زیست", "تمرینی"],
-    },
-    {
-      id: "english-midterm",
-      name: "آزمون میان‌ترم زبان انگلیسی",
-      tags: ["زبان"],
-    },
-    { id: "history-final", name: "آزمون پایان‌ترم تاریخ", tags: ["تاریخ"] },
-    { id: "geography-quiz", name: "آزمون کوییز جغرافیا", tags: ["جغرافیا"] },
-    {
-      id: "computer-practice",
-      name: "آزمون تمرینی کامپیوتر",
-      tags: ["کامپیوتر", "تمرینی"],
-    },
-  ];
-
   return (
     <Container title="لیست آزمون‌ها" className="h-full">
       <div className="flex flex-col items-center h-full gap-5">
@@ -66,16 +43,16 @@ export default function ContainerTests() {
             {classesTests?.map((test) => (
               <Card
                 key={test.exam_id}
-                id={test.exam_id}
+                exam_id={String(test.exam_id)}
+                course_id={String(test.course_id)}
                 title={test.title}
                 start={test.start_at}
                 end={test.end_at}
+                duration={test.duration}
               />
             ))}
           </Modal>
         </div>
-
-        <Pagination total={145} />
       </div>
     </Container>
   );

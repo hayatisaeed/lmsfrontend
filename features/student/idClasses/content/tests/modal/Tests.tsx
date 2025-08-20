@@ -1,19 +1,25 @@
 import { Button } from "@/shared/ui";
-import { usePathname, useRouter } from "next/navigation";
+import { convertLocaleTime, secondsToTime } from "@/shared/utils/date";
 
 interface ITestsProps {
-  id: string;
   onClose?: () => void;
   start: string;
   end: string;
+  duration: number;
+  title: string;
+  mutate: () => void;
 }
 
-export default function Tests({ id, onClose, start, end }: ITestsProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-
+export default function Tests({
+  onClose,
+  start,
+  end,
+  duration,
+  title,
+  mutate,
+}: ITestsProps) {
   function handleClickStart() {
-    router.push(`${pathname}/${id}`);
+    mutate();
   }
 
   function handleClickCancel() {
@@ -23,15 +29,23 @@ export default function Tests({ id, onClose, start, end }: ITestsProps) {
   return (
     <div className="flex flex-col justify-start gap-5 p-4">
       <div className="text-right leading-7 space-y-2">
-        <p>آزمون میانترم ریاضی فیزیک</p>
+        <p>{title}</p>
         <p>
-          شما از <span className="font-bold font-shabnam">1404/05/031</span> تا
-          <span className="font-bold font-shabnam">1404/0/02</span> می‌توانید در
-          آزمون شرکت کنید.
+          شما از
+          <span className="font-bold font-shabnam">
+            {convertLocaleTime(start)}
+          </span>
+          تا
+          <span className="font-bold font-shabnam">
+            {convertLocaleTime(end)}
+          </span>
+          می‌توانید در آزمون شرکت کنید.
         </p>
         <p>
-          پس از شروع آزمون،{" "}
-          <span className="font-bold font-shabnam">1:40:00</span>
+          پس از شروع آزمون،
+          <span className="font-bold font-shabnam">
+            {secondsToTime(duration)}
+          </span>
           فرصت خواهید داشت تا پاسخ دهید.
         </p>
         <p className="text-errors">
