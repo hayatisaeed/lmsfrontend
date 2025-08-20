@@ -5,13 +5,12 @@ import Question from "./Question";
 import { useState } from "react";
 
 export default function ContainerQuestion() {
-
-  
   const [dataDisplay, setDataDisplay] = useState<{
     questionAll: number;
     answers: number;
     remaining: number;
-  }>({ answers: 0, questionAll: 0, remaining: 0 });
+    duration: number;
+  }>({ answers: 0, questionAll: 0, remaining: 0, duration: 150 });
 
   return (
     <div className="w-full flex flex-col gap-5">

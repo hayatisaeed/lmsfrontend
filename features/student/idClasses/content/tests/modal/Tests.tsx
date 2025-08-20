@@ -4,9 +4,11 @@ import { usePathname, useRouter } from "next/navigation";
 interface ITestsProps {
   id: string;
   onClose?: () => void;
+  start: string;
+  end: string;
 }
 
-export default function Tests({ id, onClose }: ITestsProps) {
+export default function Tests({ id, onClose, start, end }: ITestsProps) {
   const router = useRouter();
   const pathname = usePathname();
 
