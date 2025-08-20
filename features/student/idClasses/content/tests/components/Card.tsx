@@ -44,18 +44,20 @@ export default function Card({
           router.push(`/${pathname}/question`);
         },
         onError: (err) => {
-          if ((err as AxiosError).response?.status === 403) {
+          const statusCode = (err as AxiosError).response?.status;
+
+          if (statusCode === 403) {
             toast.error(
               "دسترسی شما به این آزمون مجاز نیست یا زمان برگزاری به پایان رسیده است."
             );
             return;
           }
 
-          if ((err as AxiosError).response?.status === 409) {
+          if (statusCode === 409) {
             toast.error("شما قبلاً یک تلاش برای این آزمون ثبت کرده‌اید.");
             return;
           }
-          toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید");
+          toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
         },
       }
     );

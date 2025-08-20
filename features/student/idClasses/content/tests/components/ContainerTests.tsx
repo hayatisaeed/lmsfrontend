@@ -24,16 +24,16 @@ export default function ContainerTests() {
     isError: isErrorClassesTests,
   } = useGetStudentClassesTests(idClasses as string);
 
-  // if (isPendingClassesTests || isErrorClassesTests)
-  //   return (
-  //     <div className="w-full h-full flex items-center justify-center bg-white rounded-2xl">
-  //       {isErrorClassesTests ? (
-  //         <h3> مشکلی پیش آمده لطفا دوباره امتحان کنید.</h3>
-  //       ) : (
-  //         "LOADING"
-  //       )}
-  //     </div>
-  //   );
+  if (isPendingClassesTests || isErrorClassesTests)
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-white rounded-2xl">
+        {isErrorClassesTests ? (
+          <h3> مشکلی پیش آمده لطفا دوباره امتحان کنید.</h3>
+        ) : (
+          "LOADING"
+        )}
+      </div>
+    );
 
   return (
     <Container title="لیست آزمون‌ها" className="h-full">
