@@ -3,8 +3,12 @@ import { Container } from "@/shared/ui";
 import DisplayInformation from "./DisplayInformation";
 import Question from "./Question";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/core/stores/redux/Provider";
 
 export default function ContainerQuestion() {
+  const question = useSelector<RootState>((store) => store.sliceQuestion);
+
   const [dataDisplay, setDataDisplay] = useState<{
     questionAll: number;
     answers: number;

@@ -10,9 +10,19 @@ import Tests from "../modal/Tests";
 //api
 import { usePostStupostdentClassesTestsAttempts } from "@/services/tanstack/student/classes/idClasses/tests/mutation";
 
+//NEXT
 import { usePathname, useRouter } from "next/navigation";
+
+//toast
 import toast from "react-hot-toast";
+
+//types
 import { AxiosError } from "axios";
+
+//redux
+import { useDispatch } from "react-redux";
+import { addQuestion } from "@/core/stores/redux/slice/questionTest";
+import { AppDispatch } from "@/core/stores/redux/Provider";
 
 interface ICardProps {
   title: string;
@@ -36,11 +46,14 @@ export default function Card({
   const router = useRouter();
   const pathname = usePathname();
 
+  const dispatch = useDispatch<AppDispatch>();
+
   function mutateStupostdentClassesTestsAttempts() {
     mutate(
       { exam_id, course_id },
       {
-        onSuccess: () => {
+        onSuccess: (date) => {
+          dispatch(addQuestion(""));
           router.push(`/${pathname}/question`);
         },
         onError: (err) => {

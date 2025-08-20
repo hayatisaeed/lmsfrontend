@@ -2,7 +2,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { ReactNode } from "react";
 import { Provider } from "react-redux";
-import sliceQuestion from "@/features/student/idClasses/content/tests/slice/questionTest";
+import sliceQuestion from "@/core/stores/redux/slice/questionTest";
 
 interface IReduxProps {
   children: ReactNode;
@@ -17,6 +17,6 @@ const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export default function Redux({ children }: IReduxProps) {
+export default function ReduxProvider({ children }: IReduxProps) {
   return <Provider store={store}>{children}</Provider>;
 }

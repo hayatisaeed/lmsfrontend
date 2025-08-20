@@ -9,7 +9,7 @@ import { ReactNode } from "react";
 import TanstackQuery from "@/core/stores/TanstackQuery";
 
 //redux
-import Redux from "@/core/stores/Redux";
+import ReduxProvider from "@/core/stores/redux/Provider";
 
 //script
 import Script from "next/script";
@@ -37,7 +37,7 @@ interface IRootLayoutProps {
 export default function RootLayout({ children }: IRootLayoutProps) {
   return (
     //redux
-    <Redux>
+    <ReduxProvider>
       {/* tanstack-query */}
       <TanstackQuery>
         <html lang="fa" dir="rtl" className="h-full font-kalameh font-medium">
@@ -71,6 +71,6 @@ export default function RootLayout({ children }: IRootLayoutProps) {
           </body>
         </html>
       </TanstackQuery>
-    </Redux>
+    </ReduxProvider>
   );
 }
