@@ -1,10 +1,23 @@
 import { useMutation } from "@tanstack/react-query";
-import { postStupostdentClassesTestsAttemptsKey } from "./kay";
-import { postStupostdentClassesTestsAttemptsApi } from "./api";
+import {
+  postStudentClassesTestsAttemptsKey,
+  putAutoSaveAnswerKey,
+} from "./kay";
+import {
+  postStudentClassesTestsAttemptsApi,
+  putAutoSaveAnswerApi,
+} from "./api";
 
-export function usePostStupostdentClassesTestsAttempts() {
+export function usePostStudentClassesTestsAttempts() {
   return useMutation({
-    mutationKey: postStupostdentClassesTestsAttemptsKey(),
-    mutationFn: postStupostdentClassesTestsAttemptsApi,
+    mutationKey: postStudentClassesTestsAttemptsKey(),
+    mutationFn: postStudentClassesTestsAttemptsApi,
+  });
+}
+
+export function usePutAutoSaveAnswer() {
+  return useMutation({
+    mutationKey: putAutoSaveAnswerKey(),
+    mutationFn: putAutoSaveAnswerApi,
   });
 }

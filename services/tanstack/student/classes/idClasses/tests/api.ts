@@ -16,7 +16,7 @@ export async function getStudentClassesTestsApi(
   }
 }
 
-export async function postStupostdentClassesTestsAttemptsApi({
+export async function postStudentClassesTestsAttemptsApi({
   course_id,
   exam_id,
 }: {
@@ -24,9 +24,42 @@ export async function postStupostdentClassesTestsAttemptsApi({
   exam_id: string;
 }): Promise<TClassesTests[]> {
   try {
-    const response = await api.get(
+    const response = await api.post(
       `/api/v1/courses/${course_id}/exams/${exam_id}/attempts/start/
 `
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getExamsAttemptsApi(exam_id: string) {
+  try {
+    const response = await api.get(`/api/v1/courses/exams/attempts/${exam_id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function putAutoSaveAnswerApi({
+  exam_id,
+  question_id,
+  text,
+  version,
+}: {
+  version: number;
+  text: string;
+  exam_id: string;
+  question_id: string;
+}) {
+  try {
+    const response = await api.put(
+      `/exams/attempts/${exam_id}/answers/${question_id}/autosave/`,
+      { version, text }
     );
     return response.data;
   } catch (error) {

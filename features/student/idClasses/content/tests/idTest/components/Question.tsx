@@ -5,28 +5,37 @@ import { Button } from "@/shared/ui";
 import { Paperclip } from "@/assets/icons";
 
 interface IQuestionProps {
+  exam_id: string;
+  question_id: string;
   number: number;
   question: string;
   answers?: { answer: string; id: number }[];
   score?: number;
-  onSelect?: (selectedId: number) => void;
   text?: boolean;
+  mutate: (data: {
+    exam_id: string;
+    question_id: string;
+    text: string;
+    version: number;
+  }) => void;
 }
 
 export default function Question({
+  exam_id,
+  question_id,
   text = false,
   number,
   question,
   answers,
   score,
-  onSelect,
+  mutate,
 }: IQuestionProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
 
-  const handleSelect = (id: number) => {
+  function handleSelect(id: number, text: string) {
     setSelectedAnswer(id);
-    if (onSelect) onSelect(id);
-  };
+    mutate({ text, version: id, exam_id, question_id });
+  }
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -58,7 +67,7 @@ export default function Question({
                 className="cursor-pointer"
                 name={`question-${number}`}
                 checked={selectedAnswer === answer.id}
-                onChange={() => handleSelect(answer.id)}
+                onChange={() => handleSelect(answer.id, answer.answer)}
               />
               <h3 className="flex items-center gap-1">
                 <span>{`${lettersFn[index]} )`}</span>

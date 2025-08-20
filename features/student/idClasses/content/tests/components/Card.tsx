@@ -8,7 +8,7 @@ import { Button } from "@/shared/ui";
 import Tests from "../modal/Tests";
 
 //api
-import { usePostStupostdentClassesTestsAttempts } from "@/services/tanstack/student/classes/idClasses/tests/mutation";
+import { usePostStudentClassesTestsAttempts } from "@/services/tanstack/student/classes/idClasses/tests/mutation";
 
 //NEXT
 import { usePathname, useRouter } from "next/navigation";
@@ -18,11 +18,15 @@ import toast from "react-hot-toast";
 
 //types
 import { AxiosError } from "axios";
+import { AppDispatch } from "@/core/stores/redux/Provider";
 
 //redux
 import { useDispatch } from "react-redux";
 import { addQuestion } from "@/core/stores/redux/slice/questionTest";
-import { AppDispatch } from "@/core/stores/redux/Provider";
+import { useGetExamsAttempts } from "@/services/tanstack/student/classes/idClasses/tests/queries";
+
+//react
+import { useState } from "react";
 
 interface ICardProps {
   title: string;
@@ -31,6 +35,7 @@ interface ICardProps {
   exam_id: string;
   duration: number;
   course_id: string;
+  started: boolean;
 }
 
 export default function Card({
@@ -40,41 +45,56 @@ export default function Card({
   start,
   duration,
   course_id,
+  started,
 }: ICardProps) {
-  const { mutate } = usePostStupostdentClassesTestsAttempts();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { mutate, isPending: isPendingClassesTestsAttempts } =
+    usePostStudentClassesTestsAttempts();
+
+  const { refetch } = useGetExamsAttempts(exam_id);
 
   const router = useRouter();
   const pathname = usePathname();
 
   const dispatch = useDispatch<AppDispatch>();
 
-  function mutateStupostdentClassesTestsAttempts() {
-    mutate(
-      { exam_id, course_id },
-      {
-        onSuccess: (date) => {
-          dispatch(addQuestion(""));
-          router.push(`/${pathname}/question`);
-        },
-        onError: (err) => {
-          const statusCode = (err as AxiosError).response?.status;
+  async function mutateStupostdentClassesTestsAttempts() {
+    if (started) {
+      setIsLoading(true);
+      const { data } = await refetch();
+      dispatch(addQuestion(data));
+      setIsLoading(false);
+    } else {
+      mutate(
+        { exam_id, course_id },
+        {
+          onSuccess: (date) => {
+            dispatch(addQuestion(""));
+            router.push(`/${pathname}/question`);
+          },
+          onError: (err) => {
+            const statusCode = (err as AxiosError).response?.status;
 
-          if (statusCode === 403) {
-            toast.error(
-              "دسترسی شما به این آزمون مجاز نیست یا زمان برگزاری به پایان رسیده است."
-            );
-            return;
-          }
+            if (statusCode === 403) {
+              toast.error(
+                "دسترسی شما به این آزمون مجاز نیست یا زمان برگزاری به پایان رسیده است."
+              );
+              return;
+            }
 
-          if (statusCode === 409) {
-            toast.error("شما قبلاً یک تلاش برای این آزمون ثبت کرده‌اید.");
-            return;
-          }
-          toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
-        },
-      }
-    );
+            if (statusCode === 409) {
+              toast.error("شما قبلاً یک تلاش برای این آزمون ثبت کرده‌اید.");
+              return;
+            }
+            toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
+          },
+        }
+      );
+    }
   }
+
+  const isPending = isLoading || isPendingClassesTestsAttempts;
 
   return (
     <>
@@ -95,6 +115,7 @@ export default function Card({
           end={end}
           duration={duration}
           title={title}
+          isPending={isPending}
           mutate={mutateStupostdentClassesTestsAttempts}
         />
       </Modal.Window>

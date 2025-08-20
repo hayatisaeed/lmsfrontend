@@ -8,6 +8,7 @@ interface ITestsProps {
   duration: number;
   title: string;
   mutate: () => void;
+  isPending: boolean;
 }
 
 export default function Tests({
@@ -17,6 +18,7 @@ export default function Tests({
   duration,
   title,
   mutate,
+  isPending,
 }: ITestsProps) {
   function handleClickStart() {
     mutate();
@@ -55,10 +57,19 @@ export default function Tests({
 
       {/* دکمه‌ها */}
       <div className="w-full flex justify-start gap-3">
-        <Button color="PRIMARY" onClick={handleClickStart}>
+        <Button
+          color="PRIMARY"
+          disabled={isPending}
+          loading={isPending}
+          onClick={handleClickStart}
+        >
           آغاز آزمون
         </Button>
-        <Button color="SECONDARY" onClick={handleClickCancel}>
+        <Button
+          color="SECONDARY"
+          disabled={isPending}
+          onClick={handleClickCancel}
+        >
           لغو
         </Button>
       </div>

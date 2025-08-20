@@ -42,6 +42,7 @@ export default function ContainerTests() {
           <Modal>
             {classesTests?.map((test) => (
               <Card
+              started={test.started}
                 key={test.exam_id}
                 exam_id={String(test.exam_id)}
                 course_id={String(test.course_id)}
