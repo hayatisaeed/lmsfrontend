@@ -35,8 +35,9 @@ export default function ContainerQuestion() {
         <div className="flex flex-col w-full gap-5">
           <Question
             exam_id="5"
+            text
             question_id="5"
-            mutate={mutateAutoSaveAnswer}
+            mutateAnswer={mutateAutoSaveAnswer}
             score={3}
             answers={[
               { id: 1, answer: "5" },

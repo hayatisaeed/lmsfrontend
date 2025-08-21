@@ -25,6 +25,7 @@ export { default as CheckCircle } from "@/assets/icons/essentional/CheckCircle";
 export { default as CloseCircle } from "@/assets/icons/essentional/CloseCircle";
 export { default as Menu } from "@/assets/icons/essentional/Menu";
 export { default as Close } from "@/assets/icons/essentional/Close";
+export { default as Trash } from "@/assets/icons/essentional/Trash";
 
 // Google
 export { default as Google } from "@/assets/icons/google/Google";

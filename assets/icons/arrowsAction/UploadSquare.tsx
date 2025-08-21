@@ -18,7 +18,7 @@ export default function UploadSquare({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_870_6042)">
+      <g clipPath="url(#clip0_870_6042)">
         <path
           d="M9 12.75L9 7.5M9 7.5L11.25 9.75M9 7.5L6.75 9.75"
           stroke={COLORS[color]}

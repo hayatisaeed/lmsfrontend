@@ -2,7 +2,7 @@ export const COLORS = {
   DARK: "#222222",
   LIGHT: "#FFFFFF",
   PURPLE: "#4741D7",
-  GREEN: "#24C25B",
+  GREEN: "#035d36",
   DANGER: "#B3261E",
   WARNING: "#FFC700",
   PRIMARY: "#0040D8",
