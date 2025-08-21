@@ -1,10 +1,5 @@
-"use server";
-
-//API
-import api from "@/core/config/api/apiServer";
-
-//types
-import { TgetUserProfile } from "./types";
+import api from "@/core/config/api/api";
+import { TgetUserProfile } from "./type";
 import { redirect } from "next/navigation";
 
 export async function getUserProfileApi(): Promise<TgetUserProfile> {

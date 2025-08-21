@@ -33,3 +33,6 @@ export { default as Avatar } from "@/shared/components/Avatar";
 
 //BoxLink
 export { default as BoxLink } from "@/shared/components/BoxLink";
+
+//JalaliInputDatePicker
+export { default as JalaliInputDatePicker } from "@/shared/components/JalaliInputDatePicker";

@@ -1,12 +1,8 @@
-//react-hook-form
 "use client";
 import { useForm } from "react-hook-form";
-
-//hooks
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
-
-//ui
 import { Button } from "@/shared/ui";
+import { JalaliInputDatePicker } from "@/shared/components"; // مسیر خودت رو وارد کن
 
 interface IWindowIdentityInformationProps {
   onClose?: () => void;
@@ -53,41 +49,6 @@ export default function WindowIdentityInformation({
     }
   };
 
-  const handleBirthDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/[^0-9]/g, "");
-
-    if (!value.startsWith("13")) {
-      value = "13" + value.replace(/^13/, "");
-    }
-
-    if (value.length > 4) value = value.slice(0, 4) + "/" + value.slice(4);
-    if (value.length > 7) value = value.slice(0, 7) + "/" + value.slice(7);
-
-    if (value.length <= 10) {
-      setValue("birthDate", value);
-    }
-  };
-
-  const validateDate = (value: string) => {
-    if (!/^\d{4}\/\d{2}\/\d{2}$/.test(value))
-      return "فرمت تاریخ صحیح نیست (مثال: 1370/01/01)";
-
-    const [year, month, day] = value.split("/").map(Number);
-
-    if (month < 1 || month > 12) return "ماه معتبر نیست";
-    if (day < 1 || day > 31) return "روز معتبر نیست";
-
-    if ([1, 2, 3, 4, 5, 6].includes(month) && day > 31) return "روز معتبر نیست";
-    if ([7, 8, 9, 10, 11].includes(month) && day > 30) return "روز معتبر نیست";
-    if (month === 12 && day > 29) return "روز معتبر نیست";
-
-    const today = new Date();
-    const inputDate = new Date(year, month - 1, day);
-    if (inputDate > today) return "تاریخ نمی‌تواند در آینده باشد";
-
-    return true;
-  };
-
   function handleClickCancel() {
     onClose?.();
   }
@@ -131,35 +92,18 @@ export default function WindowIdentityInformation({
           </div>
 
           {/* Birth Date Input */}
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 w-full">
             <label
               htmlFor="birthDate"
               className="block text-sm mb-1 text-text-secondary"
             >
               تاریخ تولد
             </label>
-            <div className="flex justify-between items-center gap-1 w-full bg-box-primary p-4 rounded-2xl font-shabnam">
-              <input
-                id="birthDate"
-                type="text"
-                inputMode="numeric"
-                className="outline-0 border-0 w-full bg-transparent"
-                {...register("birthDate", {
-                  required: "تاریخ تولد الزامی است",
-                  validate: validateDate,
-                })}
-                onChange={handleBirthDateChange}
-                onKeyDown={(e) => {
-                  if (
-                    (e.key === "Backspace" || e.key === "Delete") &&
-                    watch("birthDate")?.length <= 2
-                  ) {
-                    e.preventDefault();
-                  }
-                }}
-                value={watch("birthDate") || ""}
-              />
-            </div>
+
+            <JalaliInputDatePicker
+              setDate={(date) => setValue("birthDate", date)}
+            />
+
             {errors.birthDate && (
               <p className="text-errors text-xs mt-1">
                 {errors.birthDate.message}

@@ -1,4 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+//slice
+import { createSlice } from "@reduxjs/toolkit";
+
+//types
+import { PayloadAction } from "@reduxjs/toolkit";
 
 interface QuestionState {
   name: string;

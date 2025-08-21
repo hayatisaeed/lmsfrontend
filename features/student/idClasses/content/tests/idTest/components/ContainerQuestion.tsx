@@ -1,10 +1,16 @@
 "use client";
+
+//container
 import { Container } from "@/shared/ui";
 import DisplayInformation from "./DisplayInformation";
 import Question from "./Question";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+
+//redux
 import { RootState } from "@/core/stores/redux/Provider";
+
+//react-query
 import { usePutAutoSaveAnswer } from "@/services/tanstack/student/classes/idClasses/tests/mutation";
 
 export default function ContainerQuestion() {

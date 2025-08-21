@@ -1,11 +1,10 @@
+"use client";
+
 //components
 import { Footer, Header, NavDesktop } from "@/core/components";
 
 //content
 import { sideBarStudent } from "@/core/constant/sideBarStudent";
-
-//api
-import { getUserProfileApi } from "@/services/api/common/server/api";
 
 //goftino
 import Goftino from "@/core/context/Goftino";
@@ -16,13 +15,26 @@ import { redirect } from "next/navigation";
 //types
 import { ReactNode } from "react";
 
+//react-query
+import { useGetUserProfile } from "@/services/tanstack/common/queries";
+
 interface IStudentLayoutProps {
   children: ReactNode;
 }
 
-export default async function Studentlayout({ children }: IStudentLayoutProps) {
-  const data = await getUserProfileApi();
+export default function Studentlayout({ children }: IStudentLayoutProps) {
+  const { data, isError, isPending } = useGetUserProfile();
 
+  if (isPending || isError)
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-white rounded-2xl">
+        {isError ? (
+          <h3> مشکلی پیش آمده لطفا دوباره امتحان کنید.</h3>
+        ) : (
+          "LOADING"
+        )}
+      </div>
+    );
   if (!data?.role || data?.role !== "Student") {
     return redirect("/");
   }

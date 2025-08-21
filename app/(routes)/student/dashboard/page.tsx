@@ -1,3 +1,4 @@
+import JalaliSpinnerDatePicker from "@/shared/components/JalaliInputDatePicker";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,8 +7,8 @@ export const metadata: Metadata = {
 
 export default function Dashboard() {
   return (
-    
-      <div>page</div>
-
+    <div>
+      <JalaliSpinnerDatePicker />
+    </div>
   );
 }

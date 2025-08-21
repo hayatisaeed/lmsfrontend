@@ -1,5 +1,5 @@
 //types
-import api from "@/core/config/api/apiClient";
+import api from "@/core/config/api/api";
 import { TClassesTests } from "./types";
 
 export async function getStudentClassesTestsApi(

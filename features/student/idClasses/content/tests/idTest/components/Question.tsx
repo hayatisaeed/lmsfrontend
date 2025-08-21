@@ -1,10 +1,27 @@
 "use client";
-import { ChangeEvent, useRef, useState } from "react";
+
+//react
+import { useRef, useState } from "react";
+
+//types
+import { ChangeEvent } from "react";
+
+//constant
 import { lettersFn } from "@/shared/constant/letters";
+
+//ui
 import { Button } from "@/shared/ui";
+
+//icon
 import { UploadSquare, Paperclip, Trash } from "@/assets/icons";
-import api from "@/core/config/api/apiClient";
+
+//api
+import api from "@/core/config/api/api";
+
+//clsx
 import clsx from "clsx";
+
+//axios
 import axios, { CancelTokenSource } from "axios";
 
 interface IQuestionProps {
