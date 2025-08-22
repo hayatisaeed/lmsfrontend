@@ -159,9 +159,11 @@ export async function getStudyBranchesApi(
 export async function postLocationApi(location: {
   province: string;
   city: string;
+  province_id: number;
+  city_id: number;
 }) {
   try {
-    const response = await api.post("/api/users/profile/location/", location);
+    const response = await api.post("/profile/location", location);
 
     return response.data;
   } catch (error) {

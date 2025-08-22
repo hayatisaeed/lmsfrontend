@@ -32,7 +32,7 @@ api.interceptors.response.use(
     const originalRequest = error.config;
 
     // Skip refresh attempt if it's already the refresh request
-    if (originalRequest.url.includes("/api/token/refresh/")) {
+    if (originalRequest.url.includes("/auth/refresh")) {
       logout();
     }
 
@@ -41,7 +41,7 @@ api.interceptors.response.use(
 
       if (refresh) {
         try {
-          const response = await api.post("/api/token/refresh/", { refresh });
+          const response = await api.post("auth/refresh", { refresh });
           const data = response.data;
 
           if (data) {

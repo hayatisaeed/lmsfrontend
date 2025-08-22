@@ -17,10 +17,7 @@ import {
 } from "@/features/student/profile/components";
 
 //key
-import {
-  getStudentEducationKey,
-  getStudentParentKey,
-} from "@/services/tanstack/student/profile/key";
+import { getStudentEducationKey } from "@/services/tanstack/student/profile/key";
 
 //api
 import {
@@ -80,7 +77,12 @@ export default function Education({ data, parentPhone }: IEducationProps) {
     onClose?: () => void
   ) => {
     postLocation(
-      { province: data.province, city: data.city },
+      {
+        province: data.province,
+        city: data.city,
+        province_id: data.idProvince,
+        city_id: data.idCity,
+      },
       {
         onSuccess: () => {
           showToast(true, onClose);

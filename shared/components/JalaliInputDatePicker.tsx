@@ -20,7 +20,7 @@ const persianMonths = [
 ];
 
 interface IJalaliInputDatePickerProps {
-  setDate?: (date: string) => void; // ورودی به صورت "jYYYY/jM/jD"
+  setDate?: (date: string) => void; // خروجی "jYYYY/jM/jD"
 }
 
 export default function JalaliInputDatePicker({
@@ -32,16 +32,22 @@ export default function JalaliInputDatePicker({
   const [day, setDay] = useState<number>(jd);
   const [month, setMonth] = useState<number>(jm);
   const [year, setYear] = useState<number>(jy);
-
   const [showPicker, setShowPicker] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const pickerRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // اتصال setDate به تغییرات
+  // ارسال تاریخ بعد از توقف تغییرات (debounce)
   useEffect(() => {
-    const newDate = `${year}/${month}/${day}`;
-    setDate?.(newDate);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      const newDate = `${year}/${month}/${day}`;
+      setDate?.(newDate);
+    }, 500); // بعد از 500ms ارسال شود
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, [day, month, year, setDate]);
 
   useEffect(() => {
@@ -102,7 +108,7 @@ export default function JalaliInputDatePicker({
     type: ColumnType,
     labelFn?: (val: number) => string
   ) => {
-    const range = 2; // تعداد آیتم‌های بالا و پایین
+    const range = 2;
     const items = [];
 
     for (let i = -range; i <= range; i++) {
@@ -126,23 +132,23 @@ export default function JalaliInputDatePicker({
 
     return (
       <div className="flex flex-col items-center mx-2 w-20">
-        <button
+        <div
           onClick={() => handleChange(type, -1)}
-          className="text-gray-400 cursor-pointer"
+          className="text-gray-400 cursor-pointer select-none"
         >
           ▲
-        </button>
+        </div>
         <div className="relative h-32 overflow-hidden flex flex-col items-center justify-center">
           <div className="flex flex-col items-center transition-transform duration-300">
             {items}
           </div>
         </div>
-        <button
+        <div
           onClick={() => handleChange(type, 1)}
-          className="text-gray-400 cursor-pointer"
+          className="text-gray-400 cursor-pointer select-none"
         >
           ▼
-        </button>
+        </div>
       </div>
     );
   };
