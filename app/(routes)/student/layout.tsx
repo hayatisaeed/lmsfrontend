@@ -16,14 +16,14 @@ import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
 //react-query
-import { useGetUserProfile } from "@/services/tanstack/common/queries";
+import { useGetUserSession } from "@/services/tanstack/common/queries";
 
 interface IStudentLayoutProps {
   children: ReactNode;
 }
 
 export default function Studentlayout({ children }: IStudentLayoutProps) {
-  const { data, isError, isPending } = useGetUserProfile();
+  const { data, isError, isPending } = useGetUserSession();
 
   if (isPending || isError)
     return (
@@ -35,14 +35,14 @@ export default function Studentlayout({ children }: IStudentLayoutProps) {
         )}
       </div>
     );
-  if (!data?.role || data?.role !== "Student") {
+  if (!data?.user.roles || !data?.user.roles.includes("student")) {
     return redirect("/");
   }
 
   const user = {
-    name: data.display_name,
-    phone: data.phone.replace(/\D/g, ""),
-    email: data.email,
+    name: " data.display_name",
+    phone: "656565",
+    email: "data.email",
     avatar: "",
   };
 

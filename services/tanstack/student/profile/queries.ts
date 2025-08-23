@@ -5,24 +5,24 @@ import { useQuery } from "@tanstack/react-query";
 import {
   getStudentIdentityKey,
   getStudentEducationKey,
-  getStatesKey,
-  getCitiesKey,
+  getLocationKey,
   getOlympiadsKey,
   getEducationalLevelsKey,
   getStudyBranchesKey,
   getStudentParentKey,
+  getScrolTypeKey,
 } from "./key";
 
 //API
 import {
   getStudentIdentityApi,
   getStudentEducationApi,
-  getStatesApi,
-  getCitiesApi,
+  getLocationApi,
   getOlympiadsApi,
   getEducationalLevelsApi,
   getStudyBranchesApi,
   getStudentParentApi,
+  getScrolTypeApi,
 } from "./api";
 
 export function useGetStudentIdentity() {
@@ -39,13 +39,6 @@ export function useGetStudentEducation() {
   });
 }
 
-export function useGetStates() {
-  return useQuery({
-    queryKey: getStatesKey(),
-    queryFn: getStatesApi,
-  });
-}
-
 export function useGetStudentParent() {
   return useQuery({
     queryKey: getStudentParentKey(),
@@ -53,11 +46,10 @@ export function useGetStudentParent() {
   });
 }
 
-export function useGetCities(id?: number) {
+export function useGetLocation(id?: number) {
   return useQuery({
-    queryKey: getCitiesKey(id),
-    queryFn: () => getCitiesApi(id),
-    enabled: !!id,
+    queryKey: getLocationKey(id),
+    queryFn: () => getLocationApi(id),
   });
 }
 
@@ -84,4 +76,8 @@ export function useGetStudyBranches(id?: number) {
     select: (items) => items.map((item) => ({ id: item.id, label: item.name })),
     enabled: !!id,
   });
+}
+
+export function useGetScrollType() {
+  return useQuery({ queryKey: getScrolTypeKey(), queryFn: getScrolTypeApi });
 }

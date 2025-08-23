@@ -2,13 +2,13 @@ import api from "@/core/config/api/api";
 
 //types
 import {
-  TCitie,
+  TLocation,
   TEducationalLevels,
   TOlympiads,
-  TState,
   TStudentEducation,
   TStudentIdentity,
   TStudentParent,
+  TStudentType,
   TStudyBranches,
 } from "@/services/tanstack/student/profile/types";
 import { AxiosError } from "axios";
@@ -104,19 +104,9 @@ export async function getStudentParentApi(): Promise<TStudentParent> {
   }
 }
 
-export async function getStatesApi(): Promise<TState[]> {
+export async function getLocationApi(id?: number): Promise<TLocation[]> {
   try {
-    const response = await api.get("/api/users/states/");
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
-
-export async function getCitiesApi(id?: number): Promise<TCitie[]> {
-  try {
-    const response = await api.get(`/api/users/cities?state=${id}`);
+    const response = await api.get(`/locations?province=${id}&all=false`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -149,6 +139,16 @@ export async function getStudyBranchesApi(
 ): Promise<TStudyBranches[]> {
   try {
     const response = await api.get(`/api/users/study-branches/?level=${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getScrolTypeApi(): Promise<TStudentType[]> {
+  try {
+    const response = await api.get(`/school-types`);
     return response.data;
   } catch (error) {
     console.error(error);

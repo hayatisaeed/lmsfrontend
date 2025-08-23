@@ -11,16 +11,11 @@ export type TStudentIdentity = {
 
 export type TStudentEducation = any;
 
-export type TState = {
-  id: number;
-  name: string;
-};
 
-export type TCitie = {
+export type TLocation = {
   id: number;
   name: string;
-  state: number;
-  state_name: string;
+  slug: string;
 };
 
 export type TOlympiads = {
@@ -47,4 +42,9 @@ export type TStudentParent = {
   phone: string;
   relation: string;
   is_verified: boolean;
+};
+
+export type TStudentType = {
+  name: string;
+  slug: string;
 };

@@ -6,7 +6,9 @@ import { TVerifyOtpForRegistration } from "./types";
 
 export async function postSendOtpToPhoneApi(phone: string) {
   try {
-    const response = await api.post("/auth/request-otp", { phone });
+    const response = await api.post("/auth/request-otp", {
+      phone,
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -22,7 +24,7 @@ export async function postVerifyOtpForRegistrationApi({
   code: string;
 }): Promise<TVerifyOtpForRegistration> {
   try {
-    const response = await api.post("/auth/request-otp", {
+    const response = await api.post("/auth/verify-otp", {
       phone,
       code,
     });

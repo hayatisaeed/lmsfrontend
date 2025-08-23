@@ -7,7 +7,7 @@ export async function getStudentClassesTestsApi(
 ): Promise<TClassesTests[]> {
   try {
     const response = await api.get(
-      `/api/v1/courses/my/active-exams/?course_id=${course_id}`
+      `/courses/my/active-exams/?course_id=${course_id}`
     );
     return response.data;
   } catch (error) {

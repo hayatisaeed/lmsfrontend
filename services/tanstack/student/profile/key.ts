@@ -22,16 +22,16 @@ export function postStudentParentKey() {
   return ["student-parent"];
 }
 
-export function getStatesKey() {
-  return ["states"];
-}
-
-export function getCitiesKey(id?: number) {
-  return ["cities", id];
+export function getLocationKey(id?: number) {
+  return ["location", id];
 }
 
 export function getOlympiadsKey() {
   return ["olympiads"];
+}
+
+export function getScrolTypeKey() {
+  return ["scrool", "type"];
 }
 
 export function getEducationalLevelsKey() {

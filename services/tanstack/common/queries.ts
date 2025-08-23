@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getUserProfileKey } from "./key";
-import { getUserProfileApi } from "./api";
+import { getUserSessionKey } from "./key";
+import { getUserSessionApi } from "./api";
 
-export function useGetUserProfile() {
+export function useGetUserSession() {
   return useQuery({
-    queryKey: getUserProfileKey(),
-    queryFn: getUserProfileApi,
+    queryKey: getUserSessionKey(),
+    queryFn: getUserSessionApi,
   });
 }

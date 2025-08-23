@@ -19,7 +19,7 @@ import {
 import toast from "react-hot-toast";
 
 //token
-import { setTokens } from "@/core/utils/token";
+import { setAccessToken } from "@/core/utils/token";
 
 export default function LoginForm() {
   const [isPhoneValid, setIsPhoneValid] = useState(false);
@@ -63,7 +63,7 @@ export default function LoginForm() {
         onSuccess: (data) => {
           toast.success("ورود شما با موفقیت انجام شد.");
 
-          setTokens(data);
+          setAccessToken(data.access_token, data.access_expires_in * 1000);
 
           router.push("/");
         },

@@ -1,13 +1,17 @@
 export type TVerifyOtpForRegistration = {
-  access: string;
+  access_expires_in: number;
+  access_token: string;
   is_new_user: boolean;
-  message: string;
-  refresh: string;
-  user: {
-    city: string | null;
-    email: string | null;
-    is_profile_complete: boolean;
-    phone: string;
-    state: string | null;
+  profile_completion: {
+    identity: boolean;
+    education: boolean;
+    location: boolean;
+    parent: boolean;
+    percent_complete: number;
   };
+  education: boolean;
+  identity: boolean;
+  location: boolean;
+  parent: boolean;
+  percent_complete: number;
 };

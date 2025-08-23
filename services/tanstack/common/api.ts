@@ -1,10 +1,10 @@
 import api from "@/core/config/api/api";
-import { TgetUserProfile } from "./type";
+import { IUserSession } from "./type";
 import { redirect } from "next/navigation";
 
-export async function getUserProfileApi(): Promise<TgetUserProfile> {
+export async function getUserSessionApi(): Promise<IUserSession> {
   try {
-    const response = await api.get("/profile");
+    const response = await api.get("/auth/session");
     return response.data;
   } catch {
     return redirect("/login");

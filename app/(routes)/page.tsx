@@ -1,13 +1,13 @@
 "use client";
 //API
 
-import { useGetUserProfile } from "@/services/tanstack/common/queries";
+import { useGetUserSession } from "@/services/tanstack/common/queries";
 
 //NEXT
 import { redirect } from "next/navigation";
 
 export default function Main() {
-  const { data, isPending, isError } = useGetUserProfile();
+  const { data, isPending, isError } = useGetUserSession();
 
   if (isPending || isError)
     return (
@@ -20,16 +20,16 @@ export default function Main() {
       </div>
     );
 
-  if (!data?.role) {
+  if (!data?.user.roles.includes("student")) {
     return redirect("/login");
   }
 
-  const role = data.role;
+  const role = data.user.roles[0];
 
   const roleRoutes: Record<string, string> = {
-    Admin: "/admin",
-    Student: "/student",
-    Teacher: "/teacher",
+    admin: "/admin",
+    student: "/student",
+    teacher: "/teacher",
   };
 
   return redirect(roleRoutes[role] ?? "/login");

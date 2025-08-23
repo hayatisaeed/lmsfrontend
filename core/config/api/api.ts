@@ -3,11 +3,11 @@ import axios from "axios";
 
 // cookie
 import {
-  setTokens,
   getAccessToken,
-  getRefreshToken,
-  clearTokens,
+  setAccessToken,
+  removeAccessToken,
 } from "@/core/utils/token";
+import { refreshToke } from "@/services/api/api";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -35,29 +35,21 @@ api.interceptors.response.use(
     if (originalRequest.url.includes("/auth/refresh")) {
       logout();
     }
-
     if (error?.response?.status === 401) {
-      const refresh = getRefreshToken();
+      try {
+        const data = await refreshToke();
 
-      if (refresh) {
-        try {
-          const response = await api.post("auth/refresh", { refresh });
-          const data = response.data;
+        if (data) {
+          setAccessToken(data);
 
-          if (data) {
-            setTokens(data);
+          error.config.headers["Authorization"] = `Bearer ${data?.access}`;
 
-            error.config.headers["Authorization"] = `Bearer ${data?.access}`;
-
-            return api.request(error.config);
-          } else {
-            logout();
-          }
-        } catch (err) {
-          console.error("Refresh request failed:", err);
+          return api.request(error.config);
+        } else {
           logout();
         }
-      } else {
+      } catch (err) {
+        console.error("Refresh request failed:", err);
         logout();
       }
     }
@@ -66,9 +58,10 @@ api.interceptors.response.use(
   }
 );
 
-function logout() {
+async function logout() {
   // Remove token cookie
-  clearTokens();
+  removeAccessToken();
+  await logout();
 
   // If in browser, redirect user to login page only if not already on login page
   if (typeof window !== "undefined") {

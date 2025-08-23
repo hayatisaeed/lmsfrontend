@@ -4,10 +4,7 @@ import { City } from "@/assets/icons";
 
 //ui
 import CityEdit from "./ui/CityEdit";
-import {
-  useGetCities,
-  useGetStates,
-} from "@/services/tanstack/student/profile/queries";
+import { useGetLocation } from "@/services/tanstack/student/profile/queries";
 
 //hooks
 import { useState } from "react";
@@ -38,8 +35,8 @@ export default function PersonalItemCity({
   const [province, setProvince] = useState<TMenu | undefined>();
   const [city, setCity] = useState<TMenu | undefined>();
 
-  const { data: states, isLoading: isLoadingStates } = useGetStates();
-  const { data: cities, isLoading: isLoadingCities } = useGetCities(
+  const { data: states, isLoading: isLoadingStates } = useGetLocation();
+  const { data: cities, isLoading: isLoadingCities } = useGetLocation(
     province?.id
   );
 
