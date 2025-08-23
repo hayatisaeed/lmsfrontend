@@ -13,14 +13,13 @@ import { ReactNode } from "react";
 import WindowMenuItems from "../../modal/WindowMenuItems";
 
 interface IMenuItemsProps {
-  defaultValue?: { id: number; label: string };
+  defaultValue?: { id: number | string; label: string };
   icon?: ReactNode;
   label: string;
   id: string;
-  mutate?: (id: number, label: string, onClose?: () => void) => void;
-
+  mutate?: (id: number | string, label: string, onClose?: () => void) => void;
   isPending?: boolean;
-  data?: { id: number; label: string }[];
+  data?: { id: number | string; label: string }[];
 }
 
 export default function MenuItems({

@@ -13,13 +13,13 @@ import { useState } from "react";
 import { TMenu } from "../types";
 
 interface IWindowMenuItemsProps {
-  defaultValue?: { id: number; label: string };
+  defaultValue?: { id: number | string; label: string };
   label: string;
   onClose?: () => void;
-  mutate?: (id: number, label: string, onClose?: () => void) => void;
+  mutate?: (id: number | string, label: string, onClose?: () => void) => void;
 
   isPending?: boolean;
-  data?: { id: number; label: string }[];
+  data?: { id: number | string; label: string }[];
 }
 
 export default function WindowMenuItems({

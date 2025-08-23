@@ -15,18 +15,18 @@ import {
   EducationItem,
   PersonalItemCity,
 } from "@/features/student/profile/components";
-
-//key
-import { getStudentEducationKey } from "@/services/tanstack/student/profile/key";
+import { getStudentProfileKey } from "@/services/tanstack/student/profile/key";
 
 //api
 import {
   usePostLocation,
   usePostStudentParent,
+  usePutStudentEducation,
 } from "@/services/tanstack/student/profile/mutation";
 import {
   useGetEducationalLevels,
   useGetOlympiads,
+  useGetScrollType,
   useGetStudyBranches,
 } from "@/services/tanstack/student/profile/queries";
 
@@ -35,26 +35,44 @@ import { TStudentEducation } from "@/services/tanstack/student/profile/types";
 
 //react-query
 import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 //toast
 import toast from "react-hot-toast";
 
 interface IEducationProps {
   data?: TStudentEducation;
-  parentPhone?: string | null;
 }
 
-export default function Education({ data, parentPhone }: IEducationProps) {
+export default function Education({ data }: IEducationProps) {
+  const [idEducationalLevels, setIdEducationalLevels] = useState<string>("");
+
+  //get olympiads
   const { data: olympiads, isLoading: isLoadingOlympiads } = useGetOlympiads();
+
+  //get EducationalLevels
   const { data: educationalLevels, isLoading: isLoadingEducationalLevels } =
     useGetEducationalLevels();
-  const { data: studyBranches, isLoading: isLoadingStudyBranches } =
-    useGetStudyBranches();
 
+  //get scroll type
+  const { data: scrollType, isLoading: isLoadingScrollType } =
+    useGetScrollType();
+
+  //get studyBranches
+  const { data: studyBranches, isLoading: isLoadingStudyBranches } =
+    useGetStudyBranches(idEducationalLevels);
+
+  //mutate parent
   const { mutate: postStudentParent, isPending: isSubmittingParentPhone } =
     usePostStudentParent();
+
+  //mutate location
   const { mutate: postLocation, isPending: isSubmittingLocation } =
     usePostLocation();
+
+  //mutate education
+  const { mutate: postEducation, isPending: isPendingPostEducation } =
+    usePutStudentEducation();
 
   const queryClient = useQueryClient();
 
@@ -67,6 +85,7 @@ export default function Education({ data, parentPhone }: IEducationProps) {
     }
   }
 
+  //fn mutate location
   const mutateLocation = (
     data: {
       idProvince: number;
@@ -86,13 +105,14 @@ export default function Education({ data, parentPhone }: IEducationProps) {
       {
         onSuccess: () => {
           showToast(true, onClose);
-          queryClient.invalidateQueries({ queryKey: getStudentEducationKey() });
+          queryClient.invalidateQueries({ queryKey: getStudentProfileKey() });
         },
         onError: () => showToast(false),
       }
     );
   };
 
+  //fn mutate parent
   const mutateStudentParent = (phone: string, onClose?: () => void) => {
     postStudentParent(phone, {
       onSuccess: () => {
@@ -101,6 +121,85 @@ export default function Education({ data, parentPhone }: IEducationProps) {
       onError: () => showToast(false),
     });
   };
+
+  //fn mutate education levels
+  function mutateEducationLevels(
+    id: string | number,
+    value: string,
+    onClose?: () => void
+  ) {
+    setIdEducationalLevels(String(id));
+    postEducation(
+      { level: Number(id) },
+      {
+        onSuccess: () => {
+          showToast(true, onClose);
+        },
+        onError: () => showToast(false),
+      }
+    );
+  }
+
+  //fn mutate olympiad
+  function mutateEducationOlympiad(
+    olympiad_ids: number | string,
+    onClose?: () => void
+  ) {
+    postEducation(
+      { olympiad_ids: [+olympiad_ids] },
+      {
+        onSuccess: () => {
+          showToast(true, onClose);
+        },
+        onError: () => showToast(false),
+      }
+    );
+  }
+
+  function mutateEducationSchoolType(
+    school_type: number | string,
+    onClose?: () => void
+  ) {
+    postEducation(
+      { school_type: +school_type },
+      {
+        onSuccess: () => {
+          showToast(true, onClose);
+        },
+        onError: () => showToast(false),
+      }
+    );
+  }
+
+  function mutateEducationSchoolName(
+    school_name: string | number,
+    onClose?: () => void
+  ) {
+    postEducation(
+      { school_name: String(school_name) },
+      {
+        onSuccess: () => {
+          showToast(true, onClose);
+        },
+        onError: () => showToast(false),
+      }
+    );
+  }
+
+  function mutateEducationStudyBranch(
+    study_branch: number | string,
+    onClose?: () => void
+  ) {
+    postEducation(
+      { study_branch: +study_branch },
+      {
+        onSuccess: () => {
+          showToast(true, onClose);
+        },
+        onError: () => showToast(false),
+      }
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5">
@@ -118,6 +217,7 @@ export default function Education({ data, parentPhone }: IEducationProps) {
         icon={<Book size="SM" />}
         data={educationalLevels}
         isPending={isLoadingEducationalLevels}
+        mutate={mutateEducationLevels}
       />
 
       <EducationItem
@@ -128,6 +228,7 @@ export default function Education({ data, parentPhone }: IEducationProps) {
         icon={<NotebookMinimalistic size="SM" />}
         data={studyBranches}
         isPending={isLoadingStudyBranches}
+        mutate={mutateEducationStudyBranch}
       />
 
       <EducationItem
@@ -137,20 +238,23 @@ export default function Education({ data, parentPhone }: IEducationProps) {
         label="نام مدرسه"
         icon={<Buildings size="SM" />}
         sendCode={false}
+        mutate={mutateEducationSchoolName}
       />
 
       <EducationItem
+        isList
+        data={scrollType}
+        isPending={isLoadingScrollType}
         id="school-type"
-        value=""
         labelModal="نوع مدرسه خود را وارد کنید"
         label="نوع مدرسه"
         icon={<Bookmark size="SM" />}
-        sendCode={false}
+        mutate={mutateEducationSchoolType}
       />
 
       <EducationItem
         id="parents-phone"
-        value={parentPhone?.replace(/\D/g, "") ?? ""}
+        value="1"
         icon={<Smartphone size="SM" />}
         labelModal="شماره تماس اولیا خود را وارد کنید"
         label="شماره موبایل اولیا"
@@ -161,6 +265,7 @@ export default function Education({ data, parentPhone }: IEducationProps) {
         error="شماره تماس "
         pattern={/^0?9\d{9}$/}
       />
+
       <EducationItem
         isList={true}
         data={olympiads}
@@ -169,6 +274,7 @@ export default function Education({ data, parentPhone }: IEducationProps) {
         label="المپیاد مدنظر"
         icon={<Notebook size="SM" />}
         isPending={isLoadingOlympiads}
+        mutate={mutateEducationOlympiad}
       />
     </div>
   );

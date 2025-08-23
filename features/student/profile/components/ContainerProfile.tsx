@@ -12,43 +12,19 @@ import {
 } from "@/features/student/profile/components";
 
 //react-query
-import {
-  useGetStudentEducation,
-  useGetStudentIdentity,
-  useGetStudentParent,
-} from "@/services/tanstack/student/profile/queries";
+import { useGetStudentProfile } from "@/services/tanstack/student/profile/queries";
 
 export default function ContainerProfile() {
   const {
-    data: studentIdentity,
-    isPending: isPendingStudentIdentity,
-    isError: isErrorStudentIdentity,
-  } = useGetStudentIdentity();
+    data,
+    isLoading: isLoadingProfile,
+    isError: isErrorProfile,
+  } = useGetStudentProfile();
 
-  const {
-    data: studentEducation,
-    isPending: isPendingStudentEducation,
-    isError: isErrorStudentEducation,
-  } = useGetStudentEducation();
-
-  const {
-    data: studentParent,
-    isPending: isPendingStudentParent,
-    isError: isErrorStudentParent,
-  } = useGetStudentParent();
-
-  const isPending =
-    isPendingStudentIdentity ||
-    isPendingStudentEducation ||
-    isPendingStudentParent;
-
-  const isError =
-    isErrorStudentIdentity || isErrorStudentEducation || isErrorStudentParent;
-
-  if (isPending || isError)
+  if (isLoadingProfile || isErrorProfile)
     return (
       <div className="w-full h-full flex items-center justify-center bg-white rounded-2xl">
-        {isError ? (
+        {isErrorProfile ? (
           <h3> مشکلی پیش آمده لطفا دوباره امتحان کنید.</h3>
         ) : (
           "LOADING"
@@ -66,7 +42,7 @@ export default function ContainerProfile() {
         <Personal data={studentIdentity} />
       </Container>
       <Container title="اطلاعات تحصیلی">
-        <Education data={studentEducation} parentPhone={studentParent.phone} />
+        <Education data={studentEducation} />
       </Container>
 
       <Container title="تغییر رمز عبور">

@@ -12,7 +12,27 @@ import { Pagination } from "@/shared/components";
 //filter
 import FilterCategory from "./FilterCategory";
 
+//api
+import { useGetCourses } from "@/services/tanstack/student/classes/queries";
+
 export default function ContainerClasses() {
+  const {
+    data: courses,
+    isLoading: isLoadingCourses,
+    isError: isErrorCourses,
+  } = useGetCourses();
+
+  if (isLoadingCourses || isErrorCourses)
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-white rounded-2xl">
+        {isErrorCourses ? (
+          <h3> مشکلی پیش آمده لطفا دوباره امتحان کنید.</h3>
+        ) : (
+          "LOADING"
+        )}
+      </div>
+    );
+
   return (
     <div className="w-full min-h-full grid grid-cols-1 md:grid-cols-[2fr_5fr] gap-5">
       <div className="flex md:flex-col gap-5">
@@ -30,16 +50,14 @@ export default function ContainerClasses() {
       <Container title="لیست منتور ها" className="justify-start">
         <div className="w-full flex flex-col items-center gap-7">
           <div className="w-full grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-3">
-            <Card
-              link={`/student/classes/${2}/content`}
-              tags={["ادبیات", "شیمی", "ریاضی", "ادبیات"]}
-              name="استاد رحمانی"
-            />
-            <Card
-              link={`/student/classes/${223423}/content`}
-              tags={["ادبیات", "شیمی", "ریاضی", "ادبیات"]}
-              name="استاد رحمانی"
-            />
+            {courses?.map((course) => (
+              <Card
+                key={course.id}
+                link={`/student/classes/${course.id}/content`}
+                image={course.index_image}
+                name={course.name}
+              />
+            ))}
           </div>
           <Pagination total={150} />
         </div>

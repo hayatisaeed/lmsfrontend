@@ -4,9 +4,9 @@ import { useState, useRef, useEffect } from "react";
 
 interface IMenuProps {
   label: string;
-  options?: { id: number; label: string }[];
-  value?: { id?: number; label?: string };
-  onChange: (item: { id: number; label: string }) => void;
+  options?: { id: number | string; label: string }[];
+  value?: { id?: number | string; label?: string };
+  onChange: (item: { id: number | string; label: string }) => void;
   disabled?: boolean;
 }
 
@@ -53,7 +53,7 @@ export default function Menu({
     }
   }
 
-  function handleSelect(item: { id: number; label: string }) {
+  function handleSelect(item: { id: number | string; label: string }) {
     onChange(item);
     setIsOpen(false);
   }

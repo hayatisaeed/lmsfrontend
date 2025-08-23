@@ -27,13 +27,12 @@ import { usePostStudentIdentity } from "@/services/tanstack/student/profile/muta
 
 //typs
 import { TStudentIdentity } from "@/services/tanstack/student/profile/types";
-
-//key-react-query
-import { getStudentIdentityKey } from "@/services/tanstack/student/profile/key";
+import { AxiosError } from "axios";
 
 //toast
 import toast from "react-hot-toast";
-import { AxiosError } from "axios";
+
+import { getStudentProfileKey } from "@/services/tanstack/student/profile/key";
 
 interface IPersonalProps {
   data?: TStudentIdentity;
@@ -54,7 +53,7 @@ export default function Personal({ data }: IPersonalProps) {
       { national_id, date_of_birth: date_of_birth.replaceAll("/", "-") },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: getStudentIdentityKey() });
+          queryClient.invalidateQueries({ queryKey: getStudentProfileKey() });
           toast.success("اطلاعات شما با موفقیت ثبت شد.");
           close?.();
         },

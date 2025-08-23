@@ -1,4 +1,4 @@
-import {  NotebookBookmark } from "@/assets/icons";
+import { NotebookBookmark } from "@/assets/icons";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,7 +20,7 @@ export default function Card({ image, name, tags, link }: ICardProps) {
         width={200}
         height={60}
         alt="class"
-        className="object-contain w-full rounded-2xl"
+        className="object-fill w-full rounded-2xl aspect-video"
       />
       <div className="w-full flex justify-between items-center">
         <div className="flex items-center justify-center gap-2">

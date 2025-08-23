@@ -1,4 +1,4 @@
-import ContainerEnroll from "@/features/student/idClasses/enroll/ContainerEnroll";
+import ContainerEnroll from "@/features/student/idClasses/enroll/components/ContainerEnroll";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

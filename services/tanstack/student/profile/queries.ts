@@ -3,53 +3,28 @@ import { useQuery } from "@tanstack/react-query";
 
 //key
 import {
-  getStudentIdentityKey,
-  getStudentEducationKey,
+  getEducationalLevelsKey,
   getLocationKey,
   getOlympiadsKey,
-  getEducationalLevelsKey,
-  getStudyBranchesKey,
-  getStudentParentKey,
   getScrolTypeKey,
+  getStudentProfileKey,
+  getStudyBranchesKey,
 } from "./key";
 
 //API
 import {
-  getStudentIdentityApi,
-  getStudentEducationApi,
+  getEducationalLevelsApi,
   getLocationApi,
   getOlympiadsApi,
-  getEducationalLevelsApi,
-  getStudyBranchesApi,
-  getStudentParentApi,
   getScrolTypeApi,
+  getStudentProfileApi,
+  getStudyBranchesApi,
 } from "./api";
 
-export function useGetStudentIdentity() {
+export function useGetStudentProfile() {
   return useQuery({
-    queryKey: getStudentIdentityKey(),
-    queryFn: getStudentIdentityApi,
-  });
-}
-
-export function useGetStudentEducation() {
-  return useQuery({
-    queryKey: getStudentEducationKey(),
-    queryFn: getStudentEducationApi,
-  });
-}
-
-export function useGetStudentParent() {
-  return useQuery({
-    queryKey: getStudentParentKey(),
-    queryFn: getStudentParentApi,
-  });
-}
-
-export function useGetLocation(id?: number) {
-  return useQuery({
-    queryKey: getLocationKey(id),
-    queryFn: () => getLocationApi(id),
+    queryKey: getStudentProfileKey(),
+    queryFn: getStudentProfileApi,
   });
 }
 
@@ -61,6 +36,23 @@ export function useGetOlympiads() {
   });
 }
 
+export function useGetLocation(id?: number | string) {
+  return useQuery({
+    queryKey: getLocationKey(id),
+    queryFn: () => getLocationApi(id),
+    select: (items) => items.map((item) => ({ id: item.id, label: item.name })),
+  });
+}
+
+export function useGetScrollType() {
+  return useQuery({
+    queryKey: getScrolTypeKey(),
+    queryFn: getScrolTypeApi,
+    select: (items) =>
+      items.map((item) => ({ id: item.slug, label: item.name })),
+  });
+}
+
 export function useGetEducationalLevels() {
   return useQuery({
     queryKey: getEducationalLevelsKey(),
@@ -69,15 +61,11 @@ export function useGetEducationalLevels() {
   });
 }
 
-export function useGetStudyBranches(id?: number) {
+export function useGetStudyBranches(id?: number | string) {
   return useQuery({
     queryKey: getStudyBranchesKey(id),
     queryFn: () => getStudyBranchesApi(id),
     select: (items) => items.map((item) => ({ id: item.id, label: item.name })),
     enabled: !!id,
   });
-}
-
-export function useGetScrollType() {
-  return useQuery({ queryKey: getScrolTypeKey(), queryFn: getScrolTypeApi });
 }
