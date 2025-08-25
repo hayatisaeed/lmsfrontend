@@ -20,6 +20,7 @@ interface IInputEditProps {
   isNum?: boolean;
   pattern?: RegExp;
   error?: string;
+  readOnly?: boolean;
 }
 
 export default function InputEdit({
@@ -33,6 +34,7 @@ export default function InputEdit({
   isNum = false,
   pattern,
   error,
+  readOnly = false,
 }: IInputEditProps) {
   return (
     <div className="flex justify-between items-center gap-2 p-4 rounded-xl bg-white-primary border border-text-primary/50">
@@ -46,39 +48,41 @@ export default function InputEdit({
         {defaultValue}
       </h3>
 
-      <Modal>
-        <Modal.Open id={id}>
-          <button type="button" className="cursor-pointer">
-            <PenNewSquare size="SM" />
-          </button>
-        </Modal.Open>
+      {readOnly || (
+        <Modal>
+          <Modal.Open id={id}>
+            <button type="button" className="cursor-pointer">
+              <PenNewSquare size="SM" />
+            </button>
+          </Modal.Open>
 
-        <Modal.Window id={id}>
-          <WindowInputEdit
-            sendCode={sendCode}
-            defaultValue={defaultValue}
-            label={label}
-            icon={icon}
-            id={id}
-            muate={mutate}
-            isPending={isPending}
-            isNum={isNum}
-            pattern={pattern}
-            error={error}
-          />
-        </Modal.Window>
+          <Modal.Window id={id}>
+            <WindowInputEdit
+              sendCode={sendCode}
+              defaultValue={defaultValue}
+              label={label}
+              icon={icon}
+              id={id}
+              muate={mutate}
+              isPending={isPending}
+              isNum={isNum}
+              pattern={pattern}
+              error={error}
+            />
+          </Modal.Window>
 
-        {sendCode && (
-          <Modal.Window id="input-otp">
-            <WindowInputOTP
+          {sendCode && (
+            <Modal.Window id="input-otp">
+              <WindowInputOTP
               // onSubmit={(otp) => {
               //   console.log("OTP وارد شده:", otp);
               // }}
               // isPending={isPending}
-            />
-          </Modal.Window>
-        )}
-      </Modal>
+              />
+            </Modal.Window>
+          )}
+        </Modal>
+      )}
     </div>
   );
 }

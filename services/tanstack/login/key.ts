@@ -9,3 +9,7 @@ export function postVerifyOtpForRegistrationKey() {
 export function getProfileUserKey() {
   return ["user-profile"];
 }
+
+export function postLogoutKey() {
+  return ["logout"];
+}

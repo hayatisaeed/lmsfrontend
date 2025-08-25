@@ -3,7 +3,7 @@ import api from "@/core/config/api/api";
 //types
 import { ICourse } from "./type";
 
-export async function getCoursesApi():Promise<ICourse[]> {
+export async function getCoursesApi(): Promise<ICourse[]> {
   try {
     const response = await api.get("/courses/courses/");
     return response.data;
@@ -13,7 +13,7 @@ export async function getCoursesApi():Promise<ICourse[]> {
   }
 }
 
-export async function getCourseItemApi(course_id: string) {
+export async function getCourseItemApi(course_id: string): Promise<ICourse> {
   try {
     const response = await api.get(`/courses/courses/${course_id}/`);
     return response.data;

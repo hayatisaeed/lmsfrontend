@@ -16,13 +16,13 @@ import { useGetStudentClassesTests } from "@/services/tanstack/student/classes/i
 import { useParams } from "next/navigation";
 
 export default function ContainerTests() {
-  const { idClasses } = useParams();
+  const { idClass } = useParams();
 
   const {
     data: classesTests,
     isPending: isPendingClassesTests,
     isError: isErrorClassesTests,
-  } = useGetStudentClassesTests(idClasses as string);
+  } = useGetStudentClassesTests(idClass as string);
 
   if (isPendingClassesTests || isErrorClassesTests)
     return (
@@ -35,14 +35,24 @@ export default function ContainerTests() {
       </div>
     );
 
+  if (classesTests.length === 0) {
+    return (
+      <Container title="لیست آزمون‌ها" className="h-full">
+        <div className="flex w-full h-full items-center justify-center">
+          <h3>فعلا لیست آزمون ها خالی می باشد.</h3>
+        </div>
+      </Container>
+    );
+  }
+
   return (
     <Container title="لیست آزمون‌ها" className="h-full">
       <div className="flex flex-col items-center h-full gap-5">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 grow w-full gap-3">
+        <div className="grid grid-cols-1 grid-rows-auto sm:grid-cols-2 md:grid-cols-4 grow w-full gap-3">
           <Modal>
             {classesTests?.map((test) => (
               <Card
-              started={test.started}
+                started={test.started}
                 key={test.exam_id}
                 exam_id={String(test.exam_id)}
                 course_id={String(test.course_id)}

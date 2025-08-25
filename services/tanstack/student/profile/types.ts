@@ -31,6 +31,33 @@ export type TStudyBranches = {
   is_active: boolean;
 };
 
+export type Tdentity = {
+  first_name: string | null;
+  last_name: string | null;
+  father_name: string | null;
+  gender: string | null;
+  date_of_birth: string | null;
+  national_id: string | null;
+  verified: boolean;
+};
+
+export type Teducation = Record<string, any>;
+
+export type TParent = {
+  required: boolean;
+  verified: boolean;
+};
+
+export type TLocationProfile = { province: string; city: string };
+
+export interface IProfile {
+  identity: Tdentity;
+  parent: TParent;
+  education: Teducation;
+  location: TLocationProfile;
+  percent_complete: number;
+}
+
 // export type TStudentIdentity = {
 //   national_id: string;
 //   date_of_birth: string;

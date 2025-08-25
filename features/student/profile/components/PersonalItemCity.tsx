@@ -1,5 +1,5 @@
 "use client";
-//icond
+//icons
 import { City } from "@/assets/icons";
 
 //ui
@@ -7,13 +7,14 @@ import CityEdit from "./ui/CityEdit";
 import { useGetLocation } from "@/services/tanstack/student/profile/queries";
 
 //hooks
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //types
 import { TMenu } from "../types";
 
 interface IAccountItemProps {
-  value: string;
+  province?: string;
+  city?: string;
   mutate: (
     data: {
       idProvince: number;
@@ -28,7 +29,8 @@ interface IAccountItemProps {
 }
 
 export default function PersonalItemCity({
-  value,
+  city: cityDefault,
+  province: provinceDefault,
   mutate,
   isLoading,
 }: IAccountItemProps) {
@@ -37,8 +39,26 @@ export default function PersonalItemCity({
 
   const { data: states, isLoading: isLoadingStates } = useGetLocation();
   const { data: cities, isLoading: isLoadingCities } = useGetLocation(
-    province?.id
+    province?.id || undefined
   );
+
+  // مقداردهی اولیه استان
+  useEffect(() => {
+    if (states && provinceDefault) {
+      const selectedProvince = states.find(
+        (state) => state.label === provinceDefault
+      );
+      setProvince(selectedProvince);
+    }
+  }, [provinceDefault, states]);
+
+  // مقداردهی اولیه شهر وقتی استان مشخص شد
+  useEffect(() => {
+    if (cities && cityDefault) {
+      const selectedCity = cities.find((c) => c.label === cityDefault);
+      setCity(selectedCity);
+    }
+  }, [cityDefault, cities]);
 
   return (
     <div className="w-full flex flex-col justify-start gap-3">

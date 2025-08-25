@@ -43,13 +43,13 @@ export default function Tests({
           </span>
           می‌توانید در آزمون شرکت کنید.
         </p>
-        <p>
+        {/* <p>
           پس از شروع آزمون،
           <span className="font-bold font-shabnam">
             {secondsToTime(duration)}
           </span>
           فرصت خواهید داشت تا پاسخ دهید.
-        </p>
+        </p> */}
         <p className="text-errors">
           توجه کنید که تنها یکبار می‌توانید در آزمون شرکت کنید.
         </p>

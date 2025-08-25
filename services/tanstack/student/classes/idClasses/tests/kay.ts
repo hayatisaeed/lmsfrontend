@@ -13,3 +13,7 @@ export function getExamsAttemptsKey(attempt_id: string) {
 export function putAutoSaveAnswerKey() {
   return ["AutoSave", "Answer"];
 }
+
+export function postSubmitExampKey() {
+  return ["submit", "examp"];
+}

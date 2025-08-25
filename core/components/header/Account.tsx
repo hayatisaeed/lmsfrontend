@@ -3,9 +3,11 @@
 import { Avatar, DropDown } from "@/shared/components";
 import { ArrowsALogout, PhoneCalling, UserRounded } from "@/assets/icons";
 import { useRouter } from "next/navigation";
-import { clearTokens } from "@/core/utils/token";
+import { removeAccessToken } from "@/core/utils/token";
 import toast from "react-hot-toast";
 import { Role } from "@/core/types/role";
+import { usePostLogout } from "@/services/tanstack/login/mutation";
+import { Spinner } from "@/shared/ui";
 
 interface IAccountProps {
   name?: string;
@@ -20,6 +22,8 @@ export default function Account({
 }: IAccountProps) {
   const router = useRouter();
 
+  const { mutate: logout, isPending: isPendingLogout } = usePostLogout();
+
   const rolePaths: Record<Role, string> = {
     Admin: "admin",
     Student: "student",
@@ -32,15 +36,18 @@ export default function Account({
   }
 
   function handleClickLogout() {
-    try {
-      clearTokens();
-      localStorage.clear();
-      router.push("/login");
-      toast.success("خروج از حساب کاربری شما با موفقیت انجام شد");
-    } catch (err) {
-      console.error("Logout error:", err);
-      toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
-    }
+    logout(undefined, {
+      onSuccess: () => {
+        removeAccessToken();
+        localStorage.clear();
+        router.push("/login");
+        toast.success("خروج از حساب کاربری شما با موفقیت انجام شد");
+      },
+      onError: (err) => {
+        console.error("Logout error:", err);
+        toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
+      },
+    });
   }
 
   return (
@@ -67,7 +74,7 @@ export default function Account({
             onClick={handleClickLogout}
             icon={<ArrowsALogout size="SM" />}
           >
-            خروج
+            {isPendingLogout ? <Spinner /> : "خروج"}
           </DropDown.Item>
         </DropDown.Window>
       </DropDown>

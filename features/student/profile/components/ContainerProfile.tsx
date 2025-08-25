@@ -13,6 +13,7 @@ import {
 
 //react-query
 import { useGetStudentProfile } from "@/services/tanstack/student/profile/queries";
+import { useGetUserSession } from "@/services/tanstack/common/queries";
 
 export default function ContainerProfile() {
   const {
@@ -21,10 +22,16 @@ export default function ContainerProfile() {
     isError: isErrorProfile,
   } = useGetStudentProfile();
 
-  if (isLoadingProfile || isErrorProfile)
+  const {
+    data: sessions,
+    isLoading: isLoadingSession,
+    isError: isErrorSession,
+  } = useGetUserSession();
+
+  if (isLoadingProfile || isErrorProfile || isLoadingSession || isErrorSession)
     return (
       <div className="w-full h-full flex items-center justify-center bg-white rounded-2xl">
-        {isErrorProfile ? (
+        {isErrorProfile || isErrorSession ? (
           <h3> مشکلی پیش آمده لطفا دوباره امتحان کنید.</h3>
         ) : (
           "LOADING"
@@ -35,19 +42,19 @@ export default function ContainerProfile() {
   return (
     <div className="flex flex-col gap-5">
       <Container title="اطلاعات حساب">
-        <Account />
+        <Account data={sessions} />
       </Container>
 
       <Container title="اطلاعات هویتی">
-        <Personal data={studentIdentity} />
+        <Personal data={data?.identity} />
       </Container>
       <Container title="اطلاعات تحصیلی">
-        <Education data={studentEducation} />
+        <Education data={data?.education} location={data?.location} />
       </Container>
 
-      <Container title="تغییر رمز عبور">
+      {/* <Container title="تغییر رمز عبور">
         <ChangePassword />
-      </Container>
+      </Container> */}
 
       <Container title="اعلان ها">اعلان</Container>
     </div>

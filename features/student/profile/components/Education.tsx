@@ -29,9 +29,12 @@ import {
   useGetScrollType,
   useGetStudyBranches,
 } from "@/services/tanstack/student/profile/queries";
+import {
+  Teducation,
+  TLocationProfile,
+} from "@/services/tanstack/student/profile/types";
 
 //types
-import { TStudentEducation } from "@/services/tanstack/student/profile/types";
 
 //react-query
 import { useQueryClient } from "@tanstack/react-query";
@@ -41,10 +44,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 interface IEducationProps {
-  data?: TStudentEducation;
+  data?: Teducation;
+  location?: TLocationProfile;
 }
 
-export default function Education({ data }: IEducationProps) {
+export default function Education({ data, location }: IEducationProps) {
   const [idEducationalLevels, setIdEducationalLevels] = useState<string>("");
 
   //get olympiads
@@ -125,17 +129,19 @@ export default function Education({ data }: IEducationProps) {
   //fn mutate education levels
   function mutateEducationLevels(
     id: string | number,
-    value: string,
+    _: string,
     onClose?: () => void
   ) {
-    setIdEducationalLevels(String(id));
     postEducation(
       { level: Number(id) },
       {
         onSuccess: () => {
+          setIdEducationalLevels(String(id));
           showToast(true, onClose);
         },
-        onError: () => showToast(false),
+        onError: () => {
+          showToast(false);
+        },
       }
     );
   }
@@ -143,6 +149,7 @@ export default function Education({ data }: IEducationProps) {
   //fn mutate olympiad
   function mutateEducationOlympiad(
     olympiad_ids: number | string,
+    _: string,
     onClose?: () => void
   ) {
     postEducation(
@@ -158,10 +165,11 @@ export default function Education({ data }: IEducationProps) {
 
   function mutateEducationSchoolType(
     school_type: number | string,
+    scholl_name: string,
     onClose?: () => void
   ) {
     postEducation(
-      { school_type: +school_type },
+      { school_type: scholl_name },
       {
         onSuccess: () => {
           showToast(true, onClose);
@@ -188,6 +196,7 @@ export default function Education({ data }: IEducationProps) {
 
   function mutateEducationStudyBranch(
     study_branch: number | string,
+    _: string,
     onClose?: () => void
   ) {
     postEducation(
@@ -204,7 +213,8 @@ export default function Education({ data }: IEducationProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5">
       <PersonalItemCity
-        value=""
+        province={location?.province}
+        city={location?.city}
         mutate={mutateLocation}
         isLoading={isSubmittingLocation}
       />

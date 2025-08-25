@@ -6,18 +6,18 @@ import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 //uiD
 import { Button, Menu } from "@/shared/ui";
 //types
-import { TCitie, TState } from "@/services/tanstack/student/profile/types";
+
 import { TMenu } from "../types";
 
 interface IWindowMenuCitiesProps {
   label: string;
   onClose?: () => void;
-  states?: TState[];
+  states?: TMenu[];
   province?: TMenu;
   setProvince: (value: TMenu) => void;
   setCity: (value?: TMenu) => void;
   city?: TMenu;
-  cities?: TCitie[];
+  cities?: TMenu[];
   isLoadingStates?: boolean;
   isLoadingCities?: boolean;
   mutate?: (
@@ -53,8 +53,8 @@ export default function WindowMenuCities({
       mutate?.(
         {
           city: city.label,
-          idCity: city.id,
-          idProvince: province.id,
+          idCity: +city.id,
+          idProvince: +province.id,
           province: province.label,
         },
         onClose
@@ -66,24 +66,14 @@ export default function WindowMenuCities({
     onClose?.();
   }
 
-  function handleSelectProvince(item: { id: number; label: string }) {
+  function handleSelectProvince(item: { id: number | string; label: string }) {
     setProvince(item);
     setCity(undefined);
   }
 
-  function handleSelectCity(item: { id: number; label: string }) {
+  function handleSelectCity(item: { id: number | string; label: string }) {
     setCity(item);
   }
-
-  const provinceOptions = states?.map((item) => ({
-    id: item.id,
-    label: item.name,
-  }));
-
-  const citiesOptions = cities?.map((item) => ({
-    id: item.id,
-    label: item.name,
-  }));
 
   return (
     <div className="flex flex-col gap-5 sm:w-[500px]">
@@ -91,7 +81,7 @@ export default function WindowMenuCities({
       <div className="flex flex-col sm:flex-row gap-3 w-full">
         <Menu
           label="استان مورد نظر خود را انتخاب کنید"
-          options={provinceOptions}
+          options={states}
           value={province}
           onChange={handleSelectProvince}
           disabled={isLoadingStates}
@@ -99,7 +89,7 @@ export default function WindowMenuCities({
 
         <Menu
           label="شهر مورد نظر خود را انتخاب کنید"
-          options={citiesOptions}
+          options={cities}
           value={city}
           onChange={handleSelectCity}
           disabled={!province || isLoadingCities}

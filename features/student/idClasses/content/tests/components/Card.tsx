@@ -100,7 +100,7 @@ export default function Card({
     <>
       <Modal.Open id={exam_id}>
         <Button type="button" className="!bg-box-primary">
-          <div className="w-full h-full !bg-box-primary !rounded-2xl !p-3 !flex !flex-col !gap-4 !text-text-primary">
+          <div className="w-full  !bg-box-primary !rounded-2xl !p-3 !flex !flex-col !gap-4 !text-text-primary">
             <div className="w-full flex justify-between items-center">
               <div className="flex items-center justify-center gap-2">
                 <h3>{title}</h3>

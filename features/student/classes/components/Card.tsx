@@ -6,13 +6,18 @@ interface ICardProps {
   image?: string;
   name?: string;
   tags?: string[];
-  link: string;
+  id: string;
+  is_joined: boolean;
 }
 
-export default function Card({ image, name, tags, link }: ICardProps) {
+export default function Card({ image, name, tags, id, is_joined }: ICardProps) {
   return (
     <Link
-      href={link}
+      href={
+        is_joined
+          ? `/student/classes/${id}/content`
+          : `/student/classes/${id}/enroll`
+      }
       className="w-full h-full bg-box-primary rounded-2xl p-3 flex flex-col gap-4"
     >
       <Image

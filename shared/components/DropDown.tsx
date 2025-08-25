@@ -112,7 +112,7 @@ function Toggler({
 }
 
 interface IItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children: ReactNode;
   icon?: ReactNode;
 }
 

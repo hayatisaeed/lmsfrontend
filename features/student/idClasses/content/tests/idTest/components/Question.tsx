@@ -1,7 +1,7 @@
 "use client";
 
 //react
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 //types
 import { ChangeEvent } from "react";
@@ -32,12 +32,15 @@ interface IQuestionProps {
   answers?: { answer: string; id: number }[];
   score?: number;
   text?: boolean;
-  mutateAnswer: (data: {
-    exam_id: string;
-    question_id: string;
-    text: string;
-    version: number;
-  }) => void;
+  mutateAnswer: (
+    data: {
+      exam_id: string;
+      question_id: string;
+      text: string;
+      version: number;
+    },
+    setNull?: () => void
+  ) => void;
 }
 
 export default function Question({
@@ -52,6 +55,8 @@ export default function Question({
 }: IQuestionProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
 
+  const [answerMessage, setAnswerMessage] = useState<string>("");
+
   const [files, setFiles] = useState<File[]>([]);
   const [progresses, setProgresses] = useState<Record<string, number>>({});
   const [cancelTokens, setCancelTokens] = useState<
@@ -59,9 +64,17 @@ export default function Question({
   >({});
   const [errorFiles, setErrorFiles] = useState<Record<string, boolean>>({});
 
+  useEffect(() => {
+    const timeOut = setTimeout(() => {}, 5000);
+
+    return () => clearInterval(timeOut);
+  }, []);
+
   function handleSelect(id: number, text: string) {
     setSelectedAnswer(id);
-    mutateAnswer({ text, version: id, exam_id, question_id });
+    mutateAnswer({ text, version: id, exam_id, question_id }, () => {
+      setSelectedAnswer(null);
+    });
   }
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -82,7 +95,7 @@ export default function Question({
       setCancelTokens((prev) => ({ ...prev, [file.name]: source }));
 
       await api
-        .post("/files/upload/answer/", formData, {
+        .post(`/courses/questions/${question_id}/files/`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
           cancelToken: source.token,
           onUploadProgress(progressEvent) {
@@ -174,6 +187,10 @@ export default function Question({
               className="w-full bg-white-primary p-1 outline-0 rounded-xl placeholder:text-sm text-sm resize-none"
               placeholder="جواب سوال :"
               rows={5}
+              value={answerMessage}
+              onChange={(e) => {
+                setAnswerMessage(e.target.value);
+              }}
             />
 
             <div className="w-full flex justify-end">

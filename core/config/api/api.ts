@@ -61,7 +61,6 @@ api.interceptors.response.use(
 async function logout() {
   // Remove token cookie
   removeAccessToken();
-  await logout();
 
   // If in browser, redirect user to login page only if not already on login page
   if (typeof window !== "undefined") {

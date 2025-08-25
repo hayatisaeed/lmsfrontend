@@ -1,20 +1,22 @@
+import { ICourse } from "@/services/tanstack/student/classes/type";
 import Image from "next/image";
 
-export default function Course() {
+interface ICourseProps {
+  course?: ICourse;
+}
+
+export default function Course({ course }: ICourseProps) {
   return (
     <div className="w-full h-full flex flex-col gap-5">
       <Image
-        src="/images/banner.png"
+        src={course?.banner_image || "/images/banner.png"}
         width={687}
-        height={159}
+        height={180}
         alt="banner"
-        className=" w-full h-[159px] rounded-2xl "
+        className="w-full h-[180px] rounded-2xl "
       />
-      <h3 className="text-text-primary text-lg font-semibold">علیرضا رحمانی</h3>
-      <p className="text-text-primary text-justify">
-        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-        از طراحان گرافیک است.
-      </p>
+      <h3 className="text-text-primary text-lg font-semibold">{course?.name}</h3>
+      <p className="text-text-primary text-justify">{course?.description}</p>
     </div>
   );
 }

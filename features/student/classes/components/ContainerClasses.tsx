@@ -53,9 +53,10 @@ export default function ContainerClasses() {
             {courses?.map((course) => (
               <Card
                 key={course.id}
-                link={`/student/classes/${course.id}/content`}
+                id={course.id}
                 image={course.index_image}
                 name={course.name}
+                is_joined={course.is_joined}
               />
             ))}
           </div>

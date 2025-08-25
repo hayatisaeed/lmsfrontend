@@ -37,3 +37,7 @@ export function postLocationKey() {
 export function postStudentParentKey() {
   return ["student-parent"];
 }
+
+export function putStudentProfileKey() {
+return ["profile"]
+}

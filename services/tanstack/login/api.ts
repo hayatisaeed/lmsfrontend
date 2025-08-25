@@ -35,3 +35,13 @@ export async function postVerifyOtpForRegistrationApi({
     throw error;
   }
 }
+
+export async function postLogoutApi() {
+  try {
+    const response = await api.post("/auth/logout");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

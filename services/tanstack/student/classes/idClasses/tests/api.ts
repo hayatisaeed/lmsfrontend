@@ -25,7 +25,7 @@ export async function postStudentClassesTestsAttemptsApi({
 }): Promise<TClassesTests[]> {
   try {
     const response = await api.post(
-      `/api/v1/courses/${course_id}/exams/${exam_id}/attempts/start/
+      `/courses/${course_id}/exams/${exam_id}/attempts/start/
 `
     );
     return response.data;
@@ -37,7 +37,7 @@ export async function postStudentClassesTestsAttemptsApi({
 
 export async function getExamsAttemptsApi(exam_id: string) {
   try {
-    const response = await api.get(`/api/v1/courses/exams/attempts/${exam_id}`);
+    const response = await api.get(`/courses/exams/attempts/${exam_id}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -60,6 +60,18 @@ export async function putAutoSaveAnswerApi({
     const response = await api.put(
       `/exams/attempts/${exam_id}/answers/${question_id}/autosave/`,
       { version, text }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function postSubmitExampApi(attempt_id: string) {
+  try {
+    const response = await api.post(
+      `/courses/exams/attempts/${attempt_id}/submit/`
     );
     return response.data;
   } catch (error) {

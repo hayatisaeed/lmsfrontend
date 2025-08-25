@@ -17,9 +17,11 @@ interface IAccountItemProps {
   isNum?: boolean;
   pattern?: RegExp;
   error?: string;
+  readOnly?: boolean;
 }
 
 export default function AccountItem({
+  readOnly = false,
   label,
   type,
   labelModal,
@@ -38,18 +40,21 @@ export default function AccountItem({
       <div className="flex w-full justify-start">
         <h3 className="text-text-primary text-sm">{label}</h3>
       </div>
-      <InputEdit
-        defaultValue={value}
-        label={labelModal}
-        icon={icon}
-        sendCode={sendCode}
-        id={id}
-        isPending={isPending}
-        pattern={pattern}
-        error={error}
-        isNum={isNum}
-        mutate={mutate}
-      />
+      {
+        <InputEdit
+          readOnly={readOnly}
+          defaultValue={value}
+          label={labelModal}
+          icon={icon}
+          sendCode={sendCode}
+          id={id}
+          isPending={isPending}
+          pattern={pattern}
+          error={error}
+          isNum={isNum}
+          mutate={mutate}
+        />
+      }
     </div>
   );
 }

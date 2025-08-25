@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { secondsToTime } from "@/shared/utils/date";
 
 interface IDisplayInformationProps {
+  submit: () => void;
   data: {
     questionAll: number;
     answers: number;
@@ -15,7 +16,10 @@ interface IDisplayInformationProps {
   };
 }
 
-export default function DisplayInformation({ data }: IDisplayInformationProps) {
+export default function DisplayInformation({
+  data,
+  submit,
+}: IDisplayInformationProps) {
   const [duration, setDuration] = useState<number>(data.duration);
 
   useEffect(() => {
@@ -59,6 +63,7 @@ export default function DisplayInformation({ data }: IDisplayInformationProps) {
           className="!bg-white-primary !text-text-primary !whitespace-nowrap"
           iconLeft
           icon={<CheckCircle size="SM" color="DARK" />}
+          onClick={submit}
         >
           ثبت آزمون
         </Button>

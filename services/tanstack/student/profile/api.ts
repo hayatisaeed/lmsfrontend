@@ -2,15 +2,15 @@ import api from "@/core/config/api/api";
 
 //types
 import {
+  IProfile,
   TEducationalLevels,
   TLocation,
   TOlympiads,
   TStudentType,
   TStudyBranches,
 } from "@/services/tanstack/student/profile/types";
-import { AxiosError } from "axios";
 
-export async function getStudentProfileApi() {
+export async function getStudentProfileApi(): Promise<IProfile> {
   try {
     const response = await api.get("/profile");
 
@@ -42,14 +42,14 @@ export async function putStudentEducationApi(data: {
   study_branch?: number;
   olympiad_ids?: number[];
   school_name?: string;
-  school_type?: number;
+  school_type?: string;
   province_id?: number;
   city_id?: number;
   province?: string;
   city?: string;
 }) {
   try {
-    const response = await api.put("/profile/education/", data);
+    const response = await api.put("/profile/education", data);
 
     return response.data;
   } catch (error) {
@@ -60,7 +60,7 @@ export async function putStudentEducationApi(data: {
 
 export async function getOlympiadsApi(): Promise<TOlympiads[]> {
   try {
-    const response = await api.get(`/olympiads?published=false`);
+    const response = await api.get(`/olympiads`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -72,7 +72,8 @@ export async function getLocationApi(
   id?: number | string
 ): Promise<TLocation[]> {
   try {
-    const response = await api.get(`/locations?province=${id}&all=false`);
+    const query = id ? `?province=${id}&all=false` : "";
+    const response = await api.get(`/locations${query}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -104,7 +105,7 @@ export async function getStudyBranchesApi(
   id?: number | string
 ): Promise<TStudyBranches[]> {
   try {
-    const response = await api.get(`/study-branches/?level=${id}`);
+    const response = await api.get(`/study-branches?level=${id}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -130,10 +131,24 @@ export async function postLocationApi(location: {
 
 export async function postStudentParentApi(phone: string) {
   try {
-    const response = await api.post("/profile/location", {
+    const response = await api.post("/profile/parent", {
       phone,
       relation: "father",
     });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function putStudentProfileApi(data: {
+  display_name?: string;
+  email?: string;
+}) {
+  try {
+    const response = await api.put("/profile", data);
 
     return response.data;
   } catch (error) {

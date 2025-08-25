@@ -26,7 +26,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { usePostStudentIdentity } from "@/services/tanstack/student/profile/mutation";
 
 //typs
-import { TStudentIdentity } from "@/services/tanstack/student/profile/types";
+import { Tdentity } from "@/services/tanstack/student/profile/types";
 import { AxiosError } from "axios";
 
 //toast
@@ -35,7 +35,7 @@ import toast from "react-hot-toast";
 import { getStudentProfileKey } from "@/services/tanstack/student/profile/key";
 
 interface IPersonalProps {
-  data?: TStudentIdentity;
+  data?: Tdentity;
 }
 
 export default function Personal({ data }: IPersonalProps) {
@@ -85,35 +85,29 @@ export default function Personal({ data }: IPersonalProps) {
     <div className="flex flex-col w-full gap-5">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5">
         <PersonalItem
-          value={
-            data?.national_id
-              ? `${data?.father_name || ""} ${data?.last_name || ""}`.trim()
-              : ""
-          }
+          value={`${data?.first_name || ""} ${data?.last_name || ""}`.trim()}
           label="نام و نام خانوادگی"
           icon={<UserRounded size="SM" />}
         />
         <PersonalItem
-          value={data?.national_id ? data.national_id : ""}
+          value={data?.national_id || ""}
           label="کدملی"
           isNum
           icon={<Card size="SM" />}
         />
         <PersonalItem
           isNum
-          value={
-            data?.national_id ? data.date_of_birth?.replaceAll("-", "/") : ""
-          }
+          value={data?.date_of_birth?.replaceAll("-", "/")}
           label="تاریخ تولد"
           icon={<UserId size="SM" />}
         />
         <PersonalItem
-          value={data?.national_id ? data.father_name : ""}
+          value={data?.father_name || ""}
           label="نام پدر"
           icon={<UserGroup size="SM" />}
         />
         <PersonalItem
-          value={data?.national_id ? (data.gender === "M" ? "مرد" : "زن") : ""}
+          value={data?.verified ? (data?.gender === "M" ? "مرد" : "زن") : ""}
           label="جنسیت"
           icon={<UserCheck size="SM" />}
         />
@@ -121,7 +115,7 @@ export default function Personal({ data }: IPersonalProps) {
 
       <div className="flex w-full justify-end items-center">
         <Modal>
-          {data?.national_id ? (
+          {data?.verified ? (
             <></>
           ) : (
             <Modal.Open id="identity-information">

@@ -6,6 +6,10 @@ import Reserve from "./Reserve";
 import Course from "./Course";
 import { usePostEnrollInCourse } from "@/services/tanstack/student/classes/mutation";
 
+//api
+import { useGetCourseItem } from "@/services/tanstack/student/classes/queries";
+import toast from "react-hot-toast";
+
 interface IContainerEnrollProps {
   idClass: string;
 }
@@ -16,8 +20,35 @@ export default function ContainerEnroll({ idClass }: IContainerEnrollProps) {
   const { mutate: enrollCourse, isPending: isPendingEnrollCourse } =
     usePostEnrollInCourse();
 
+  const {
+    data: courseItem,
+    isLoading: isLoadingCourseItem,
+    isError: isErrorCourse,
+  } = useGetCourseItem(idClass as string);
+
+  if (isLoadingCourseItem || isErrorCourse)
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-white rounded-2xl">
+        {isErrorCourse ? (
+          <h3> مشکلی پیش آمده لطفا دوباره امتحان کنید.</h3>
+        ) : (
+          "LOADING"
+        )}
+      </div>
+    );
+
   function handleMutateEnrollCourse() {
-    enrollCourse(idClass as string);
+    enrollCourse(idClass as string, {
+      onSuccess: () => {
+        toast.success("با موفقیت به دوره اضافه شدید");
+        setTimeout(() => {
+          router.replace(`/student/classes/${courseItem?.id}/content`);
+        }, 500);
+      },
+      onError: () => {
+        toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
+      },
+    });
   }
 
   function handleClickBack() {
@@ -38,10 +69,10 @@ export default function ContainerEnroll({ idClass }: IContainerEnrollProps) {
           بازگشت
         </Button>
       }
-      title="منتور استاد رحمانی"
+      title={`${courseItem?.name}`}
     >
       <div className="w-full grow grid grid-cols-1 md:grid-cols-[5fr_2fr] gap-5">
-        <Course />
+        <Course course={courseItem} />
         <Reserve
           mutate={handleMutateEnrollCourse}
           isPending={isPendingEnrollCourse}
