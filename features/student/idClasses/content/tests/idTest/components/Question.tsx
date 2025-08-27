@@ -98,7 +98,7 @@ export default function Question({
     setSelectedAnswer(id);
 
     mutateAnswer(
-      { text: answerMessage, version: id, attempt_id, question_id },
+      { text: String(id), version: id, attempt_id, question_id },
       () => {
         setSelectedAnswer(null);
         handleDataDisplay(false);
