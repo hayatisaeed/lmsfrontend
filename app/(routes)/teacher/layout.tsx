@@ -7,6 +7,7 @@ import { sideBarTeacher } from "@/core/constant/sideBarTeacher";
 
 //goftino
 import Goftino from "@/core/context/Goftino";
+import { useGetUserSession } from "@/services/tanstack/common/queries";
 
 //NEXT
 import { redirect } from "next/navigation";
@@ -15,14 +16,13 @@ import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
 //react-query
-import { useGetUserProfile } from "@/services/tanstack/common/queries";
 
 interface IStudentLayoutProps {
   children: ReactNode;
 }
 
 export default function Teacherlayout({ children }: IStudentLayoutProps) {
-  const { data, isError, isPending } = useGetUserProfile();
+  const { data, isError, isPending } = useGetUserSession();
 
   if (isPending || isError)
     return (
@@ -35,14 +35,14 @@ export default function Teacherlayout({ children }: IStudentLayoutProps) {
       </div>
     );
 
-  if (!data?.role || data?.role !== "Teacher") {
+  if (!data?.user.roles || data?.user.roles.includes("teacher")) {
     return redirect("/");
   }
 
   const user = {
-    name: data.display_name,
-    phone: data.phone.replace(/\D/g, ""),
-    email: data.email,
+    name: data.user.display_name,
+    phone: data.user.phone.replace(/\D/g, ""),
+    email: data.user.email,
     avatar: "",
   };
 
@@ -54,7 +54,12 @@ export default function Teacherlayout({ children }: IStudentLayoutProps) {
         </aside>
         <div className="flex flex-col w-full h-full overflow-hidden">
           <header>
-            <Header path="student" navs={sideBarTeacher} role="Teacher" />
+            <Header
+              path="student"
+              navs={sideBarTeacher}
+              role="Teacher"
+              display_name={data.user.display_name || ""}
+            />
           </header>
           <div className="h-full overflow-y-auto flex flex-col gap-5">
             <main className="grow px-5 lg:p-0">{children}</main>

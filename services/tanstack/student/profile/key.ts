@@ -14,6 +14,10 @@ export function getOlympiadsKey() {
   return ["olympiads"];
 }
 
+export function getEducationKey() {
+  return ["education"];
+}
+
 export function getLocationKey(id?: number | string) {
   return ["location", id];
 }
@@ -39,5 +43,9 @@ export function postStudentParentKey() {
 }
 
 export function putStudentProfileKey() {
-return ["profile"]
+  return ["profile"];
+}
+
+export function postAvatarProfileKey() {
+  return ["avatar"];
 }

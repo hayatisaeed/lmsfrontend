@@ -60,6 +60,7 @@ export default function ContainerTests() {
                 start={test.start_at}
                 end={test.end_at}
                 duration={test.duration}
+                attempt_id={test.attempt_id}
               />
             ))}
           </Modal>

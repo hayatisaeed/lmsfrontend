@@ -13,9 +13,14 @@ import { ChangeEvent } from "react";
 interface IUploaderProps {
   title?: string;
   defaultImage?: string;
+  changeImage?: (file: File) => void;
 }
 
-export default function Uploader({ title, defaultImage = "" }: IUploaderProps) {
+export default function Uploader({
+  title,
+  defaultImage = "",
+  changeImage,
+}: IUploaderProps) {
   const [image, setImage] = useState<string>(defaultImage);
 
   function upload(e: ChangeEvent<HTMLInputElement>) {
@@ -23,6 +28,7 @@ export default function Uploader({ title, defaultImage = "" }: IUploaderProps) {
     const file = files?.[0];
     if (file) {
       setImage(URL.createObjectURL(file));
+      changeImage?.(file);
     }
   }
 

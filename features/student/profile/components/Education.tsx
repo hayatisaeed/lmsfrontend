@@ -15,7 +15,10 @@ import {
   EducationItem,
   PersonalItemCity,
 } from "@/features/student/profile/components";
-import { getStudentProfileKey } from "@/services/tanstack/student/profile/key";
+import {
+  getEducationKey,
+  getStudentProfileKey,
+} from "@/services/tanstack/student/profile/key";
 
 //api
 import {
@@ -30,8 +33,8 @@ import {
   useGetStudyBranches,
 } from "@/services/tanstack/student/profile/queries";
 import {
-  Teducation,
   TLocationProfile,
+  IEducation,
 } from "@/services/tanstack/student/profile/types";
 
 //types
@@ -44,7 +47,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 interface IEducationProps {
-  data?: Teducation;
+  data?: IEducation | null;
   location?: TLocationProfile;
 }
 
@@ -83,6 +86,7 @@ export default function Education({ data, location }: IEducationProps) {
   function showToast(success: boolean, onClose?: () => void) {
     if (success) {
       toast.success("اطلاعات شما با موفقیت ثبت شد.");
+      queryClient.invalidateQueries({ queryKey: getEducationKey() });
       onClose?.();
     } else {
       toast.error("مشکلی پیش آمده لطفا دوباره امتحان کنید.");
@@ -223,6 +227,7 @@ export default function Education({ data, location }: IEducationProps) {
         isList
         id="degree"
         labelModal="مقطع تحصیلی خود را وارد کنید"
+        value={educationalLevels?.find((item) => item.id === data?.level)}
         label="مقطع تحصیلی"
         icon={<Book size="SM" />}
         data={educationalLevels}
@@ -235,6 +240,7 @@ export default function Education({ data, location }: IEducationProps) {
         id="study"
         labelModal="رشته تحصیلی خود را وارد کنید"
         label="رشته تحصیلی"
+        value={studyBranches?.find((item) => item.id === data?.study_branch)}
         icon={<NotebookMinimalistic size="SM" />}
         data={studyBranches}
         isPending={isLoadingStudyBranches}
@@ -243,7 +249,7 @@ export default function Education({ data, location }: IEducationProps) {
 
       <EducationItem
         id="school-name"
-        value=""
+        value={data?.school_name || ""}
         labelModal="نام مدرسه خود را وارد کنید"
         label="نام مدرسه"
         icon={<Buildings size="SM" />}
@@ -256,6 +262,7 @@ export default function Education({ data, location }: IEducationProps) {
         data={scrollType}
         isPending={isLoadingScrollType}
         id="school-type"
+        // value={scrollType?.find((item) => item.id===data?.school_type)}
         labelModal="نوع مدرسه خود را وارد کنید"
         label="نوع مدرسه"
         icon={<Bookmark size="SM" />}
@@ -282,6 +289,7 @@ export default function Education({ data, location }: IEducationProps) {
         id="olmpiads"
         labelModal="المپیاد مدنظر خود را انتخاب کنید"
         label="المپیاد مدنظر"
+        value={olympiads?.find((item) => item.id === data?.olympiads?.[0])}
         icon={<Notebook size="SM" />}
         isPending={isLoadingOlympiads}
         mutate={mutateEducationOlympiad}

@@ -31,17 +31,16 @@ export type TStudyBranches = {
   is_active: boolean;
 };
 
-export type Tdentity = {
+export type TIdentity = {
   first_name: string | null;
   last_name: string | null;
   father_name: string | null;
   gender: string | null;
   date_of_birth: string | null;
   national_id: string | null;
+  avatar: null | string;
   verified: boolean;
 };
-
-export type Teducation = Record<string, any>;
 
 export type TParent = {
   required: boolean;
@@ -51,11 +50,28 @@ export type TParent = {
 export type TLocationProfile = { province: string; city: string };
 
 export interface IProfile {
-  identity: Tdentity;
+  identity: TIdentity;
   parent: TParent;
-  education: Teducation;
   location: TLocationProfile;
   percent_complete: number;
+}
+
+interface LocationEducation {
+  province_id: number;
+  city_id: number;
+  province: string;
+  city: string;
+}
+
+export interface IEducation {
+  id: number;
+  level: number | null;
+  grade: number | null;
+  study_branch: number | null;
+  olympiads: number[];
+  school_name: string;
+  school_type: number | null;
+  location: LocationEducation;
 }
 
 // export type TStudentIdentity = {

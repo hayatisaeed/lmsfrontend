@@ -36,11 +36,13 @@ interface ICardProps {
   duration: number;
   course_id: string;
   started: boolean;
+  attempt_id?: string;
 }
 
 export default function Card({
   title,
   exam_id,
+  attempt_id,
   end,
   start,
   duration,
@@ -52,7 +54,7 @@ export default function Card({
   const { mutate, isPending: isPendingClassesTestsAttempts } =
     usePostStudentClassesTestsAttempts();
 
-  const { refetch } = useGetExamsAttempts(exam_id);
+  const { refetch } = useGetExamsAttempts(attempt_id || "");
 
   const router = useRouter();
   const pathname = usePathname();
@@ -63,15 +65,18 @@ export default function Card({
     if (started) {
       setIsLoading(true);
       const { data } = await refetch();
-      dispatch(addQuestion(data));
+
+      dispatch(addQuestion(data || {}));
+      router.push(`${pathname}/question`);
+
       setIsLoading(false);
     } else {
       mutate(
         { exam_id, course_id },
         {
-          onSuccess: (date) => {
-            dispatch(addQuestion(""));
-            router.push(`/${pathname}/question`);
+          onSuccess: (data) => {
+            dispatch(addQuestion(data));
+            router.push(`${pathname}/question`);
           },
           onError: (err) => {
             const statusCode = (err as AxiosError).response?.status;

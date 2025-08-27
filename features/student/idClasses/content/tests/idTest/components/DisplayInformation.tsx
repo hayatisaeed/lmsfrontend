@@ -8,6 +8,7 @@ import { secondsToTime } from "@/shared/utils/date";
 
 interface IDisplayInformationProps {
   submit: () => void;
+
   data: {
     questionAll: number;
     answers: number;
@@ -63,7 +64,7 @@ export default function DisplayInformation({
           className="!bg-white-primary !text-text-primary !whitespace-nowrap"
           iconLeft
           icon={<CheckCircle size="SM" color="DARK" />}
-          onClick={submit}
+          onClick={() => submit()}
         >
           ثبت آزمون
         </Button>

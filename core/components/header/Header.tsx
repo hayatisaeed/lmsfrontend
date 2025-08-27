@@ -13,9 +13,11 @@ interface IHeaderProps {
   path: "student" | "teacher" | "admin";
   role: Role;
   navs: Navs[];
+  display_name:string
 }
 
-export default function Header({ role, navs, path }: IHeaderProps) {
+
+export default function Header({ role, navs, path ,display_name}: IHeaderProps) {
   return (
     <div className="w-full bg-white-primary rounded-none lg:rounded-2xl px-5 py-4 mb-5 flex justify-between items-center">
       <div className="hidden md:inline-block">
@@ -24,7 +26,7 @@ export default function Header({ role, navs, path }: IHeaderProps) {
       <div className=" md:hidden">
         <NavMobile navs={navs} path={path} />
       </div>
-      <Account name="امیرحسین شکری" role={role} />
+      <Account name={display_name} role={role} />
     </div>
   );
 }

@@ -1,11 +1,10 @@
+"use client";
 //import navbar , header
 import { Footer, Header, NavDesktop } from "@/core/components";
 
 //constant
 import { sideBarAdmin } from "@/core/constant/sideBarAdmin";
-
-//api
-import { getUserProfileApi } from "@/services/api/common/server/api";
+import { useGetUserSession } from "@/services/tanstack/common/queries";
 
 //NEXT
 import { redirect } from "next/navigation";
@@ -17,10 +16,10 @@ interface IAdminLayoutProps {
   children: ReactNode;
 }
 
-export default async function Adminlayout({ children }: IAdminLayoutProps) {
-  const data = await getUserProfileApi();
+export default function Adminlayout({ children }: IAdminLayoutProps) {
+  const { data } = useGetUserSession();
 
-  if (!data?.role || data?.role !== "Admin") {
+  if (!data?.user.roles || data?.user.roles.includes("Admin")) {
     return redirect("/");
   }
 
@@ -31,7 +30,12 @@ export default async function Adminlayout({ children }: IAdminLayoutProps) {
       </aside>
       <div className="flex flex-col w-full h-full overflow-hidden">
         <header>
-          <Header path="admin" navs={sideBarAdmin} role="Admin" />
+          <Header
+            path="admin"
+            navs={sideBarAdmin}
+            role="Admin"
+            display_name={data.user.display_name || ""}
+          />
         </header>
         <div className="h-full overflow-y-auto flex flex-col gap-5">
           <main className="grow">{children}</main>

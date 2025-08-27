@@ -1,23 +1,18 @@
 //slice
+import { IExamSession } from "@/services/tanstack/student/classes/idClasses/tests/types";
 import { createSlice } from "@reduxjs/toolkit";
 
 //types
 import { PayloadAction } from "@reduxjs/toolkit";
 
-interface QuestionState {
-  name: string;
-}
-
-const initialState: QuestionState = {
-  name: "",
-};
+const initialState: Partial<IExamSession> = {};
 
 const sliceQuestion = createSlice({
   name: "courses/tests",
   initialState,
   reducers: {
-    addQuestion: (state, action: PayloadAction<string>) => {
-      state.name = action.payload;
+    addQuestion: (_, action: PayloadAction<Partial<IExamSession>>) => {
+      return action.payload;
     },
   },
 });

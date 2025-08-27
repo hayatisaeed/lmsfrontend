@@ -6,13 +6,15 @@ import { Container } from "@/shared/ui";
 //import items
 import {
   Account,
-  ChangePassword,
   Personal,
   Education,
 } from "@/features/student/profile/components";
 
 //react-query
-import { useGetStudentProfile } from "@/services/tanstack/student/profile/queries";
+import {
+  useGetEducation,
+  useGetStudentProfile,
+} from "@/services/tanstack/student/profile/queries";
 import { useGetUserSession } from "@/services/tanstack/common/queries";
 
 export default function ContainerProfile() {
@@ -28,7 +30,20 @@ export default function ContainerProfile() {
     isError: isErrorSession,
   } = useGetUserSession();
 
-  if (isLoadingProfile || isErrorProfile || isLoadingSession || isErrorSession)
+  const {
+    data: education,
+    isLoading: isLoadingEducation,
+    isError: isErrorEducation,
+  } = useGetEducation();
+
+  if (
+    isLoadingProfile ||
+    isErrorProfile ||
+    isLoadingSession ||
+    isErrorSession ||
+    isLoadingEducation ||
+    isErrorEducation
+  )
     return (
       <div className="w-full h-full flex items-center justify-center bg-white rounded-2xl">
         {isErrorProfile || isErrorSession ? (
@@ -42,14 +57,14 @@ export default function ContainerProfile() {
   return (
     <div className="flex flex-col gap-5">
       <Container title="اطلاعات حساب">
-        <Account data={sessions} />
+        <Account data={sessions} avatar={data?.identity.avatar} />
       </Container>
 
       <Container title="اطلاعات هویتی">
         <Personal data={data?.identity} />
       </Container>
       <Container title="اطلاعات تحصیلی">
-        <Education data={data?.education} location={data?.location} />
+        <Education data={education} location={data?.location} />
       </Container>
 
       {/* <Container title="تغییر رمز عبور">

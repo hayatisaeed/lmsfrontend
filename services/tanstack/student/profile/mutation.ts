@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 //key
 import {
+  postAvatarProfileKey,
   postLocationKey,
   postStudentIdentityKey,
   postStudentParentKey,
@@ -13,6 +14,7 @@ import {
 //api
 
 import {
+  postAvatarProfileApi,
   postLocationApi,
   postStudentIdentityApi,
   postStudentParentApi,
@@ -52,5 +54,12 @@ export function usePutStudentProfile() {
   return useMutation({
     mutationFn: putStudentProfileApi,
     mutationKey: putStudentProfileKey(),
+  });
+}
+
+export function usePostAvatarProfile() {
+  return useMutation({
+    mutationFn: postAvatarProfileApi,
+    mutationKey: postAvatarProfileKey(),
   });
 }

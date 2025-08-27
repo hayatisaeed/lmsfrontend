@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 //key
 import {
   getEducationalLevelsKey,
+  getEducationKey,
   getLocationKey,
   getOlympiadsKey,
   getScrolTypeKey,
@@ -14,6 +15,7 @@ import {
 //API
 import {
   getEducationalLevelsApi,
+  getEducationApi,
   getLocationApi,
   getOlympiadsApi,
   getScrolTypeApi,
@@ -68,4 +70,8 @@ export function useGetStudyBranches(id?: number | string) {
     select: (items) => items.map((item) => ({ id: item.id, label: item.name })),
     enabled: !!id,
   });
+}
+
+export function useGetEducation() {
+  return useQuery({ queryKey: getEducationKey(), queryFn: getEducationApi });
 }

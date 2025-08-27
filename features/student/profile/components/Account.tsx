@@ -9,18 +9,33 @@ import { Uploader } from "@/shared/components";
 //import icons
 import { Letter, Smartphone, UserRounded } from "@/assets/icons";
 import { IUserSession } from "@/services/tanstack/common/type";
-import { usePutStudentProfile } from "@/services/tanstack/student/profile/mutation";
+import {
+  usePostAvatarProfile,
+  usePutStudentProfile,
+} from "@/services/tanstack/student/profile/mutation";
 import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { getUserSessionKey } from "@/services/tanstack/common/key";
 
 interface IAccountProps {
   data?: IUserSession;
+  avatar?: string | null;
 }
 
-export default function Account({ data }: IAccountProps) {
+export default function Account({ data, avatar }: IAccountProps) {
   const { mutate: mutateProfile, isPending: isPendingProfile } =
     usePutStudentProfile();
+
+  const { mutate: mutateAvatar } = usePostAvatarProfile();
+
+  function handleMutateProfileAvatar(image: File) {
+    console.log(image);
+
+    const formData = new FormData();
+
+    formData.set("avatar", image);
+    mutateAvatar(formData);
+  }
 
   const queryClient = useQueryClient();
 
@@ -67,7 +82,11 @@ export default function Account({ data }: IAccountProps) {
   return (
     <div className="flex w-full flex-col justify-start gap-5">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        <Uploader title="بارگذاری تصویر حساب" />
+        <Uploader
+          title="بارگذاری تصویر حساب"
+          defaultImage={avatar || ""}
+          changeImage={handleMutateProfileAvatar}
+        />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">

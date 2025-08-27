@@ -26,16 +26,16 @@ import { useQueryClient } from "@tanstack/react-query";
 import { usePostStudentIdentity } from "@/services/tanstack/student/profile/mutation";
 
 //typs
-import { Tdentity } from "@/services/tanstack/student/profile/types";
 import { AxiosError } from "axios";
 
 //toast
 import toast from "react-hot-toast";
 
 import { getStudentProfileKey } from "@/services/tanstack/student/profile/key";
+import { TIdentity } from "@/services/tanstack/student/profile/types";
 
 interface IPersonalProps {
-  data?: Tdentity;
+  data?: TIdentity;
 }
 
 export default function Personal({ data }: IPersonalProps) {

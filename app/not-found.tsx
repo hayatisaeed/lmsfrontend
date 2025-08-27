@@ -1,7 +1,6 @@
 //logo
 import ArrowLeft from "@/assets/icons/arrows/ArrowLeft";
 
-
 //types
 import { Metadata } from "next";
 
@@ -20,13 +19,14 @@ export default function NotFound() {
   return (
     <div className="w-full h-full flex flex-col gap-3 justify-center items-center p-4">
       {/* تصویر با اندازه واقعی خودش */}
-      <div className="relative">
+      <div className="relative ">
         <Image
           src="/images/not-found.png"
           alt="image"
           fill
+          width={768}
+          height={768}
           className="object-contain"
-          sizes="(max-width: 640px) 90px, (max-width: 768px) 120px, 220px"
         />
       </div>
 

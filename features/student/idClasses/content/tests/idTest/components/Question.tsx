@@ -25,16 +25,19 @@ import clsx from "clsx";
 import axios, { CancelTokenSource } from "axios";
 
 interface IQuestionProps {
-  exam_id: string;
+  body_richtext: string;
+  setSending: (start: boolean) => void;
+  attempt_id: string;
+  handleDataDisplay: (answer: boolean) => void;
   question_id: string;
-  number: number;
+  number?: number;
   question: string;
   answers?: { answer: string; id: number }[];
   score?: number;
   text?: boolean;
   mutateAnswer: (
     data: {
-      exam_id: string;
+      attempt_id: string;
       question_id: string;
       text: string;
       version: number;
@@ -44,37 +47,78 @@ interface IQuestionProps {
 }
 
 export default function Question({
-  exam_id,
+  handleDataDisplay,
+  attempt_id,
   question_id,
   text = false,
   number,
   question,
   answers,
   score,
+  body_richtext,
+  setSending,
   mutateAnswer,
 }: IQuestionProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-
-  const [answerMessage, setAnswerMessage] = useState<string>("");
-
+  const [answerMessage, setAnswerMessage] = useState<string>(body_richtext);
   const [files, setFiles] = useState<File[]>([]);
   const [progresses, setProgresses] = useState<Record<string, number>>({});
   const [cancelTokens, setCancelTokens] = useState<
     Record<string, CancelTokenSource>
   >({});
   const [errorFiles, setErrorFiles] = useState<Record<string, boolean>>({});
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const timeOut = setTimeout(() => {}, 5000);
+    if (!isMounted) {
+      setIsMounted(true);
+      return;
+    }
 
-    return () => clearInterval(timeOut);
-  }, []);
+    if (!answerMessage && selectedAnswer === null) return;
 
-  function handleSelect(id: number, text: string) {
+    const timeout = setTimeout(() => {
+      setSending(true);
+      mutateAnswer({
+        text: answerMessage,
+        attempt_id,
+        question_id,
+        version: selectedAnswer || -1,
+      });
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeout);
+      setSending(false);
+    };
+  }, [answerMessage, selectedAnswer, attempt_id, question_id, isMounted]);
+
+  function handleSelect(id: number) {
+    const wasAnswered = selectedAnswer !== null;
     setSelectedAnswer(id);
-    mutateAnswer({ text, version: id, exam_id, question_id }, () => {
-      setSelectedAnswer(null);
-    });
+
+    mutateAnswer(
+      { text: answerMessage, version: id, attempt_id, question_id },
+      () => {
+        setSelectedAnswer(null);
+        handleDataDisplay(false);
+      }
+    );
+
+    if (!wasAnswered) {
+      handleDataDisplay(true);
+    }
+  }
+
+  function handleTextChange(value: string) {
+    const wasAnswered = !!answerMessage;
+    setAnswerMessage(value);
+
+    if (!wasAnswered && value.trim() !== "") {
+      handleDataDisplay(true);
+    } else if (wasAnswered && value.trim() === "") {
+      handleDataDisplay(false);
+    }
   }
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -85,6 +129,9 @@ export default function Question({
 
   async function handleFileUpload(e: ChangeEvent<HTMLInputElement>) {
     const selectedFiles = Array.from(e.target.files || []);
+    if (selectedFiles.length > 0 && files.length === 0) {
+      handleDataDisplay(true);
+    }
     setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
 
     selectedFiles.forEach(async (file) => {
@@ -121,27 +168,38 @@ export default function Question({
     });
   }
 
-  function handleRemoveFile(file: File) {
+  async function handleRemoveFile(file: File) {
     if (progresses[file.name] < 100 && cancelTokens[file.name]) {
-      // ⛔ اگر هنوز در حال آپلود بود → کنسل کن
       cancelTokens[file.name].cancel("User canceled upload");
-      setFiles((prev) => prev.filter((f) => f.name !== file.name));
-      setProgresses((prev) => {
-        const { [file.name]: _, ...rest } = prev;
-        return rest;
-      });
-      setCancelTokens((prev) => {
-        const { [file.name]: _, ...rest } = prev;
-        return rest;
-      });
-      setErrorFiles((prev) => {
-        const { [file.name]: _, ...rest } = prev;
-        return rest;
-      });
-    } else {
-      // ✅ اینجا فانکشن حذف از سرور رو صدا بزن
-      // removeFileFromServer(file)
-      console.log("Delete from server:", file.name);
+    }
+
+    const newFiles = files.filter((f) => f.name !== file.name);
+    setFiles(newFiles);
+
+    setProgresses((prev) => {
+      const { [file.name]: _, ...rest } = prev;
+      return rest;
+    });
+    setCancelTokens((prev) => {
+      const { [file.name]: _, ...rest } = prev;
+      return rest;
+    });
+    setErrorFiles((prev) => {
+      const { [file.name]: _, ...rest } = prev;
+      return rest;
+    });
+
+    if (newFiles.length === 0) {
+      handleDataDisplay(false);
+    }
+
+    if (progresses[file.name] === 100) {
+      try {
+        await api.post(`/your/custom/endpoint/`, { fileName: file.name });
+        console.log("File successfully removed on server");
+      } catch (err) {
+        console.error("Error removing file from server:", err);
+      }
     }
   }
 
@@ -153,7 +211,6 @@ export default function Question({
         </h3>
         <p className="font-shabnam text-xs">{score && `(${score} نمره)`}</p>
       </div>
-      {/* question */}
       <h3 className="leading-7 text-justify">{question}</h3>
 
       {/* answers */}
@@ -169,7 +226,7 @@ export default function Question({
                 className="cursor-pointer"
                 name={`question-${number}`}
                 checked={selectedAnswer === answer.id}
-                onChange={() => handleSelect(answer.id, answer.answer)}
+                onChange={() => handleSelect(answer.id)}
               />
               <h3 className="flex items-center gap-1">
                 <span>{`${lettersFn[index]} )`}</span>
@@ -188,9 +245,7 @@ export default function Question({
               placeholder="جواب سوال :"
               rows={5}
               value={answerMessage}
-              onChange={(e) => {
-                setAnswerMessage(e.target.value);
-              }}
+              onChange={(e) => handleTextChange(e.target.value)}
             />
 
             <div className="w-full flex justify-end">
@@ -214,6 +269,7 @@ export default function Question({
               </Button>
             </div>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {files.map((file) => (
               <div

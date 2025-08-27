@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar, DropDown } from "@/shared/components";
-import { ArrowsALogout, PhoneCalling, UserRounded } from "@/assets/icons";
+import { ArrowsALogout, UserRounded } from "@/assets/icons";
 import { useRouter } from "next/navigation";
 import { removeAccessToken } from "@/core/utils/token";
 import toast from "react-hot-toast";
@@ -63,10 +63,6 @@ export default function Account({
             icon={<UserRounded size="SM" />}
           >
             حساب کاربری
-          </DropDown.Item>
-
-          <DropDown.Item icon={<PhoneCalling size="SM" />}>
-            شماره موبایل
           </DropDown.Item>
 
           <DropDown.Item

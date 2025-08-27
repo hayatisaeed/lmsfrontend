@@ -2,6 +2,7 @@ import api from "@/core/config/api/api";
 
 //types
 import {
+  IEducation,
   IProfile,
   TEducationalLevels,
   TLocation,
@@ -49,7 +50,7 @@ export async function putStudentEducationApi(data: {
   city?: string;
 }) {
   try {
-    const response = await api.put("/profile/education", data);
+    const response = await api.patch("/profile/education", data);
 
     return response.data;
   } catch (error) {
@@ -94,6 +95,16 @@ export async function getScrolTypeApi(): Promise<TStudentType[]> {
 export async function getEducationalLevelsApi(): Promise<TEducationalLevels[]> {
   try {
     const response = await api.get("/educational-levels");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getEducationApi(): Promise<IEducation> {
+  try {
+    const response = await api.get("/profile/education");
     return response.data;
   } catch (error) {
     console.error(error);
@@ -150,6 +161,20 @@ export async function putStudentProfileApi(data: {
   try {
     const response = await api.put("/profile", data);
 
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function postAvatarProfileApi(data: FormData) {
+  try {
+    const response = await api.post("/profile/avatar", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);

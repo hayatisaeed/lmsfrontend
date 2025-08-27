@@ -40,9 +40,9 @@ export default function Studentlayout({ children }: IStudentLayoutProps) {
   }
 
   const user = {
-    name: " data.display_name",
-    phone: "656565",
-    email: "data.email",
+    name: data.user.display_name,
+    phone: data.user.phone,
+    email: data.user.email,
     avatar: "",
   };
 
@@ -54,7 +54,12 @@ export default function Studentlayout({ children }: IStudentLayoutProps) {
         </aside>
         <div className="flex flex-col w-full h-full overflow-hidden">
           <header>
-            <Header path="student" navs={sideBarStudent} role="Student" />
+            <Header
+              path="student"
+              display_name={data.user.display_name||"دانش آموز محترم"}
+              navs={sideBarStudent}
+              role="Student"
+            />
           </header>
           <div className="h-full overflow-y-auto flex flex-col gap-5">
             <main className="grow px-5 lg:p-0">{children}</main>
