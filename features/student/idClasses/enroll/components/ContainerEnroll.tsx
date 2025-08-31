@@ -32,7 +32,7 @@ export default function ContainerEnroll({ idClass }: IContainerEnrollProps) {
         {isErrorCourse ? (
           <h3> مشکلی پیش آمده لطفا دوباره امتحان کنید.</h3>
         ) : (
-          "LOADING"
+          "در حال بارگذاری ..."
         )}
       </div>
     );

@@ -15,7 +15,9 @@ export default function Course({ course }: ICourseProps) {
         alt="banner"
         className="w-full h-[180px] rounded-2xl "
       />
-      <h3 className="text-text-primary text-lg font-semibold">{course?.name}</h3>
+      <h3 className="text-text-primary text-lg font-semibold">
+        توضیحات {course?.name}
+      </h3>
       <p className="text-text-primary text-justify">{course?.description}</p>
     </div>
   );

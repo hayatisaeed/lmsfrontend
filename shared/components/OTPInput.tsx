@@ -15,7 +15,7 @@ import clsx from "clsx";
 
 interface OTPInputProps {
   length?: number;
-  onComplete: (code: number) => void;
+  onComplete: (code: string) => void;
   size?: keyof typeof SIZES;
   color?: keyof typeof COLORS;
   error?: boolean;
@@ -58,7 +58,7 @@ export default function OTPInput({
     const isEvery = newOtpValues.every((value) => value !== "");
 
     if (isEvery) {
-      onComplete(Number(newOtpValues.join("")));
+      onComplete(newOtpValues.join(""));
     }
 
     // If there is an empty one, go to it
@@ -111,7 +111,7 @@ export default function OTPInput({
 
     const nextEmptyIndex = newOtpValues.findIndex((value) => value === "");
     if (nextEmptyIndex === -1) {
-      onComplete(Number(newOtpValues.join("")));
+      onComplete(newOtpValues.join(""));
     } else {
       inputRefs.current[nextEmptyIndex]?.focus();
     }

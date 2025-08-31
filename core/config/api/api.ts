@@ -1,4 +1,4 @@
-//core/config/api.ts
+// core/config/api.ts
 import axios from "axios";
 
 // cookie
@@ -7,7 +7,7 @@ import {
   setAccessToken,
   removeAccessToken,
 } from "@/core/utils/token";
-import { refreshToke } from "@/services/api/api";
+import { refreshToken } from "@/services/api/api";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -16,35 +16,44 @@ const api = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
+// ----------------- REQUEST INTERCEPTOR -----------------
 api.interceptors.request.use(
   (request) => {
     const access = getAccessToken();
-    if (access) request.headers["Authorization"] = `Bearer ${access}`;
-
+    if (access) {
+      request.headers["Authorization"] = `Bearer ${access}`;
+    }
     return request;
   },
   (error) => Promise.reject(error)
 );
 
+// ----------------- RESPONSE INTERCEPTOR -----------------
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    // Skip refresh attempt if it's already the refresh request
+    if (!originalRequest || !originalRequest.url) {
+      return Promise.reject(error);
+    }
+
     if (originalRequest.url.includes("/auth/refresh")) {
       logout();
+      return Promise.reject(error);
     }
-    if (error?.response?.status === 401) {
+
+    if (error?.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
       try {
-        const data = await refreshToke();
+        const data = await refreshToken();
 
-        if (data) {
-          setAccessToken(data);
+        if (data?.access) {
+          setAccessToken(data.access);
 
-          error.config.headers["Authorization"] = `Bearer ${data?.access}`;
-
-          return api.request(error.config);
+          originalRequest.headers["Authorization"] = `Bearer ${data.access}`;
+          return api.request(originalRequest);
         } else {
           logout();
         }
@@ -58,13 +67,11 @@ api.interceptors.response.use(
   }
 );
 
+// ----------------- LOGOUT HANDLER -----------------
 async function logout() {
-  // Remove token cookie
   removeAccessToken();
 
-  // If in browser, redirect user to login page only if not already on login page
   if (typeof window !== "undefined") {
-    // Check if already on login page
     const currentPath = window.location.pathname;
     if (currentPath !== "/login") {
       window.location.href = "/login";

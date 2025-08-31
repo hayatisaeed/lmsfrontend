@@ -119,7 +119,7 @@ export default function Personal({ data }: IPersonalProps) {
             <></>
           ) : (
             <Modal.Open id="identity-information">
-              <Button type="button">تایید هویت</Button>
+              <Button type="button">ویرایش اطلاعات</Button>
             </Modal.Open>
           )}
           <Modal.Window id="identity-information">

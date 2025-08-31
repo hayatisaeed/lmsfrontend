@@ -43,7 +43,7 @@ export async function putStudentEducationApi(data: {
   study_branch?: number;
   olympiad_ids?: number[];
   school_name?: string;
-  school_type?: string;
+  school_type?: number;
   province_id?: number;
   city_id?: number;
   province?: string;

@@ -91,7 +91,7 @@ export default function Account({ data, avatar }: IAccountProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <AccountItem
-          label="نام کاربری"
+          label="نام نمایشی"
           value={data?.user.display_name || ""}
           sendCode={false}
           labelModal="نام کاربری خود را وارد کنید."

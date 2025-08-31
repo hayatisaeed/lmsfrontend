@@ -56,7 +56,7 @@ export default function LoginForm() {
     });
   }
 
-  function handleCodeComplete(code: number) {
+  function handleCodeComplete(code: string) {
     verifyOtpForRegistration(
       { phone, code: String(code) },
       {

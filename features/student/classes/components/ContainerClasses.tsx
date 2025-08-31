@@ -28,14 +28,14 @@ export default function ContainerClasses() {
         {isErrorCourses ? (
           <h3> مشکلی پیش آمده لطفا دوباره امتحان کنید.</h3>
         ) : (
-          "LOADING"
+          "در حال بارگذاری ..."
         )}
       </div>
     );
 
   return (
-    <div className="w-full min-h-full grid grid-cols-1 md:grid-cols-[2fr_5fr] gap-5">
-      <div className="flex md:flex-col gap-5">
+    <div className="w-full min-h-full grid grid-cols-1 gap-5">
+      {/* <div className="flex md:flex-col gap-5">
         <Container title="دسته بندی ها">
           <FilterCategory
             filters={[
@@ -46,8 +46,8 @@ export default function ContainerClasses() {
             ]}
           />
         </Container>
-      </div>
-      <Container title="لیست منتور ها" className="justify-start">
+      </div> */}
+      <Container title="لیست دوره ها" className="justify-start">
         <div className="w-full flex flex-col items-center gap-7">
           <div className="w-full grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-3">
             {courses?.map((course) => (
@@ -60,7 +60,7 @@ export default function ContainerClasses() {
               />
             ))}
           </div>
-          <Pagination total={150} />
+          {/* <Pagination total={150} /> */}
         </div>
       </Container>
     </div>

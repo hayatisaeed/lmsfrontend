@@ -14,6 +14,7 @@ export type TLocation = {
 export type TStudentType = {
   name: string;
   slug: string;
+  id: number;
 };
 
 export type TEducationalLevels = {

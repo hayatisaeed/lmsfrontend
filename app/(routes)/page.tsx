@@ -15,7 +15,7 @@ export default function Main() {
         {isError ? (
           <h3> مشکلی پیش آمده لطفا دوباره امتحان کنید.</h3>
         ) : (
-          "LOADING"
+          "در حال بارگذاری ..."
         )}
       </div>
     );

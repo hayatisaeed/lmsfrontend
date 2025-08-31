@@ -49,9 +49,10 @@ import toast from "react-hot-toast";
 interface IEducationProps {
   data?: IEducation | null;
   location?: TLocationProfile;
+  parent?: string;
 }
 
-export default function Education({ data, location }: IEducationProps) {
+export default function Education({ data, location, parent }: IEducationProps) {
   const [idEducationalLevels, setIdEducationalLevels] = useState<string>("");
 
   //get olympiads
@@ -78,8 +79,7 @@ export default function Education({ data, location }: IEducationProps) {
     usePostLocation();
 
   //mutate education
-  const { mutate: postEducation, isPending: isPendingPostEducation } =
-    usePutStudentEducation();
+  const { mutate: postEducation } = usePutStudentEducation();
 
   const queryClient = useQueryClient();
 
@@ -173,7 +173,7 @@ export default function Education({ data, location }: IEducationProps) {
     onClose?: () => void
   ) {
     postEducation(
-      { school_type: scholl_name },
+      { school_type: +school_type },
       {
         onSuccess: () => {
           showToast(true, onClose);
@@ -217,8 +217,8 @@ export default function Education({ data, location }: IEducationProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-5">
       <PersonalItemCity
-        province={location?.province}
-        city={location?.city}
+        province={location?.province||""}
+        city={location?.city||""}
         mutate={mutateLocation}
         isLoading={isSubmittingLocation}
       />
@@ -262,7 +262,7 @@ export default function Education({ data, location }: IEducationProps) {
         data={scrollType}
         isPending={isLoadingScrollType}
         id="school-type"
-        // value={scrollType?.find((item) => item.id===data?.school_type)}
+        value={scrollType?.find((item) => item.id === data?.school_type)}
         labelModal="نوع مدرسه خود را وارد کنید"
         label="نوع مدرسه"
         icon={<Bookmark size="SM" />}
@@ -271,7 +271,7 @@ export default function Education({ data, location }: IEducationProps) {
 
       <EducationItem
         id="parents-phone"
-        value="1"
+        value={parent || ""}
         icon={<Smartphone size="SM" />}
         labelModal="شماره تماس اولیا خود را وارد کنید"
         label="شماره موبایل اولیا"

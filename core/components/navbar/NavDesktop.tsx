@@ -78,7 +78,7 @@ export default function Nav({ navs, path }: INavProps) {
           ></div>
 
           {/* Static Items */}
-          <NavLink
+          {/* <NavLink
             label="پشتیبانی"
             path={`/${path}/support`}
             icon={HeadphonesRound}
@@ -89,7 +89,7 @@ export default function Nav({ navs, path }: INavProps) {
             small={!open}
             path={`/${path}/help`}
             icon={Help}
-          />
+          /> */}
         </div>
       </div>
     </div>

@@ -81,12 +81,12 @@ export default function NavMobile({ navs, path }: INavProps) {
           ))}
 
           <div className="w-[90%] h-[1px] ms-[25px] bg-liner-primary/7"></div>
-          <NavLink
+          {/* <NavLink
             label="پشتیبانی"
             path={`/${path}/support`}
             icon={HeadphonesRound}
           />
-          <NavLink label="راهنما" path={`/${path}/help`} icon={Help} />
+          <NavLink label="راهنما" path={`/${path}/help`} icon={Help} /> */}
         </div>
       </div>
     </>

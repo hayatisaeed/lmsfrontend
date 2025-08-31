@@ -49,7 +49,7 @@ export default function ContainerProfile() {
         {isErrorProfile || isErrorSession ? (
           <h3> مشکلی پیش آمده لطفا دوباره امتحان کنید.</h3>
         ) : (
-          "LOADING"
+          "در حال بارگذاری ..."
         )}
       </div>
     );
@@ -64,7 +64,11 @@ export default function ContainerProfile() {
         <Personal data={data?.identity} />
       </Container>
       <Container title="اطلاعات تحصیلی">
-        <Education data={education} location={data?.location} />
+        <Education
+          data={education}
+          location={data?.location}
+          parent={data?.identity.father_name || ""}
+        />
       </Container>
 
       {/* <Container title="تغییر رمز عبور">

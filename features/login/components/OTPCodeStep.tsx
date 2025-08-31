@@ -13,7 +13,7 @@ import { OTPInput } from "@/shared/components/";
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 
 interface IOTPCodeStepProps {
-  onCompleteCode: (code: number) => void;
+  onCompleteCode: (code: string) => void;
   disabled?: boolean;
   isLoading?: boolean;
   isError?: boolean;

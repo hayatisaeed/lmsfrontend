@@ -50,8 +50,7 @@ export function useGetScrollType() {
   return useQuery({
     queryKey: getScrolTypeKey(),
     queryFn: getScrolTypeApi,
-    select: (items) =>
-      items.map((item) => ({ id: item.slug, label: item.name })),
+    select: (items) => items.map((item) => ({ id: item.id, label: item.name })),
   });
 }
 
